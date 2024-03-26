@@ -1,26 +1,26 @@
 import AccountReel from "@/components/AccountReel/AccountReel";
-import AccountMarketplace from "@/components/home/AccountMarketplace";
-import BannerHome from "@/components/home/BannerHome";
-import BecomeSeller from "@/components/home/BecomeSeller";
-import Features from "@/components/home/Features";
-import FilterAndFindAccountSection from "@/components/home/FilterAndFindAccountSection";
-import HowItWorks from "@/components/home/HowItWorks";
-import ReadyToStart from "@/components/home/ReadyToStart";
-import TestimonialHome from "@/components/home/TestimonialHome";
-import WhyChoose from "@/components/home/WhyChoose";
+import AccountMarketplace from "@/components/Home/AccountMarketplace";
+import BannerHome from "@/components/Home/BannerHome";
+import BecomeSeller from "@/components/Home/BecomeSeller";
+import Features from "@/components/Home/Features";
+import FilterAndFindAccountSection from "@/components/Home/FilterAndFindAccountSection";
+import HowItWorks from "@/components/Home/HowItWorks";
+import ReadyToStart from "@/components/Home/ReadyToStart";
+import TestimonialHome from "@/components/Home/TestimonialHome";
+import WhyChoose from "@/components/Home/WhyChoose";
 import HomeLayout from "@/layout/HomeLayout";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { AccountType, UserRole } from "@/types/common";
 import { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (user?.role === UserRole.Seller) {
@@ -29,13 +29,13 @@ export default function Home() {
       }
     }
     if (user?.id) {
-      router.push("/marketplace")
+      router.push("/marketplace");
     }
   }, [user, dispatch, router]);
 
   useEffect(() => {
     AOS.init();
-  }, [])
+  }, []);
 
   const readySection = {
     title: "Ready to Start Your Journey?",
@@ -47,18 +47,20 @@ export default function Home() {
 
   return (
     <HomeLayout>
-      {!user?.id &&
-        <div className="overflow-hidden">
-          {/* <HomeBanner /> */}
-          <BannerHome />
-          <AccountMarketplace />
-          <Features />
-          <HowItWorks />
-          <BecomeSeller />
-          <WhyChoose />
-          <TestimonialHome />
-          <ReadyToStart readySection={readySection} />
-        </div>
+      {
+        !user?.id && (
+          <div className="overflow-hidden">
+            {/* <HomeBanner /> */}
+            <BannerHome />
+            <AccountMarketplace />
+            <Features />
+            <HowItWorks />
+            <BecomeSeller />
+            <WhyChoose />
+            <TestimonialHome />
+            <ReadyToStart readySection={readySection} />
+          </div>
+        )
         // : (
         //   <div className="container">
         //     <div className="w-full">

@@ -1,4 +1,4 @@
-import OrderDetailsAccountInfo from "@/components/Orders/OrderDetailsAccountInfo";
+import OrderDetailsAccountInfo from "@/components/orders/OrderDetailsAccountInfo";
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
 import { useGetOrderByIdQuery } from "@/redux/features/order/orderApi";

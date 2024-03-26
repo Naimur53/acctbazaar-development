@@ -27,7 +27,6 @@ const OrdersMain: React.FC<Props> = ({ onChange, data }) => {
         {data.map((single) => {
           return <OrderAccountCard orderInfo={single} key={single.id} />;
         })}
-        <OrderAccountCard />
       </div>
     </div>
   );

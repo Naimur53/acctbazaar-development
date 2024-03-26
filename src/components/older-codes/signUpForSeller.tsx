@@ -62,24 +62,24 @@ const SignUpForSeller: React.FC = () => {
 
     const { confirmPassword, accept, ...rest } = data;
 
-    dispatch(
-      createUser({
-        ...rest,
-        role: UserRole.Seller,
-        paymentWithPaystack: selectedOption === "bank",
-      })
-    )
-      .unwrap()
-      .then((res: any) => {
-        if (res.user) {
-          router.push(res.user.txId);
-        } else if (res.error) {
-          toast.error(res.message);
-        }
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
+    // dispatch(
+    //   createUser({
+    //     ...rest,
+    //     role: UserRole.Seller,
+    //     paymentWithPaystack: selectedOption === "bank",
+    //   })
+    // )
+    //   .unwrap()
+    //   .then((res: any) => {
+    //     if (res.user) {
+    //       router.push(res.user.txId);
+    //     } else if (res.error) {
+    //       toast.error(res.message);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     toast.error(err);
+    // });
   };
 
   useEffect(() => {

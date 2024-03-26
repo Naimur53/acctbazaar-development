@@ -1,4 +1,4 @@
-import OrderAccountCard from "@/components/Orders/OrderAccountCard";
+import OrderAccountCard from "@/components/orders/OrderAccountCard";
 import OrdersMain from "@/components/orders/OrdersMain";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";

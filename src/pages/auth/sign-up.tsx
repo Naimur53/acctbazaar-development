@@ -45,7 +45,7 @@ const SignUp = () => {
     }
 
     const { confirmPassword, accept, ...rest } = data;
-    dispatch(createUser({ ...rest, role: UserRole.User }));
+    dispatch(createUser({ ...rest, role: UserRole.User } as any));
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const SignUp = () => {
 
   if (isLoading) {
     return <Loading></Loading>;
-  };
+  }
 
   return (
     <div className="flex lg:h-[100vh]">

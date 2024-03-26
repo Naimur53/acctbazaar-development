@@ -47,7 +47,7 @@ const SignUp: React.FC = () => {
     }
 
     const { confirmPassword, accept, ...rest } = data;
-    dispatch(createUser({ ...rest, role: UserRole.User }));
+    // dispatch(createUser({ ...rest, role: UserRole.User }));
   };
 
   useEffect(() => {
