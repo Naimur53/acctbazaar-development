@@ -4,10 +4,17 @@ import AppModal from "../ui/AppModal";
 import AccountCredentialCard from "./AccountCredentialCard";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { useAddAccountMutation } from "@/redux/features/account/accountApi";
+import {
+  useAddAccountMutation,
+  useAddMultiAccountMutation,
+} from "@/redux/features/account/accountApi";
 import { isValidURL } from "@/utils";
 import { toast } from "react-toastify";
-import { ResponseErrorType } from "@/types/common";
+import {
+  IGenericErrorMessage,
+  ResponseErrorType,
+  ResponseSuccessType,
+} from "@/types/common";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { emptyAccountCredentials } from "@/redux/features/account/accountSlice";
 
@@ -24,40 +31,43 @@ export default function ReviewSellAccount({
     (state) => state.account
   );
 
-  const [addAccount, { isLoading }] = useAddAccountMutation();
+  const [addAccount, { isLoading }] = useAddMultiAccountMutation();
 
   const handleReview = async () => {
     if (!accountCredentials.length) {
       toast.error("Account data not Found");
     }
-    const submittedData = {
+    const dataToSum = accountCredentials.map(({ email, ...single }) => ({
       ...accountCard,
-      ...accountCredentials[1],
-    };
-
-    addAccount(submittedData)
+      ...single,
+      username: email,
+      id: undefined,
+    }));
+    console.log(dataToSum);
+    addAccount(dataToSum)
       .unwrap()
-      .then((res: ResponseErrorType) => {
-        if (!res?.data.success) {
+      .then((res: ResponseSuccessType) => {
+        if (!res.data) {
           toast.error(res?.data.message || "something went wrong");
         } else {
           setModalOpen(true);
-          dispatch(emptyAccountCredentials());
-          toast.success("Successfully account added");
+
+          //   toast.success("Successfully account added");
         }
       })
-      .catch(() => {
-        toast.error("something went wrong");
+      .catch((err: IGenericErrorMessage) => {
+        toast.error(err.message || "something went wrong");
       });
   };
 
   const handleModal = () => {
     setModalOpen(false);
-    updateProgress(1);
+    updateProgress(2);
+    dispatch(emptyAccountCredentials());
   };
 
   useEffect(() => {
-    if (accountCredentials.length < 2) {
+    if (accountCredentials.length < 0) {
       updateProgress(1);
     }
   }, [accountCredentials.length, updateProgress]);
@@ -68,9 +78,12 @@ export default function ReviewSellAccount({
         Review Account
       </h2>
       <div className="pb-6 pt-1 md:pt-9 space-y-3 md:w-2/5 mx-auto">
-        <AccountCredentialCard account={accountCard} />
+        <AccountCredentialCard
+          updateProgress={updateProgress}
+          account={accountCard}
+        />
         <div className="border border-[#EFECEC]"></div>
-        {accountCredentials.slice(1).map((account, index) => (
+        {accountCredentials.map((account, index) => (
           <OrderDetailsAccountInfo
             key={index}
             index={index}
