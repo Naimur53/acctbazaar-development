@@ -5,6 +5,7 @@ import authSlice from "../features/auth/authSlice";
 import marketplaceSlice from "../features/marketplace/marketplaceSlice";
 import categorySlice from "../features/categories/categorySlice";
 import accountSlice from "../features/account/accountSlice";
+import cartSlice from "../features/cart/cartSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     marketplace: marketplaceSlice,
     categories: categorySlice,
     account: accountSlice,
+    cart: cartSlice,
   },
 
   devTools: process.env.NODE_ENV !== "production",
