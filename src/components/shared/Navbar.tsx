@@ -29,6 +29,7 @@ import ProfileDetailsPopUp from "./ProfileDetailsPopUp";
 import NotificationsPopUp from "./NotificationsPopUp";
 import CartPopUp from "./CartPopUp";
 import AppDrawer from "../ui/AppDrawer";
+import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -84,11 +85,12 @@ const Navbar = () => {
       >
         <div className='md:hidden'>
           <AppDrawer
+            title="Filter"
             button={
               <FiMenu className="md:hidden text-xl" />
             }
           >
-            okkk
+            <MarketplaceSidebar />
           </AppDrawer>
         </div>
 

@@ -69,7 +69,9 @@ export default function ProfileDetailsPopUp() {
                     <div className='border-b border-b-[#EDF2F7] pb-2 pl-2 pt-2'>
                         <div className='flex items-center justify-between gap-10 pb-1'>
                             <h4 className="text-base">{user?.name}</h4>
-                            <button onClick={openModal} className="appOutlineBtnSm">Become Verified</button>
+                            {!user?.isVerified &&
+                                <button onClick={openModal} className="appOutlineBtnSm">Become Verified</button>
+                            }
                         </div>
                         <p className="textG">{user?.email}</p>
                     </div>
