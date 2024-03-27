@@ -81,7 +81,7 @@ const Marketplace = () => {
               <MarketplaceSidebar />
             </div>
             <div className="hidden md:block border border-[#E1DBDB]"></div>
-            <div className="w-full md:w-[73%] h-full overflow-y-auto bg-white p-2 md:p-4 2xl:p-6">
+            <div className="w-full md:w-[73%] max-h-[80dvh] overflow-y-auto bg-white p-2 md:p-4 2xl:p-6">
               <AppRenderReduxData
                 queryData={queryData}
                 showData={(data) => {
