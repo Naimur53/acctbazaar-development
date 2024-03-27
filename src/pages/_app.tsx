@@ -37,7 +37,14 @@ export default function App({ Component, pageProps }: AppProps) {
           </main>
         </RootLayout>
       </Provider>
-      <ToastContainer></ToastContainer>
+      <ToastContainer
+        position="bottom-left"
+        hideProgressBar={true}
+        autoClose={3500}
+        limit={1}
+        toastStyle={{ background: "#000" }}
+        pauseOnFocusLoss={false}
+      ></ToastContainer>
     </>
   );
 }

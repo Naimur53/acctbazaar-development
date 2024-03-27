@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import AccountCredentialCard from "./AccountCredentialCard";
 import MyAdsAccountCard from "../myAds/MyAdsAccountCard";
+import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
 import AppFormInput from "../ui/AppFormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import AppFormTextarea from "../ui/AppFormTextarea";
@@ -10,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import AppRenderReduxData from "../ui/AppRenderReduxData";
 import { IAccount } from "@/types/common";
 import { setAccountCredentials } from "@/redux/features/account/accountSlice";
-import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
 
 type TAccountCredentials = {
   updateProgress: Dispatch<SetStateAction<number>>;
@@ -64,7 +64,10 @@ export default function AccountCredentials({
         <div className="flex  flex-col md:flex-row gap-4 2xl:gap-6 min-h-[70dvh]">
           {/* this is left div  */}
           <div className="md:w-[33%] max-h-[50dvh] md:max-h-full overflow-y-auto">
-            <AccountCredentialCard account={accountCard} />
+            <AccountCredentialCard
+              updateProgress={updateProgress}
+              account={accountCard}
+            />
           </div>
           {/* this is middle div  */}
           <div className="md:w-[30%] space-y-3">
@@ -126,22 +129,14 @@ export default function AccountCredentials({
               register={register}
               error={errors?.additionalDescription}
             />
-            <div className="">
-              <input type="file" id="file" className="hidden" />
-              <label
-                htmlFor="file"
-                className="cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed py-3 px-3 flex items-center gap-1 justify-between"
-              >
-                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm">
-                  <CgFileAdd />
-                  Upload Valid Identity Document
-                </h2>
-                <p className="text-primary text-xs font-medium">Select File</p>
-              </label>
-              <h2 className="text-[#7D7878] pt-1 text-xs">
-                JPEG, PNG, PDF. Max file size: 2mb
-              </h2>
-            </div>
+            {/* <div className=''>
+                            <input type="file" id="file" className="hidden" />
+                            <label htmlFor="file" className='cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed py-3 px-3 flex items-center gap-1 justify-between'>
+                                <h2 className="text-[#7D7878] flex items-center gap-1 text-sm"><CgFileAdd />Upload Valid Identity Document</h2>
+                                <p className="text-primary text-xs font-medium">Select File</p>
+                            </label>
+                            <h2 className="text-[#7D7878] pt-1 text-xs">JPEG, PNG, PDF. Max file size: 2mb</h2>
+                        </div> */}
           </div>
           <div className="hidden md:block border border-[#EFECEC]"></div>
           {/* this is last div  */}
@@ -149,26 +144,28 @@ export default function AccountCredentials({
             {accountCredentials.length < 1 ? (
               <div className="h-[30dvh]"></div>
             ) : (
-              accountCredentials
-                .slice(1)
-                .map((account, index) => (
-                  <OrderDetailsAccountInfo
-                    key={index}
-                    index={index}
-                    account={account}
-                  />
-                ))
+              accountCredentials.map((account, index) => (
+                <OrderDetailsAccountInfo
+                  key={index}
+                  index={index}
+                  account={account}
+                />
+              ))
             )}
             <div className="mt-auto pt-3 md:pt-6 flex items-center justify-center gap-2 md:gap-5">
               <button
                 type="submit"
                 className="appBtn text-xs px-2 md:text-sm 2xl:text-base md:px-10"
               >
-                {accountCredentials.length > 1
+                {accountCredentials.length > 0
                   ? "Add another account"
                   : "Add account"}
               </button>
-              <button onClick={handleCredentials} className="appOutlineBtn">
+              <button
+                type="button"
+                onClick={handleCredentials}
+                className="appOutlineBtn"
+              >
                 Review
               </button>
             </div>

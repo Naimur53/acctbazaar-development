@@ -213,9 +213,10 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUserWithToken.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.accessToken = getFromLocalStorage(authKey);
+        state.user = action.payload.user;
+        state.accessToken = action.payload.accessToken;
         state.isLoading = false;
+        localStorage.setItem("accessToken", action.payload.accessToken);
       })
       .addCase(loginUserWithToken.rejected, (state, action) => {
         state.user = null;
