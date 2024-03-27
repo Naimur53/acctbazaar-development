@@ -27,18 +27,7 @@ const initialState: IInitialState = {
     name: "",
     price: "",
   },
-  accountCredentials: [
-    {
-      id: "",
-      username: "",
-      email: "",
-      password: "",
-      preview: "",
-      additionalEmail: "",
-      additionalPassword: "",
-      additionalDescription: "",
-    },
-  ],
+  accountCredentials: [],
 };
 
 export const accountSlice = createSlice({

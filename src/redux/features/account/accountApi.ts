@@ -24,6 +24,16 @@ export const accountApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: [tagTypes.account],
     }),
+    addMultiAccount: builder.mutation({
+      query: (info) => {
+        return {
+          url: "/accounts/multi-upload",
+          method: "POST",
+          body: info,
+        };
+      },
+      invalidatesTags: [tagTypes.account],
+    }),
     editAccount: builder.mutation({
       query: (info) => {
         return {
@@ -51,4 +61,5 @@ export const {
   useDeleteAccountMutation,
   useEditAccountMutation,
   useGetAccountByIdQuery,
+  useAddMultiAccountMutation,
 } = accountApi;

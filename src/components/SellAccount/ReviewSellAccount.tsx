@@ -48,7 +48,7 @@ export default function ReviewSellAccount({
       .unwrap()
       .then((res: ResponseSuccessType) => {
         if (!res.data) {
-          toast.error(res?.data.message || "something went wrong");
+          toast.error(res?.data.message || "Something went wrong ");
         } else {
           setModalOpen(true);
 
@@ -56,6 +56,7 @@ export default function ReviewSellAccount({
         }
       })
       .catch((err: IGenericErrorMessage) => {
+        console.log(err);
         toast.error(err.message || "something went wrong");
       });
   };

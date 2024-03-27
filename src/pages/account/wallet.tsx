@@ -27,13 +27,9 @@ const Wallet = () => {
       // searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
-      if (key === "isSold") {
-        return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${false}`;
-      } else {
-        const value = info[key as keyof typeof info];
-        if (value) {
-          return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
-        }
+      const value = info[key as keyof typeof info];
+      if (value) {
+        return pre + `${Boolean(pre.length) ? "&" : ""}${key}=${value}`;
       }
       return pre;
     }, "");

@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 export default function SellYourAccount() {
-  const [sellAccountState, setSellAccountState] = useState(0);
+  const [sellAccountState, setSellAccountState] = useState(1);
   const { user } = useAppSelector((state) => state.user);
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export default function SellYourAccount() {
   return (
     <HomeLayout>
       <PrivateLayout>
-        {/* <WelcomeModal /> */}
+        {UserRole.User === user?.role ? <WelcomeModal /> : null}
         <div className="container py-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex flex-col md:flex-row gap-1 justify-between">
