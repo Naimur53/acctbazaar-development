@@ -73,7 +73,7 @@ const SellerLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   //     );
   //   }
   // }
-  return <DashboardLayout>{children}</DashboardLayout>;
+  return <>{children}</>;
 };
 
 export default SellerLayout;

@@ -5,6 +5,7 @@ import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
+import SellerLayout from "@/layout/SellerLayout";
 import { useGetOrdersQuery } from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
 import { IOrder } from "@/types/common";
@@ -47,7 +48,7 @@ const Orders = () => {
 
   return (
     <HomeLayout>
-      <PrivateLayout>
+      <SellerLayout>
         <div className="container py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex justify-between">
@@ -85,37 +86,40 @@ const Orders = () => {
                     showData={(data) => {
                       return (
                         <div>
-                          {
-                            data?.data.length > 0 ?
-                              data.data.map((single: IOrder) => (
-                                <OrderAccountCard
-                                  orderInfo={single}
-                                  key={single.id}
-                                />
-                              )) :
-
-                              <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
-                                <Image
-                                  width={120}
-                                  height={120}
-                                  className="size-14 md:size-28"
-                                  src={"/assets/account/orders.png"}
-                                  alt="order image"
-                                />
-                                <h3 className="subTitle pt-5">No orders</h3>
-                                <p className="text-textGrey pt-1">
-                                  Buy and Sell orders will be shown here
-                                </p>
-                                <div className="flex items-center gap-2 md:gap-4 2xl:gap-5 pt-6">
-                                  <Link href="/marketplace">
-                                    <button className="appOutlineBtn">Explore marketplace</button>
-                                  </Link>
-                                  <Link href="/account/sell-your-account">
-                                    <button className="appBtn">Sell product</button>
-                                  </Link>
-                                </div>
+                          {data?.data.length > 0 ? (
+                            data.data.map((single: IOrder) => (
+                              <OrderAccountCard
+                                orderInfo={single}
+                                key={single.id}
+                              />
+                            ))
+                          ) : (
+                            <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
+                              <Image
+                                width={120}
+                                height={120}
+                                className="size-14 md:size-28"
+                                src={"/assets/account/orders.png"}
+                                alt="order image"
+                              />
+                              <h3 className="subTitle pt-5">No orders</h3>
+                              <p className="text-textGrey pt-1">
+                                Buy and Sell orders will be shown here
+                              </p>
+                              <div className="flex items-center gap-2 md:gap-4 2xl:gap-5 pt-6">
+                                <Link href="/marketplace">
+                                  <button className="appOutlineBtn">
+                                    Explore marketplace
+                                  </button>
+                                </Link>
+                                <Link href="/account/sell-your-account">
+                                  <button className="appBtn">
+                                    Sell product
+                                  </button>
+                                </Link>
                               </div>
-                          }
+                            </div>
+                          )}
                           <div className="flex justify-center mt-5">
                             <Pagination
                               showSizeChanger={false}
@@ -134,10 +138,9 @@ const Orders = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-      </PrivateLayout>
+      </SellerLayout>
     </HomeLayout>
   );
 };
