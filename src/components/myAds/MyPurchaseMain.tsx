@@ -17,7 +17,11 @@ const MyPurchaseMain = ({ accounts }: TMyPurchaseMain) => {
       <div className="w-full h-full bg-white">
         {accounts.map((account) => (
           // <OrdersCard key={account.id} {...account}></OrdersCard>
-          <MyPurchaseAccountCard account={account?.account} key={account.id} />
+          <MyPurchaseAccountCard
+            account={account?.account}
+            key={account.id}
+            orderId={account.id}
+          />
         ))}
       </div>
     </div>
