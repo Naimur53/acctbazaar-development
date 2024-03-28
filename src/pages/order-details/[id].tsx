@@ -78,7 +78,7 @@ const OrderDetails = () => {
               {/* this is image and description div  */}
               <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
                 <Image
-                  src={getImageUrlByCategory(AccountCategory.Instagram)}
+                  src={getImageUrlByCategory(mainData?.account.category)}
                   className="size-9 md:size-10 lg:size-14 2xl:size-16"
                   width={70}
                   height={70}
@@ -87,18 +87,16 @@ const OrderDetails = () => {
                 {/* this is description div  */}
                 <div className="">
                   <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
-                    2021 Instagram account with 100+ followers.{" "}
-                    <span className="text-sm text-[#403C3C]">10 pcs</span>
+                    {mainData?.account.name}
                   </h3>
                   <p className="text-textGrey pt-0.5 text-xs md:text-sm">
-                    This account has dating and marketplace installed, comes
-                    with email and 2fa code{" "}
+                    {mainData?.account.description}
                   </p>
                 </div>
               </div>
               <h2 className="text-textBlack font-bold flex items-center justify-end">
                 <PiCurrencyDollarBold />
-                50,000
+                {mainData?.account.price}
               </h2>
             </div>
             <div className="pt-2 space-y-2">

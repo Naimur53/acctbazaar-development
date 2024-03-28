@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -5,8 +6,9 @@ import React from "react";
 type Props = { small?: boolean };
 
 const Logo = ({ small }: Props) => {
+  const user = useAppSelector((state) => state.user.user);
   return (
-    <div className="pl-6 md:pl-0">
+    <div className={`${user?.id && "pl-6 md:pl-0"}`}>
       <Link href="/" className="flex items-center">
         <Image
           width={200}

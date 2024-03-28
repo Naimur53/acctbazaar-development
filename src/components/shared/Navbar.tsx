@@ -3,7 +3,7 @@ import Logo from "../ui/Logo";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
-import { Avatar, Badge, Drawer, MenuProps } from "antd";
+import { Avatar, Badge, Drawer, MenuProps, Space } from "antd";
 import { useRouter } from "next/router";
 import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -72,6 +72,89 @@ const Navbar = () => {
     label: string;
   }
 
+  const nav = (
+    <ul className="flex md:flex-row flex-col lg:gap-3 md:items-center justify-between">
+      <li>
+        <Link className="flex items-center gap-1 nav-single-item" href={"/"}>
+          <span className="flex items-center">
+            <IoMdHome className="align-middle md:hidden" />
+          </span>
+          <span className="align-middle">Home</span>
+        </Link>
+      </li>
+
+      {!user?.id ? (
+        <>
+          <li>
+            <Link
+              className="flex items-center gap-1 nav-single-item"
+              href="/#about"
+            >
+              <span className="align-middle">About</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="flex items-center gap-1 nav-single-item"
+              href="/#features"
+            >
+              <span className="align-middle">Features</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="flex items-center gap-1 nav-single-item"
+              href="/#how-it-works"
+            >
+              <span className="align-middle">How it works</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="flex items-center gap-1 nav-single-item"
+              href={"/become-a-seller"}
+            >
+              <span className="align-middle">Become A Merchant</span>
+            </Link>
+          </li>
+          <li>
+            <div className="nav-single-item text-center ">
+              {/* <Dropdown menu={{ items }}> */}
+              <Link
+                href="/auth/sign-in"
+                className="nav-single-item px-4 py-2 rounded-lg inline-block border text-primary border-primary "
+              >
+                <Space>
+                  Login
+                  {/* <DownOutlined /> */}
+                </Space>
+              </Link>
+              {/* </Dropdown> */}
+            </div>
+          </li>
+          <li className="w-full">
+            <div className="nav-single-item text-center w-full">
+              {/* <Dropdown menu={{ items }}> */}
+              <Link
+                href="/auth/sign-up"
+                className="appBtn w-full"
+              >
+                <Space>
+                  Sign Up
+                  {/* <DownOutlined /> */}
+                </Space>
+              </Link>
+              {/* </Dropdown> */}
+            </div>
+          </li>
+        </>
+      ) : null}
+    </ul>
+  )
+
   return (
     <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-[#D0D2D5]">
       <div
@@ -85,7 +168,7 @@ const Navbar = () => {
           }
       `}
       >
-        <div className='md:hidden'>
+        {user?.id && <div className='md:hidden'>
           <AppDrawer
             title="Filter"
             button={
@@ -94,11 +177,11 @@ const Navbar = () => {
           >
             <MarketplaceSidebar />
           </AppDrawer>
-        </div>
+        </div>}
 
         <Logo />
 
-        <div className='md:hidden flex items-center gap-1'>
+        {user?.id && <div className='md:hidden flex items-center gap-1'>
           <AppDrawer
             title="Notifications"
             button={
@@ -127,7 +210,7 @@ const Navbar = () => {
 
 
           <ProfileDetailsPopUp />
-        </div>
+        </div>}
 
         {/* this is for tab to large screen  */}
         <div className='hidden md:flex items-center gap-2 lg:gap-6'>
@@ -156,7 +239,38 @@ const Navbar = () => {
               </div>
             }
           </div>
+
         </div>
+
+        {!user?.id &&
+          <div className="md:hidden cursor-pointer flex justify-end ml-auto">
+            <button
+              onClick={() => setMobileMenu(true)}
+              className="hover:text-orange-500 transition-all flex justify-center items-center border p-2 rounded hover:border-orange-500"
+            >
+              <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+            </button>
+          </div>}
+
+        {/* this is for the mobile section  */}
+        <div className="block md:hidden">
+          <Drawer
+            width={300}
+            title={
+              <>
+                <Logo></Logo>
+              </>
+            }
+            placement={"left"}
+            closable={false}
+            onClose={() => setMobileMenu(false)}
+            open={mobileMenu}
+          >
+            <div>{nav}</div>
+          </Drawer>
+        </div>
+
+
       </div>
     </header>
   );
