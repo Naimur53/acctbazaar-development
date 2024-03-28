@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppModal from "../ui/AppModal";
 import Image from "next/image";
+import { useAppSelector } from "@/redux/hook";
 
 export default function WelcomeModal() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const { user } = useAppSelector((state) => state.user);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (user?.isPaidForSeller) {
+      setModalOpen(false);
+    }
+  }, [user?.isPaidForSeller])
 
   return (
     <AppModal
@@ -43,7 +51,7 @@ export default function WelcomeModal() {
                   <h4>Make payment</h4>
                   <p className="text-sm">
                     Make a one time payment fee of $10,{" "}
-                    <span className="text-primary font-medium">
+                    <span onClick={() => setModalOpen(false)} className="text-primary font-medium">
                       Make payment
                     </span>
                   </p>

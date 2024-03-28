@@ -53,6 +53,7 @@ export default function ShoppingCart() {
             return;
         } else {
             setSuccessStatus({ isDone: true, totalItems: mainData.length });
+            toast.success("Order placed successful", { toastId: 1 });
             mainData.forEach((ele) => {
                 makeOrder({ accountId: ele.accountId })
                     .unwrap()
@@ -80,7 +81,7 @@ export default function ShoppingCart() {
                             {myCarts.length > 0 ?
                                 <>
                                     {myCarts?.map((account, index) => (
-                                        <CartAccountCard account={account} key={index} isModal={isCartLoading || successStatus.isDone} />
+                                        <CartAccountCard account={account} key={index} isModal={isCartLoading || isOrderLoading || isCurrencyLoading} />
                                     ))}
                                 </>
                                 :
@@ -115,8 +116,7 @@ export default function ShoppingCart() {
                                             <p className="textB">Payment Method:</p>
                                             <h2 className="text-textBlack font-bold flex gap-1 items-center"><CiWallet className="text-xl" />My Wallet</h2>
                                         </div>
-                                        {isCartLoading ||
-                                            successStatus.isDone ?
+                                        {isCartLoading || isOrderLoading || isCurrencyLoading ?
                                             <button className="appBtn px-10 flex items-center justify-center w-full"><AiOutlineLoading3Quarters className="animate-spin text-white text-xl" /></button>
                                             :
                                             (data?.data?.amount < mainPrice) ?

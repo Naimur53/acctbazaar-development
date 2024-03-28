@@ -26,7 +26,7 @@ export default function CartPopUpBody() {
     const mainPrice = totalPrice + parseFloat(ServiceCharge);
 
     return (
-        <div className='divide-y max-w-full md:max-w-80'>
+        <div className='divide-y max-w-full md:min-w-80 md:max-w-80'>
             {myCarts.length > 0 ?
                 <>
                     <div className='overflow-y-auto max-h-[50dvh]'>

@@ -1,3 +1,4 @@
+import { BsClipboardCheck } from "react-icons/bs";
 import { FiHome } from "react-icons/fi";
 import { IoSettingsOutline, IoWalletOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -44,6 +45,11 @@ export const loggedUserNavLinks = [
         icon: TbSpeakerphone
     },
     {
+        label: "My Purchase",
+        path: "/my-purchase",
+        icon: BsClipboardCheck
+    },
+    {
         label: "Messages",
         path: "/messages",
         icon: TbMessage2
@@ -58,7 +64,7 @@ export const loggedUserNavLinks = [
 export const popupNavbarLinks = [
     {
         label: "My Account Dashboard",
-        path: "/account/dashboard",
+        path: "/seller/dashboard",
         icon: LuLayoutDashboard,
     },
     {

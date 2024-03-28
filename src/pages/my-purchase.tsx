@@ -1,17 +1,16 @@
 import MyAdsMain from "@/components/myAds/MyAdsMain";
-import AppInput from "@/components/ui/AppInput";
+import MyPurchaseMain from "@/components/myAds/MyPurchaseMain";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import AppTabs from "@/components/ui/AppTabs";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
-import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
+import { useGetMyOrdersQuery } from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { IoFilter } from "react-icons/io5";
 
-const MyAds = () => {
+export default function MyPurchase() {
     const tabs = [
         { value: "All", label: "All" },
         { value: "approved", label: "Active" },
@@ -45,7 +44,7 @@ const MyAds = () => {
         return queryString;
     }, [activeTab, user?.id]);
 
-    const queryData = useGetAccountsQuery(queryString)
+    const queryData = useGetMyOrdersQuery(queryString)
 
     return (
         <HomeLayout>
@@ -53,8 +52,8 @@ const MyAds = () => {
                 <div className='container py-10 2xl:py-12'>
                     {/* this is top section div  */}
                     <div className=''>
-                        <h2 className="title">My Ads</h2>
-                        <p className="text-textGrey text-xs md:text-sm">All of your product ads shows here</p>
+                        <h2 className="title">My Purchase</h2>
+                        <p className="text-textGrey text-xs md:text-sm">All of your product Purchase shows here</p>
                     </div>
 
                     {/* this is main div  */}
@@ -67,7 +66,7 @@ const MyAds = () => {
                                 return (<>
                                     {
                                         data?.data.length > 0 ?
-                                            <MyAdsMain accounts={data?.data} />
+                                            <MyPurchaseMain accounts={data?.data} />
                                             :
                                             <div className='bg-white rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col'>
                                                 <Image width={120} height={120} src={'/assets/myAds/no-ads.png'} alt="order image" />
@@ -89,5 +88,3 @@ const MyAds = () => {
         </HomeLayout>
     );
 };
-
-export default MyAds;

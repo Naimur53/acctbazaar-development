@@ -77,7 +77,7 @@ export default function CartAccountCard({ account, isModal }: TCartAccountCard) 
                         }
 
                         <div className=''>
-                            <button disabled={isModal} onClick={() => deleteCart(account?.id)} className="text-textGrey  hover:text-red"><AiOutlineDelete /></button>
+                            <button disabled={isModal} onClick={() => deleteCart(account?.id)} className={`text-textGrey ${!isModal && "hover:text-red"}`}><AiOutlineDelete /></button>
                         </div>
                     </div>
                 </div>

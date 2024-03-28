@@ -17,7 +17,7 @@ export default function MobileNavbar() {
                 {loggedUserNavLinks.map((nav: TNav) => {
                     const Icon = nav.icon;
                     return (
-                        <div key={nav?.label} className={`flex flex-col items-center justify-center gap-0.5 ${router?.asPath === nav?.path && "text-primary"} text-sm font-medium hover:text-primary`}>
+                        <div key={nav?.label} className={`flex flex-col items-center justify-center gap-0.5 ${router?.asPath === nav?.path && "text-primary"} text-xs font-medium hover:text-primary`}>
                             <Icon className="text-base" />
                             <Link href={nav?.path}>{nav.label}</Link>
                         </div>
