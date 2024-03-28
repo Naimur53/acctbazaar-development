@@ -1,9 +1,11 @@
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
+import Loading from "@/components/ui/Loading";
 import AddMoneyModal from "@/components/wallet/AddMoneyModal";
 import AddWithdrawModal from "@/components/wallet/AddWithdrawModal";
 import useDebounce from "@/hooks/useDebounce";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
+import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
 import { convertDateToString } from "@/utils/convertDateToString";
 import { Table } from "antd";
@@ -14,7 +16,7 @@ import { IoEyeOutline } from "react-icons/io5";
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
   // const debouncedSearch = useDebounce(search, 500);
-
+  const { data, isLoading } = useGetCurrencyOfLoggedInUserQuery("");
   const queryString = useMemo(() => {
     const info = {
       // category: selectedCategories.join('-'),
@@ -52,9 +54,28 @@ const Wallet = () => {
       },
     },
     {
-      title: "Transaction Type",
-      dataIndex: "bankName",
-      className: "min-w-[150px]",
+      title: "Payment type",
+      dataIndex: "walletAddress",
+      className: "capitalize",
+      render: (current: any, fullData: any) => {
+        return (
+          <div>
+            {current?.length
+              ? fullData.isTrc
+                ? "Crypto TRC 20"
+                : "Crypto BEP 20"
+              : "Bank"}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Address",
+      dataIndex: "walletAddress",
+      className: "capitalize",
+      render: (current: any, fullData: any) => {
+        return <div>{current || fullData.bankName}</div>;
+      },
     },
     {
       title: "Amount",
@@ -62,20 +83,12 @@ const Wallet = () => {
       className: "min-w-[150px]",
     },
     {
-      title: "Payment Method",
-      dataIndex: "paymentMethod",
-      className: "min-w-[150px]",
-      render: (text: string) => {
-        return <div className={``}>{text}</div>;
-      },
-    },
-    {
       title: "Status",
       dataIndex: "status",
       className: "min-w-[150px]",
       render: (text: string, record: any) => {
         return (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-start">
             <p
               className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
                 (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
@@ -125,18 +138,24 @@ const Wallet = () => {
                 />
                 <div className="absolute top-0 left-0 px-4 py-5 w-full h-full rounded flex flex-col justify-between">
                   <div className="flex items-center justify-between text-white">
-                    <h3 className="text-white font-medium">Your Balance</h3>
-                    <h2 className="text-sm">USD ( $ ) </h2>
+                    <h3 className="text-white font-medium text-xl">
+                      Your Balance
+                    </h3>
+                    {/* <h2 className="text-sm">USD ( $ ) </h2> */}
                   </div>
 
-                  <div className="bg-white/15 p-4 text-white flex justify-between gap-3 rounded-xl">
+                  <div className="bg-white/15 p-4 text-white gap-3 rounded-xl">
                     <div className="space-y-1">
-                      <h2 className="text-2xl md:text-3xl font-medium">
-                        $7,213.05
-                      </h2>
-                      <h2 className="text-sm font-medium">+50.235 (5.25%)</h2>
+                      {isLoading ? (
+                        <Loading></Loading>
+                      ) : (
+                        <h2 className="text-2xl md:text-3xl text-center w-full font-medium">
+                          ${data?.data?.amount?.toFixed(2) || 0}
+                        </h2>
+                      )}
+                      {/* <h2 className="text-sm font-medium">+50.235 (5.25%)</h2> */}
                     </div>
-                    <IoEyeOutline className="text-xl md:text-2xl" />
+                    {/* <IoEyeOutline className="text-xl md:text-2xl" /> */}
                   </div>
                 </div>
               </div>
