@@ -19,13 +19,13 @@ const AppTabs = ({ tabs, activeTab, setActiveTab }: TAppTabs) => {
                     <button
                         key={tab.label}
                         onClick={() => setActiveTab(tab.value ? tab.value : tab.label)}
-                        className={`${activeTab === tab.label ? "text-primary" : "hover:text-primary text-[#827E7E]"
+                        className={`${activeTab === (tab.value ? tab.value : tab.label) ? "text-primary" : "hover:text-primary text-[#827E7E]"
                             } relative px-2 py-1 md:py-1.5 text-xs md:text-sm font-medium transition`}
                         style={{
                             WebkitTapHighlightColor: "transparent",
                         }}
                     >
-                        {activeTab === tab.label && (
+                        {activeTab === (tab.value ? tab.value : tab.label) && (
                             <motion.span
                                 layoutId="bubble"
                                 className={`absolute inset-0 z-10 border-b md:border-b-2 border-b-[#FF5A35]`}

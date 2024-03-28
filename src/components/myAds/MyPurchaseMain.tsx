@@ -3,22 +3,25 @@ import AppTabs from "../ui/AppTabs";
 import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
 import OrderDetailsAccountInfo from "../orders/OrderDetailsAccountInfo";
 import MyAdsAccountCard from "./MyAdsAccountCard";
-import { IAccount } from "@/types/common";
+import { IAccount, IOrder } from "@/types/common";
+import OrdersCard from "../OrdersCard/OrdersCard";
+import MyPurchaseAccountCard from "./MyPurchaseAccountCard";
 
-type TMyAdsMain = {
-  accounts: IAccount[];
+type TMyPurchaseMain = {
+  accounts: IOrder[];
 };
 
-const MyAdsMain = ({ accounts }: TMyAdsMain) => {
+const MyPurchaseMain = ({ accounts }: TMyPurchaseMain) => {
   return (
     <div className="flex gap-4 max-h-[60vh] overflow-auto 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
       <div className="w-full h-full bg-white">
         {accounts.map((account) => (
-          <MyAdsAccountCard account={account} key={account.id} />
+          // <OrdersCard key={account.id} {...account}></OrdersCard>
+          <MyPurchaseAccountCard account={account?.account} key={account.id} />
         ))}
       </div>
     </div>
   );
 };
 
-export default MyAdsMain;
+export default MyPurchaseMain;

@@ -67,13 +67,16 @@ export default function ProfileDetailsPopUp() {
                 {/* this is main component  */}
                 <div className=''>
                     <div className='border-b border-b-[#EDF2F7] pb-2 pl-2 pt-2'>
-                        <div className='flex items-center justify-between gap-10 pb-1'>
-                            <h4 className="text-base">{user?.name}</h4>
-                            {!user?.isVerified &&
-                                <button onClick={openModal} className="appOutlineBtnSm">Become Verified</button>
+                        <div className='flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1'>
+                            <h4 className="text-sm md:text-base">{user?.name}</h4>
+                            {!user?.isApprovedForSeller &&
+                                <button onClick={openModal} className="appOutlineBtnSm hidden md:block">Become Verified</button>
                             }
                         </div>
                         <p className="textG">{user?.email}</p>
+                        {!user?.isApprovedForSeller &&
+                            <button onClick={openModal} className="appOutlineBtnSm mt-2 md:hidden">Become Verified</button>
+                        }
                     </div>
 
                     <div className='space-y-2 pt-2 p-2'>

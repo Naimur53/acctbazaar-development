@@ -2,12 +2,13 @@ import { useDeleteAccountMutation } from "@/redux/features/account/accountApi";
 import { AccountCategory, IAccount } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlinePauseCircle } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 
-const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
-
+const MyPurchaseAccountCard = ({ account }: { account: IAccount }) => {
+    console.log(account);
     const [deleteAccount] = useDeleteAccountMutation();
     return (
         <div className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 hover:bg-[#FBFAFA]`}>
@@ -28,12 +29,21 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
                     <h2 className="text-textBlack font-bold flex items-center justify-end"><PiCurrencyDollarBold />{account?.price}</h2>
                     {/* this is icons div view cart message  */}
                     <div className='flex items-center justify-between gap-4 text-[#4F4F4F]'>
+                        <Link href={`/order-details/${account?.id}`}>
+                            <Image
+                                src={"/assets/icons/eye.png"}
+                                width={40}
+                                height={40}
+                                className="size-4 md:size-5"
+                                alt="eye"
+                            />
+                        </Link>
                         {/* <button className="flex items-center gap-1 text-sm ">
                             <MdOutlinePauseCircle /> Pause Ad
                         </button> */}
-                        <button onClick={() => deleteAccount(account?.id)} className="bg-white group p-2 rounded-full">
+                        {/* <button onClick={() => deleteAccount(account?.id)} className="bg-white group p-2 rounded-full">
                             <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
@@ -41,4 +51,4 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
     );
 };
 
-export default MyAdsAccountCard;
+export default MyPurchaseAccountCard;

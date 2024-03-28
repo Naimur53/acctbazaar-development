@@ -34,7 +34,7 @@ export default function SellYourAccount() {
       }
     }
   }, [user, router, sellAccountState]);
-  console.log(user);
+
   return (
     <HomeLayout>
       <PrivateLayout>
@@ -58,67 +58,56 @@ export default function SellYourAccount() {
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <TbWallet
-                      className={`text-2xl ${
-                        sellAccountState === 1 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 1 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState === 1
+                  className={`border w-12 md:w-20 ${sellAccountState === 1
                       ? "border-primary"
                       : "border-textBlack"
-                  }`}
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 2 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <FiPlusCircle
-                      className={`text-2xl ${
-                        sellAccountState === 2 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 2 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
-                  } ${
-                    sellAccountState > 2 && "border-textBlack border-solid"
-                  }  ${
-                    sellAccountState === 2 && "border-primary border-dashed"
-                  }`}
+                  className={`border w-12 md:w-20 ${sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
+                    } ${sellAccountState > 2 && "border-textBlack border-solid"
+                    }  ${sellAccountState === 2 && "border-primary border-dashed"
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 3 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <BiMessageSquareDetail
-                      className={`text-2xl ${
-                        sellAccountState === 3 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 3 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
                 <div
-                  className={`border w-12 md:w-20 ${
-                    sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
-                  } ${
-                    sellAccountState > 3 && "border-textBlack border-solid"
-                  }  ${
-                    sellAccountState === 3 && "border-primary border-dashed"
-                  }`}
+                  className={`border w-12 md:w-20 ${sellAccountState < 2 && "border-[#CCCCCC] border-dashed"
+                    } ${sellAccountState > 3 && "border-textBlack border-solid"
+                    }  ${sellAccountState === 3 && "border-primary border-dashed"
+                    }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
                   {sellAccountState > 4 ? (
                     <GoCheckCircleFill className={`text-2xl text-textBlack`} />
                   ) : (
                     <TbMessage2Search
-                      className={`text-2xl ${
-                        sellAccountState === 4 && "text-primary"
-                      }`}
+                      className={`text-2xl ${sellAccountState === 4 && "text-primary"
+                        }`}
                     />
                   )}
                 </div>
@@ -126,30 +115,26 @@ export default function SellYourAccount() {
 
               <div className="flex text-xs md:text-sm items-center justify-between gap-5 md:gap-6 font-medium">
                 <p
-                  className={`${sellAccountState === 1 && "text-primary"} ${
-                    sellAccountState > 1 && "text-textBlack"
-                  }`}
+                  className={`${sellAccountState === 1 && "text-primary"} ${sellAccountState > 1 && "text-textBlack"
+                    }`}
                 >
                   Make Payment
                 </p>
                 <p
-                  className={`${sellAccountState === 2 && "text-primary"} ${
-                    sellAccountState > 2 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-center`}
+                  className={`${sellAccountState === 2 && "text-primary"} ${sellAccountState > 2 && "text-textBlack"
+                    } min-w-16 md:min-w-24 text-center`}
                 >
                   Add account
                 </p>
                 <p
-                  className={`${sellAccountState === 3 && "text-primary"} ${
-                    sellAccountState > 3 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-end`}
+                  className={`${sellAccountState === 3 && "text-primary"} ${sellAccountState > 3 && "text-textBlack"
+                    } min-w-16 md:min-w-24 text-end`}
                 >
                   Credentials
                 </p>
                 <p
-                  className={`${sellAccountState === 4 && "text-primary"} ${
-                    sellAccountState > 4 && "text-textBlack"
-                  } min-w-16 md:min-w-24 text-end pr-2`}
+                  className={`${sellAccountState === 4 && "text-primary"} ${sellAccountState > 4 && "text-textBlack"
+                    } min-w-16 md:min-w-24 text-end pr-2`}
                 >
                   Review
                 </p>

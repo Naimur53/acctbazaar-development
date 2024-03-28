@@ -10,7 +10,7 @@ interface MonthlySale {
   totalSold: number;
 }
 
-function customizeData(data: AccountData[]): MonthlySale[] {
+export function customizeData(data: AccountData[]): MonthlySale[] {
   const monthlySales: { [key: string]: number } = {};
 
   data.forEach((account) => {

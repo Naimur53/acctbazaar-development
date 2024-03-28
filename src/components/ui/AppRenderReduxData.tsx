@@ -10,6 +10,7 @@ type Props = {
   renderErrorComponent?: (error: any) => React.ReactNode;
   loadingComponent?: React.ReactNode;
   notAllowIsFetching?: boolean;
+  isEmptyComponentHave?: boolean;
 };
 
 const AppRenderReduxData = ({
@@ -18,6 +19,7 @@ const AppRenderReduxData = ({
   renderErrorComponent,
   loadingComponent,
   notAllowIsFetching,
+  isEmptyComponentHave
 }: Props) => {
   const { data, isFetching, isLoading, isError, error } = queryData;
 
@@ -34,6 +36,8 @@ const AppRenderReduxData = ({
       <AppErrorComponent />
     );
 
+  } else if ((data as any)?.data && isEmptyComponentHave) {
+    content = showData(data);
   } else if ((data as any)?.data?.length > 0) {
     content = showData(data);
   } else {

@@ -30,6 +30,8 @@ import NotificationsPopUp from "./NotificationsPopUp";
 import CartPopUp from "./CartPopUp";
 import AppDrawer from "../ui/AppDrawer";
 import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
+import NotificationBody from "./NotificationBody";
+import CartPopUpBody from "./CartPopUpBody";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -97,8 +99,33 @@ const Navbar = () => {
         <Logo />
 
         <div className='md:hidden flex items-center gap-1'>
-          <NotificationsPopUp />
-          <CartPopUp />
+          <AppDrawer
+            title="Notifications"
+            button={
+              <div className='relative cursor-pointer'>
+                <Image width={32} height={32} className="size-5 md:size-6 object-contain" src={'/assets/icons/Notification.png'} alt="country icon" />
+                <span className="size-1.5 md:size-2 2xl:size-2.5 rounded-full bg-primary absolute top-0 right-0.5"></span>
+              </div>
+            }
+          >
+            <NotificationBody />
+          </AppDrawer>
+
+          <AppDrawer
+            title="Shopping cart"
+            button={
+              <div className='relative cursor-pointer'>
+                <Image width={32} height={32} className="size-5 md:size-6 object-contain" src={'/assets/icons/shopping-cart.png'} alt="country icon" />
+                {myCarts.length > 0 &&
+                  <span className="size-2 md:size-3 2xl:size-3.5 rounded-full bg-primary text-white font-medium text-[5px] md:text-[8px] 2xl:text-[10px] flex items-center justify-center text-center absolute top-0 md:-top-0.5 -right-0.5">{myCarts.length}</span>
+                }
+              </div>
+            }
+          >
+            <CartPopUpBody />
+          </AppDrawer>
+
+
           <ProfileDetailsPopUp />
         </div>
 

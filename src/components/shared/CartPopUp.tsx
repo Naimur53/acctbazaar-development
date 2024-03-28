@@ -9,6 +9,7 @@ import { toggleSelectAll } from "@/redux/features/cart/cartSlice";
 import { ICart } from "@/types/common";
 import { useGetMyCartsQuery } from "@/redux/features/cart/cartApi";
 import config from "@/utils/config";
+import CartPopUpBody from "./CartPopUpBody";
 
 export default function CartPopUp() {
     const { data: cartsInfo, isLoading: isCartLoading } = useGetMyCartsQuery("");
@@ -40,45 +41,7 @@ export default function CartPopUp() {
                     }
                 </div>
             }>
-            {/* this is main component  */}
-            <div className='divide-y max-w-80'>
-                {myCarts.length > 0 ?
-                    <>
-                        <div className='overflow-y-auto max-h-[50dvh]'>
-                            {myCarts?.map((account, index) => (
-                                <CartAccountCard account={account} key={index} />
-                            ))}
-                        </div>
-                        <div className='pt-1'>
-                            <h4 className="text-end">Summary</h4>
-                            <div className='py-1'>
-                                <div className='flex items-center justify-end gap-4'>
-                                    <p className="textG">Subtotal:</p>
-                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />{totalPrice}</h2>
-                                </div>
-                                <div className='flex items-center justify-end gap-4'>
-                                    <p className="textG">Service charge (10%):</p>
-                                    <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />{ServiceCharge}</h2>
-                                </div>
-                            </div>
-
-                            <div className='flex items-center justify-end gap-4 pb-2'>
-                                <p className="textB">Total:</p>
-                                <h2 className="text-textBlack font-bold flex items-center"><PiCurrencyDollarBold />{mainPrice}</h2>
-                            </div>
-                        </div>
-
-                        <Link href={'shopping-cart'}>
-                            <button className="appBtn w-full">View cart {(myCarts.length > 0) && `( ${myCarts.length} )`}</button>
-                        </Link>
-                    </>
-                    :
-                    <div className='p-4 text-[#828D99] flex items-center justify-center flex-col gap-2'>
-                        <Image width={80} height={80} className="size-20 object-contain" src={'/assets/icons/empty-cart.png'} alt="country icon" />
-                        Shopping cart is empty
-                    </div>
-                }
-            </div>
+            <CartPopUpBody />
         </AppPopover>
     );
 };

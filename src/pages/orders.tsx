@@ -10,6 +10,7 @@ import { useAppSelector } from "@/redux/hook";
 import { IOrder } from "@/types/common";
 import { Pagination } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 
@@ -77,18 +78,44 @@ const Orders = () => {
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                 />
-                <div className="w-3/4 py-6 space-y-6">
+                <div className="py-6 space-y-6">
                   <AppRenderReduxData
+                    isEmptyComponentHave
                     queryData={orderQuery}
                     showData={(data) => {
                       return (
                         <div>
-                          {data.data.map((single: IOrder) => (
-                            <OrderAccountCard
-                              orderInfo={single}
-                              key={single.id}
-                            />
-                          ))}
+                          {
+                            data?.data.length > 0 ?
+                              data.data.map((single: IOrder) => (
+                                <OrderAccountCard
+                                  orderInfo={single}
+                                  key={single.id}
+                                />
+                              )) :
+
+                              <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
+                                <Image
+                                  width={120}
+                                  height={120}
+                                  className="size-14 md:size-28"
+                                  src={"/assets/account/orders.png"}
+                                  alt="order image"
+                                />
+                                <h3 className="subTitle pt-5">No orders</h3>
+                                <p className="text-textGrey pt-1">
+                                  Buy and Sell orders will be shown here
+                                </p>
+                                <div className="flex items-center gap-2 md:gap-4 2xl:gap-5 pt-6">
+                                  <Link href="/marketplace">
+                                    <button className="appOutlineBtn">Explore marketplace</button>
+                                  </Link>
+                                  <Link href="/account/sell-your-account">
+                                    <button className="appBtn">Sell product</button>
+                                  </Link>
+                                </div>
+                              </div>
+                          }
                           <div className="flex justify-center mt-5">
                             <Pagination
                               showSizeChanger={false}
@@ -107,23 +134,7 @@ const Orders = () => {
                 </div>
               </div>
             </div>
-            {/*          
-              <div className="bg-white rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col">
-                <Image
-                  width={120}
-                  height={120}
-                  src={"/assets/orders/orders.png"}
-                  alt="order image"
-                />
-                <h3 className="subTitle pt-5">No orders</h3>
-                <p className="text-textGrey pt-1">
-                  Buy and Sell orders will be shown here
-                </p>
-                <div className="flex items-center gap-4 2xl:gap-5 pt-6">
-                  <button className="appOutlineBtn">Explore marketplace</button>
-                  <button className="appBtn">Sell product</button>
-                </div>
-              </div> */}
+
           </div>
         </div>
       </PrivateLayout>

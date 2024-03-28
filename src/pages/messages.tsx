@@ -112,7 +112,7 @@ const Messages = () => {
               <Image
                 width={120}
                 height={120}
-                src={"/assets/message/message.png"}
+                src={"/assets/account/message.png"}
                 alt="order image"
               />
               <h3 className="subTitle pt-5">No messages</h3>
