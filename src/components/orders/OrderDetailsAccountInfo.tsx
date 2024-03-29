@@ -17,11 +17,12 @@ type TOrderDetailsAccountInfo = {
         additionalPassword?: string;
         additionalDescription?: string;
     }
-}
+};
 
 const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) => {
     const [open, setOpen] = useState(false);
     const dispatch = useAppDispatch();
+
     return (
         <div className='rounded-lg border border-borderColor p-4'>
             <div className={`flex items-center justify-between ${open && "border-b border-b-borderColor pb-3"}`}>
@@ -53,9 +54,9 @@ const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) =
                     </div>
                     <div className='space-y-1.5'>
                         <p className="text-textGrey">Additional Information</p>
-                        <p>{account?.additionalDescription}</p>
+                        <p className="text-sm">{account?.additionalDescription}</p>
                     </div>
-                    <div className='space-y-1.5'>
+                    {/* <div className='space-y-1.5'>
                         <p className="text-textGrey">Images</p>
                         <div className='rounded-lg py-2 px-3 flex items-center gap-3'>
                             <Image src={'/assets/orders/upload.png'} width={32} height={32} alt="upload image" />
@@ -64,7 +65,7 @@ const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) =
                                 <p className="text-xs text-textGrey">200 KB</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </motion.div>
             ) :
                 (

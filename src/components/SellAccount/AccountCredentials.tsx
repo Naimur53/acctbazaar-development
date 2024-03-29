@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import AppRenderReduxData from "../ui/AppRenderReduxData";
 import { IAccount } from "@/types/common";
 import { setAccountCredentials } from "@/redux/features/account/accountSlice";
+import { toast } from "react-toastify";
 
 type TAccountCredentials = {
   updateProgress: Dispatch<SetStateAction<number>>;
@@ -51,9 +52,13 @@ export default function AccountCredentials({
   };
 
   const handleCredentials = () => {
+    if (accountCredentials.length < 1) {
+      return toast.error("Please set minimum one account Credentials", { toastId: 1 })
+    }
     updateProgress(4);
   };
-  console.log(accountCredentials);
+
+
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
       <h2 className="subTitle pt-4 md:pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
@@ -144,13 +149,15 @@ export default function AccountCredentials({
             {accountCredentials.length < 1 ? (
               <div className="h-[30dvh]"></div>
             ) : (
-              accountCredentials.map((account, index) => (
-                <OrderDetailsAccountInfo
-                  key={index}
-                  index={index}
-                  account={account}
-                />
-              ))
+              <div className='max-h-[60dvh] space-y-2 overflow-auto'>
+                {accountCredentials.map((account, index) => (
+                  <OrderDetailsAccountInfo
+                    key={index}
+                    index={index}
+                    account={account}
+                  />
+                ))}
+              </div>
             )}
             <div className="mt-auto pt-3 md:pt-6 flex items-center justify-center gap-2 md:gap-5">
               <button

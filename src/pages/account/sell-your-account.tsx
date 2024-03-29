@@ -38,7 +38,8 @@ export default function SellYourAccount() {
   return (
     <HomeLayout>
       <PrivateLayout>
-        {UserRole.User === user?.role ? <WelcomeModal /> : null}
+        <WelcomeModal />
+        {/* {UserRole.User === user?.role ? <WelcomeModal /> : null} */}
         <div className="container py-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex flex-col md:flex-row gap-1 justify-between">
@@ -65,8 +66,8 @@ export default function SellYourAccount() {
                 </div>
                 <div
                   className={`border w-12 md:w-20 ${sellAccountState === 1
-                      ? "border-primary"
-                      : "border-textBlack"
+                    ? "border-primary"
+                    : "border-textBlack"
                     }`}
                 ></div>
                 <div className=" p-2 rounded-full bg-white size-12 flex items-center justify-center">
@@ -113,28 +114,28 @@ export default function SellYourAccount() {
                 </div>
               </div>
 
-              <div className="flex text-xs md:text-sm items-center justify-between gap-5 md:gap-6 font-medium">
+              <div className="flex text-xs md:text-sm items-center justify-between md:gap-6 font-medium">
                 <p
                   className={`${sellAccountState === 1 && "text-primary"} ${sellAccountState > 1 && "text-textBlack"
-                    }`}
+                    }  min-w-[80px]`}
                 >
                   Make Payment
                 </p>
                 <p
                   className={`${sellAccountState === 2 && "text-primary"} ${sellAccountState > 2 && "text-textBlack"
-                    } min-w-16 md:min-w-24 text-center`}
+                    } min-w-20 md:min-w-24 text-center ml-4`}
                 >
                   Add account
                 </p>
                 <p
                   className={`${sellAccountState === 3 && "text-primary"} ${sellAccountState > 3 && "text-textBlack"
-                    } min-w-16 md:min-w-24 text-end`}
+                    } min-w-16 md:min-w-24 text-end mx-2`}
                 >
                   Credentials
                 </p>
                 <p
                   className={`${sellAccountState === 4 && "text-primary"} ${sellAccountState > 4 && "text-textBlack"
-                    } min-w-16 md:min-w-24 text-end pr-2`}
+                    } min-w-16 md:min-w-24 text-end md:pr-2`}
                 >
                   Review
                 </p>

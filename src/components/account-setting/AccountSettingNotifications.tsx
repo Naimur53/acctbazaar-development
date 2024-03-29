@@ -6,14 +6,15 @@ const AccountSettingNotifications = () => {
     const [editUser, { isLoading }] = useEditUserMutation();
 
     return (
-        <div className='py-4 2xl:py-5 flex justify-between'>
+        <div className='py-1 md:py-4 2xl:py-5 flex gap-4 flex-col md:flex-row justify-between'>
             {/* this is left side text  */}
             <div className='text-textBlueBlack space-y-1'>
                 <h3 className="font-semibold">Notifications</h3>
-                <p className="text-textGrey text-sm">Get notified on activities within   <br />Acctbazaar</p>
+                <p className="text-textGrey text-sm hidden md:block">Get notified on activities within   <br />Acctbazaar</p>
+                <p className="text-textGrey text-sm md:hidden">Get notified on activities within  Acctbazaar</p>
             </div>
             {/* this is right side text  */}
-            <div className='w-[40%] space-y-3'>
+            <div className='w-full md:w-[40%] space-y-3'>
                 <div className='flex gap-4'>
                     <input
                         // {...register("accept", {

@@ -16,7 +16,7 @@ import {
   ResponseSuccessType,
 } from "@/types/common";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { emptyAccountCredentials } from "@/redux/features/account/accountSlice";
+import { emptyAccountCredentials, setAccountCard } from "@/redux/features/account/accountSlice";
 
 type TReviewSellAccount = {
   updateProgress: Dispatch<SetStateAction<number>>;
@@ -43,7 +43,7 @@ export default function ReviewSellAccount({
       username: email,
       id: undefined,
     }));
-    console.log(dataToSum);
+
     addAccount(dataToSum)
       .unwrap()
       .then((res: ResponseSuccessType) => {
@@ -65,20 +65,21 @@ export default function ReviewSellAccount({
     setModalOpen(false);
     updateProgress(2);
     dispatch(emptyAccountCredentials());
+    dispatch(setAccountCard({}));
   };
 
   useEffect(() => {
-    if (accountCredentials.length < 0) {
-      updateProgress(1);
+    if (accountCredentials.length < 1) {
+      updateProgress(2);
     }
-  }, [accountCredentials.length, updateProgress]);
+  }, [accountCredentials, updateProgress]);
 
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] md:p-6 2xl:p-8">
       <h2 className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
         Review Account
       </h2>
-      <div className="pb-6 pt-1 md:pt-9 space-y-3 md:w-2/5 mx-auto">
+      <div className="pb-6 pt-1 md:pt-4 space-y-3 md:w-2/5 mx-auto">
         <AccountCredentialCard
           updateProgress={updateProgress}
           account={accountCard}
@@ -101,6 +102,7 @@ export default function ReviewSellAccount({
               Submit
             </button>
           )}
+
           <AppModal
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}

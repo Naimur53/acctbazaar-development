@@ -58,7 +58,7 @@ export default function MyPurchase() {
 
                     {/* this is main div  */}
                     <div className='mt-2 md:mt-4 lg:mt-5 2xl:mt-6 bg-white rounded-2xl w-full  p-6 2xl:p-8'>
-                        <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+                        {/* <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} /> */}
                         <AppRenderReduxData
                             queryData={queryData}
                             isEmptyComponentHave

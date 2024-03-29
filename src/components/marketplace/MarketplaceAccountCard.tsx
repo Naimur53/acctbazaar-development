@@ -131,7 +131,7 @@ const MarketplaceAccountCard = ({
                     src={"/assets/icons/cart.png"}
                     width={40}
                     height={40}
-                    className="size-4 md:size-5 cursor-pointer"
+                    className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
                     alt="cart"
                   />
                 </Tooltip>
@@ -184,7 +184,7 @@ const MarketplaceAccountCard = ({
                     src={"/assets/icons/eye.png"}
                     width={40}
                     height={40}
-                    className="size-4 md:size-5 cursor-pointer"
+                    className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
                     alt="eye"
                   />
                 </Tooltip>

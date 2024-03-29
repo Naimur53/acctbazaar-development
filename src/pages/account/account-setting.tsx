@@ -18,15 +18,15 @@ const AccountSetting = () => {
 
     return (
         <HomeLayout>
-            <div className='container py-10 2xl:py-12'>
+            <div className='container py-5 md:py-10 2xl:py-12'>
                 <h2 className="title">Account settings</h2>
 
                 {/* this is main div  */}
-                <div className='bg-white rounded min-h-screen  py-6 px-10 mt-2 md:mt-4 lg:mt-5 2xl:mt-6'>
+                <div className='bg-white rounded min-h-[80dvh] py-3 md:py-6 md:px-10 mt-2 md:mt-4 lg:mt-5 2xl:mt-6'>
                     <AppTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
 
                     <AnimatePresence mode="wait">
-                        <motion.div className='w-[80%] py-4'
+                        <motion.div className='w-full md:w-[80%] py-2 md:py-4'
                             key={activeTab ? activeTab : "empty"}
                             initial={{ x: -10, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}

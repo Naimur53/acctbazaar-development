@@ -75,18 +75,18 @@ const AccountSettingSecurity = () => {
 
     return (
         <form
-            className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
+            className="w-full md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row gap-3 justify-between'>
                 {/* this is left side text  */}
                 <div className='text-textBlueBlack space-y-1'>
                     <h3 className="font-semibold">Password</h3>
                     <p className="text-textGrey text-sm">Please enter your current password to  <br /> change your password.</p>
                 </div>
-                {/* this is right side text  */}
-                <div className='w-[37%] space-y-3'>
 
+                {/* this is right side text  */}
+                <div className='w-full md:w-[37%] space-y-3'>
                     <AppFormInput
                         label="Current Password"
                         name="prePassword"
@@ -121,12 +121,12 @@ const AccountSettingSecurity = () => {
                         placeholder="Type your Confirm password"
                         error={errors.confirmPassword}
                     />
-                    <div className='flex items-center justify-end gap-4'>
-                        <button type="button" onClick={() => reset()} className="appOutlineBtn">Cancel</button>
+                    <div className='flex items-center justify-end gap-2 md:gap-4'>
+                        <button type="button" onClick={() => reset()} className="appOutlineBtn  text-xs md:text-sm 2xl:text-base">Cancel</button>
                         {isLoading ?
                             <button className="appBtn px-10"><AiOutlineLoading3Quarters className="animate-spin text-white text-xl" /></button>
                             :
-                            <button type="submit" className="appBtn">Update password</button>
+                            <button type="submit" className="appBtn text-xs md:text-sm 2xl:text-base">Update password</button>
                         }
                     </div>
                 </div>

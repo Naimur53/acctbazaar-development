@@ -83,3 +83,26 @@ export const popupNavbarLinks = [
         icon: TbLogout2,
     },
 ]
+
+export const loggedUserPopupNavbarLinks = [
+    {
+        label: "My Account Dashboard",
+        path: "/dashboard",
+        icon: LuLayoutDashboard,
+    },
+    {
+        label: "Referral",
+        path: "/referral",
+        icon: PiUsersThreeLight,
+    },
+    {
+        label: "Account settings",
+        path: "/account/account-setting",
+        icon: IoSettingsOutline,
+    },
+    {
+        label: "Log out",
+        path: "/",
+        icon: TbLogout2,
+    },
+]

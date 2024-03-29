@@ -12,7 +12,7 @@ type TAccountCredentialCard = {
     category: string;
     description: string;
     name: string;
-    price: string;
+    price: number;
   };
   updateProgress: Dispatch<SetStateAction<number>>;
 };
@@ -21,7 +21,7 @@ export default function AccountCredentialCard({
   account,
   updateProgress,
 }: TAccountCredentialCard) {
-  console.log(account);
+
   return (
     <div
       className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-[#FBFAFA]`}
@@ -34,7 +34,7 @@ export default function AccountCredentialCard({
         alt="social icons"
       />
       {/* this is description div  */}
-      <div className="">
+      <div className="w-full">
         <div className="">
           <h3 className="text-textBlack font-medium text-sm">
             {account?.name}
@@ -43,7 +43,7 @@ export default function AccountCredentialCard({
         </div>
 
         {/* this is right side div with icons and price  */}
-        <div className="flex items-center gap-1 md:gap-4 justify-between">
+        <div className="w-full flex items-center gap-1 md:gap-4 justify-between">
           <h2 className="text-textBlack font-bold flex text-sm items-center justify-end">
             <PiCurrencyDollarBold />
             {account?.price}

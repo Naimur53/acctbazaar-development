@@ -26,7 +26,7 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
   const [modalOpen, setModalOpen] = useState(false);
   const [userGuide, setUserGuide] = useState(1);
   const user = useAppSelector((state) => state.user.user);
-
+  const { accountCard } = useAppSelector(state => state.account);
   useEffect(() => {
     if (!user?.isPaidForSeller) {
       setModalOpen(true)
@@ -39,7 +39,14 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      category: accountCard?.category,
+      name: accountCard.name,
+      description: accountCard?.description,
+      price: accountCard?.price
+    }
+  });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);

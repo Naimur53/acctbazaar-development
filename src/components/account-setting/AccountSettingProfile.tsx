@@ -136,18 +136,18 @@ const AccountSettingProfile = () => {
 
     return (
         <form
-            className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
+            className="w-full md:py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row justify-between gap-3'>
                 {/* this is left side text  */}
                 <div className='text-textBlueBlack space-y-1'>
                     <h3 className="font-semibold">Personal Information</h3>
                     <p className="text-textGrey text-sm">Make adjustments to your personal <br /> information and save them.</p>
                 </div>
-                {/* this is right side text  */}
-                <div className='w-[40%] space-y-3'>
 
+                {/* this is right side text  */}
+                <div className='w-full md:w-[40%] space-y-3'>
                     <div className=''>
                         <AppFormInput
                             label="Name"
@@ -208,15 +208,17 @@ const AccountSettingProfile = () => {
                     )}
                 </div>
             </div>
+
             <div className='border border-[#F2F4F7]'></div>
-            <div className='flex justify-between'>
+
+            <div className='flex flex-col md:flex-row gap-3 justify-between'>
                 {/* this is left side text  */}
                 <div className='text-textBlueBlack space-y-1'>
                     <h3 className="font-semibold">Avatar</h3>
                     <p className="text-zinc-400 text-sm">Select a nice picture of yourself.</p>
                 </div>
                 {/* this is right side text  */}
-                <div className='w-[40%] flex items-center justify-between gap-4'>
+                <div className='w-full md:w-[40%] flex items-center justify-between gap-4'>
                     <img className="size-20 rounded-full object-cover" src={user?.profileImg as string} alt="" />
                     <div className=''>
                         <input onChange={(e) => handleFileUpload(e.target.files && e.target.files[0])} type="file" name="" id="file" className="hidden" />
@@ -236,15 +238,18 @@ const AccountSettingProfile = () => {
                     </div>
                 </div>
             </div>
+
             <div className='border border-[#F2F4F7]'></div>
-            <div className='flex justify-between'>
+
+            <div className='flex flex-col md:flex-row gap-3 justify-between'>
                 {/* this is left side text  */}
                 <div className='text-textBlueBlack space-y-1'>
                     <h3 className="font-semibold">Additional Information</h3>
                     <p className="text-textGrey text-sm">Verify your Identity</p>
                 </div>
+
                 {/* this is right side text  */}
-                <div className='w-[40%] space-y-3'>
+                <div className='w-full md:w-[40%] space-y-3'>
                     <div className='grid grid-cols-2 gap-2'>
                         <AppFormSelect
                             control={control}

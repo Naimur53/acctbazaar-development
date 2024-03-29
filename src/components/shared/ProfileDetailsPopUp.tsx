@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { SlArrowDown } from "react-icons/sl";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { popupNavbarLinks } from "./NavbarData";
+import { loggedUserPopupNavbarLinks, popupNavbarLinks } from "./NavbarData";
 import Link from "next/link";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import AppModal from "../ui/AppModal";
 import { useRouter } from "next/navigation";
+import { UserRole } from "@/types/common";
 
 export default function ProfileDetailsPopUp() {
     const [open, setOpen] = useState(false);
@@ -69,18 +70,18 @@ export default function ProfileDetailsPopUp() {
                     <div className='border-b border-b-[#EDF2F7] pb-2 pl-2 pt-2'>
                         <div className='flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1'>
                             <h4 className="text-sm md:text-base">{user?.name}</h4>
-                            {!user?.isApprovedForSeller &&
+                            {(!user?.isApprovedForSeller && user?.role === UserRole.User) &&
                                 <button onClick={openModal} className="appOutlineBtnSm hidden md:block">Become Verified</button>
                             }
                         </div>
                         <p className="textG">{user?.email}</p>
-                        {!user?.isApprovedForSeller &&
+                        {(!user?.isApprovedForSeller && user?.role === UserRole.User) &&
                             <button onClick={openModal} className="appOutlineBtnSm mt-2 md:hidden">Become Verified</button>
                         }
                     </div>
 
                     <div className='space-y-2 pt-2 p-2'>
-                        {popupNavbarLinks.map(nav => (
+                        {(user?.role === (UserRole.SuperAdmin || UserRole.Admin) ? loggedUserPopupNavbarLinks : popupNavbarLinks).map(nav => (
                             nav.label === "Log out" ?
                                 <div
                                     key={nav?.label}

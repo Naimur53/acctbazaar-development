@@ -1,12 +1,14 @@
+import { AccountCategory } from "@/types/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInitialState {
   accountCard: {
-    category: string;
+    category: AccountCategory;
     description: string;
     name: string;
-    price: string;
+    price: number;
   };
+
   accountCredentials: {
     id: string;
     username: string;
@@ -21,12 +23,7 @@ interface IInitialState {
 
 // Define the initial state using that type
 const initialState: IInitialState = {
-  accountCard: {
-    category: "",
-    description: "",
-    name: "",
-    price: "",
-  },
+  accountCard: {} as IInitialState["accountCard"],
   accountCredentials: [],
 };
 

@@ -212,7 +212,6 @@ const Navbar = () => {
           </Drawer>
         </div>}
 
-
       </div>
     </header>
   );
