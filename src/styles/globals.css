@@ -389,3 +389,12 @@ input[type="range"]::-moz-range-thumb {
   border-color: #ff5a35;
   background-color: #ff5a35;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+}

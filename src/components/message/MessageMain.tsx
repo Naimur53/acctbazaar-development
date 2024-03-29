@@ -14,8 +14,8 @@ const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
   return (
     <div className="border border-[#EFECEC] rounded-lg">
       {/* this is top message div  */}
-      <div className="border-b border-b-[#EFECEC] flex">
-        <div className="w-1/3 p-5 border-r border-r-[#EFECEC] flex items-center justify-center">
+      <div className="border-b border-b-[#EFECEC] flex flex-col md:flex-row">
+        <div className="w-full md:w-1/3 pt-2 md:p-5 border-r border-r-[#EFECEC] flex items-center justify-center">
           <div className="flex items-center gap-3">
             <Image
               src={user.profileImg || ""}
@@ -27,7 +27,7 @@ const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
             <h3 className="text-[#1D2939] font-semibold">{user.name}</h3>
           </div>
         </div>
-        <div className="w-2/3 px-3 py-1.5">
+        <div className="w-full md:w-2/3 px-3 py-1.5">
           <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
             <Image
               src={getImageUrlByCategory(account.category)}

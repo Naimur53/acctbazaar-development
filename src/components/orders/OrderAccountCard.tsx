@@ -7,9 +7,12 @@ import { PiCurrencyDollarBold } from "react-icons/pi";
 import dateFormat from "dateformat";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Link from "next/link";
+import { Tooltip } from "antd";
+
 type props = {
   orderInfo: IOrder;
 };
+
 const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
   const accountInfo = orderInfo.account;
   return (
@@ -19,27 +22,28 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
       {/* this is sell or buy div  */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <p className="text-red font-medium text-sm">Sell</p>
+          <p className="text-red font-medium text-xs md:text-sm">Sell</p>
           <Image
-            src={"/assets/instagram.png"}
+            src={getImageUrlByCategory(accountInfo.category)}
             width={16}
             height={16}
             alt="social icons"
           />
-          <p className="text-sm text-textBlack">{accountInfo.category}</p>
+          <p className="text-xs md:text-sm text-textBlack">{accountInfo.category}</p>
         </div>
-        <p className="py-1 px-2 rounded-full text-xs flex items-center gap-2 text-[#027A48] bg-[#ECFDF3]">
+        <p className="py-0.5 md:py-1 px-1 md:px-2 rounded-full text-xs flex items-center gap-1 md:gap-2 text-[#027A48] bg-[#ECFDF3]">
           <GoDotFill />
           Completed
         </p>
       </div>
 
       {/* this is order and date div  */}
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-textBlack flex items-center gap-2">
-          Order number <span className="text-textGrey"># {orderInfo.id}</span>
+      <div className="flex flex-col md:flex-row md:items-center gap-1 justify-between">
+        <p className="text-xs md:text-sm line-clamp-1 text-textBlack flex items-center gap-1 md:gap-2">
+          <p className="w-24 md:w-fit text-textBlack">Order number</p> <span className="text-textGrey line-clamp-1"># {orderInfo.id}</span>
         </p>
         <p className="text-xs text-textGrey">
+          <span className="md:hidden  text-textBlack">Order time: </span>
           {dateFormat(new Date(orderInfo.createdAt), appDateFormate)}
         </p>
       </div>
@@ -88,13 +92,15 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-end gap-4">
             <Link href={`/order-details/${orderInfo.id}`}>
-              <Image
-                src={"/assets/icons/message.png"}
-                width={40}
-                height={40}
-                className="size-4 md:size-5"
-                alt="eye"
-              />
+              <Tooltip title="Message vendor">
+                <Image
+                  src={"/assets/icons/message.png"}
+                  width={40}
+                  height={40}
+                  className="size-4 md:size-5 cursor-pointer"
+                  alt="message"
+                />
+              </Tooltip>
             </Link>
             {/* <button className="text-textGrey underline underline-offset-2">
               Review

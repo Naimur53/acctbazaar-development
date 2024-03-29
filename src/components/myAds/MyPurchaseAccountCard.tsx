@@ -1,6 +1,7 @@
 import { useDeleteAccountMutation } from "@/redux/features/account/accountApi";
 import { AccountCategory, IAccount } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
+import { Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -39,14 +40,13 @@ const MyPurchaseAccountCard = ({
             </p>
           </div>
           <p
-            className={`text-sm   py-1 px-2 rounded-full ${
-              (account?.approvedForSale === "pending" &&
+            className={`text-sm   py-1 px-2 rounded-full ${(account?.approvedForSale === "pending" &&
                 "text-[#B54708] bg-[#FFFAEB]") ||
               (account?.approvedForSale === "denied" &&
                 "text-[#B42318] bg-[#FEF3F2]") ||
               (account?.approvedForSale === "approved" &&
                 "text-[#175CD3] bg-[#EFF8FF]")
-            }`}
+              }`}
           >
             {account?.approvedForSale}
           </p>
@@ -61,13 +61,15 @@ const MyPurchaseAccountCard = ({
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
             <Link href={`/order-details/${orderId}`}>
-              <Image
-                src={"/assets/icons/eye.png"}
-                width={40}
-                height={40}
-                className="size-4 md:size-5"
-                alt="eye"
-              />
+              <Tooltip title="Open account details">
+                <Image
+                  src={"/assets/icons/eye.png"}
+                  width={40}
+                  height={40}
+                  className="size-4 md:size-5 cursor-pointer"
+                  alt="eye"
+                />
+              </Tooltip>
             </Link>
             {/* <button className="flex items-center gap-1 text-sm ">
                             <MdOutlinePauseCircle /> Pause Ad

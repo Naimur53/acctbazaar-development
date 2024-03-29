@@ -288,7 +288,7 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
         </div>
       </AppModal>
 
-      <div className="bg-white rounded-2xl w-full min-h-[80vh] p-4 md:p-6 2xl:p-8">
+      <div className="bg-white rounded-2xl w-full min-h-[80vh] pt-4 md:p-6 2xl:p-8">
         <h2 className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
           Add Account
         </h2>

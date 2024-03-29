@@ -49,7 +49,7 @@ const Orders = () => {
   return (
     <HomeLayout>
       <SellerLayout>
-        <div className="container py-10 2xl:py-12">
+        <div className="container py-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
           <div className="flex justify-between">
             <div className="">
@@ -73,69 +73,69 @@ const Orders = () => {
           {/* this is main div  */}
           <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div>
-              <div className="bg-white rounded-2xl w-full min-h-[90vh] p-6 2xl:p-8">
+              <div className="bg-white rounded-2xl w-full min-h-[90vh] md:p-6 2xl:p-8">
                 <AppTabs
                   tabs={tabs}
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
                 />
-                <div className="py-6 space-y-6">
-                  <AppRenderReduxData
-                    isEmptyComponentHave
-                    queryData={orderQuery}
-                    showData={(data) => {
-                      return (
-                        <div>
-                          {data?.data.length > 0 ? (
-                            data.data.map((single: IOrder) => (
+                <AppRenderReduxData
+                  isEmptyComponentHave
+                  queryData={orderQuery}
+                  showData={(data) => {
+                    return (
+                      <div className="py-4 md:py-6 space-y-6">
+                        {data?.data.length > 0 ? (
+                          <div className='max-h-[70dvh] overflow-auto space-y-3 md:space-y-0'>
+                            {data.data.map((single: IOrder) => (
                               <OrderAccountCard
                                 orderInfo={single}
                                 key={single.id}
                               />
-                            ))
-                          ) : (
-                            <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
-                              <Image
-                                width={120}
-                                height={120}
-                                className="size-14 md:size-28"
-                                src={"/assets/account/orders.png"}
-                                alt="order image"
-                              />
-                              <h3 className="subTitle pt-5">No orders</h3>
-                              <p className="text-textGrey pt-1">
-                                Buy and Sell orders will be shown here
-                              </p>
-                              <div className="flex items-center gap-2 md:gap-4 2xl:gap-5 pt-6">
-                                <Link href="/marketplace">
-                                  <button className="appOutlineBtn">
-                                    Explore marketplace
-                                  </button>
-                                </Link>
-                                <Link href="/account/sell-your-account">
-                                  <button className="appBtn">
-                                    Sell product
-                                  </button>
-                                </Link>
-                              </div>
-                            </div>
-                          )}
-                          <div className="flex justify-center mt-5">
-                            <Pagination
-                              showSizeChanger={false}
-                              pageSize={data.meta.limit}
-                              total={data.meta.total}
-                              current={data.meta.page}
-                              onChange={(value) => {
-                                setPage(value);
-                              }}
-                            ></Pagination>
+                            ))}
                           </div>
+                        ) : (
+                          <div className="bg-white rounded-2xl w-full min-h-[60vh] flex items-center justify-center flex-col">
+                            <Image
+                              width={120}
+                              height={120}
+                              className="size-14 md:size-28"
+                              src={"/assets/account/orders.png"}
+                              alt="order image"
+                            />
+                            <h3 className="subTitle pt-5">No orders</h3>
+                            <p className="text-textGrey pt-1">
+                              Buy and Sell orders will be shown here
+                            </p>
+                            <div className="flex items-center gap-2 md:gap-4 2xl:gap-5 pt-6">
+                              <Link href="/marketplace">
+                                <button className="appOutlineBtn">
+                                  Explore marketplace
+                                </button>
+                              </Link>
+                              <Link href="/account/sell-your-account">
+                                <button className="appBtn">
+                                  Sell product
+                                </button>
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex justify-center mt-5">
+                          <Pagination
+                            showSizeChanger={false}
+                            pageSize={data.meta.limit}
+                            total={data.meta.total}
+                            current={data.meta.page}
+                            onChange={(value) => {
+                              setPage(value);
+                            }}
+                          ></Pagination>
                         </div>
-                      );
-                    }}
-                  ></AppRenderReduxData>
-                </div>
+                      </div>
+                    );
+                  }}
+                ></AppRenderReduxData>
               </div>
             </div>
           </div>

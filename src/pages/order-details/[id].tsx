@@ -14,6 +14,8 @@ import { PiCurrencyDollarBold } from "react-icons/pi";
 import OrderDetailsMessaging from "@/components/orders/OrderDetailsMessaging";
 import appDateFormate from "@/utils/appDateFormate";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
+import { Tooltip } from "antd";
+import AppDrawer from "@/components/ui/AppDrawer";
 
 const OrderDetails = () => {
   const isCancelled = false;
@@ -42,17 +44,18 @@ const OrderDetails = () => {
     );
   }
   const mainData = data.data as IOrder;
+  console.log(mainData);
   return (
     <HomeLayout>
-      <div className="container py-10 2xl:py-12">
+      <div className="container py-5 md:py-10 2xl:py-12">
         <h1 className="text-textBlack font-medium">
-          Orders/ <span className="text-xl">Order Details</span>
+          Orders/ <span className="text-lg md:text-xl">Order Details</span>
         </h1>
-        <div className="py-6 flex items-center justify-between gap-4">
-          <div className="space-x-2">
-            <p className="text-textBlack flex items-center gap-2 font-medium text-[28px]">
-              Order No:
-              <span className="text-textGrey text-base font-normal">
+        <div className="py-3 md:py-6 flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4">
+          <div className="md:space-x-2 space-y-1 md:space-y-0">
+            <p className="text-textBlack w-full flex items-center gap-1 md:gap-2 font-medium text-sm line-clamp-1 md:text-[28px]">
+              <p className="w-24 md:w-fit">Order No:</p>
+              <span className="text-textGrey line-clamp-1 text-sm md:text-base font-normal">
                 #{location.id}
               </span>
             </p>
@@ -61,7 +64,7 @@ const OrderDetails = () => {
               {mainData.status}
             </p>
           </div>
-          <div className="space-y-2">
+          <div className="space-x-2 md:space-y-2 flex items-center md:block">
             <p className="text-sm text-textBlack">Order {mainData.status}</p>
             <p className="text-xs text-textGrey">
               {dateFormat(new Date(mainData.createdAt), appDateFormate)}
@@ -70,10 +73,10 @@ const OrderDetails = () => {
         </div>
 
         {/* this is main div  */}
-        <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-white p-2 md:p-4 lg:p-5 2xl:p-6">
-          <div className="w-[55%] h-full space-y-3 2xl:space-y-4">
+        <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-white md:p-4 lg:p-5 2xl:p-6">
+          <div className="w-full md:w-[55%] h-full space-y-3 2xl:space-y-4">
             <div
-              className={`flex items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-[#FBFAFA] p-2 md:p-4 2xl:p-5`}
+              className={`w-full flex flex-col md:flex-row items-start justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 bg-[#FBFAFA] p-2 md:p-4 2xl:p-5`}
             >
               {/* this is image and description div  */}
               <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -94,10 +97,26 @@ const OrderDetails = () => {
                   </p>
                 </div>
               </div>
-              <h2 className="text-textBlack font-bold flex items-center justify-end">
-                <PiCurrencyDollarBold />
-                {mainData?.account.price}
-              </h2>
+              <div className='flex w-full items-center justify-between md:justify-end gap-1'>
+                <h2 className="text-textBlack font-bold flex items-center justify-end">
+                  <PiCurrencyDollarBold />
+                  {mainData?.account.price}
+                </h2>
+                <AppDrawer
+                  button={
+                    <Image
+                      src={"/assets/icons/message.png"}
+                      width={40}
+                      height={40}
+                      className="size-4 md:size-5 md:hidden cursor-pointer"
+                      alt="message"
+                    />
+                  }
+                >
+                  <OrderDetailsMessaging order={mainData} />
+                </AppDrawer>
+
+              </div>
             </div>
             <div className="pt-2 space-y-2">
               {/* <OrderDetailsAccountInfo />
@@ -138,8 +157,8 @@ const OrderDetails = () => {
               </>
             )}
           </div>
-          <div className="border border-[#EFECEC]"></div>
-          <div className="w-[43%] h-full">
+          <div className="hidden md:block border border-[#EFECEC]"></div>
+          <div className="hidden md:block w-[43%] h-full">
             <OrderDetailsMessaging order={mainData} />
           </div>
         </div>

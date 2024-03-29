@@ -1,6 +1,7 @@
 import MessageMain from "@/components/message/MessageMain";
 import SingleMessageUser from "@/components/message/SingleMessageUser";
 import SingleMessage from "@/components/message/SingleMessageUser";
+import AppDrawer from "@/components/ui/AppDrawer";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import AppInput from "@/components/ui/AppInput";
 import Loading from "@/components/ui/Loading";
@@ -65,7 +66,7 @@ const Messages = () => {
   );
   return (
     <HomeLayout>
-      <div className="container py-10 2xl:py-12">
+      <div className="container py-5 md:py-10 2xl:py-12">
         {/* this is top section div  */}
         <div className="flex justify-between">
           <div className="">
@@ -82,20 +83,45 @@ const Messages = () => {
         {/* this is main div  */}
         <div className="pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
           {mainData.length ? (
-            <div className="flex gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[90vh] bg-white p-2 md:p-4 lg:p-5 2xl:p-6">
-              <div className="w-[35%] h-full space-y-3 2xl:space-y-4">
+            <div className="flex flex-col md:flex-row gap-4 2xl:gap-6 rounded-lg lg:rounded-2xl min-h-[70dvh] bg-white pt-2 md:p-4 lg:p-5 2xl:p-6">
+              <div className="w-full md:w-[35%] max-h-[70dvh] overflow-auto space-y-3 2xl:space-y-4">
                 {mainData.map((single) => (
-                  <SingleMessageUser
-                    isActive={single.id === activeChatId}
-                    user={single.orderBy}
-                    key={single.id}
-                    orderId={single.id}
-                    setActiveChatId={setActiveChatId}
-                  />
+                  <>
+                    <div key={single.id} className='hidden md:block'>
+                      <SingleMessageUser
+                        isActive={single.id === activeChatId}
+                        user={single.orderBy}
+                        orderId={single.id}
+                        setActiveChatId={setActiveChatId}
+                      />
+                    </div>
+                    <div key={single.id} className='md:hidden'>
+                      <AppDrawer
+                        button={
+                          <SingleMessageUser
+                            isActive={single.id === activeChatId}
+                            user={single.orderBy}
+                            orderId={single.id}
+                            setActiveChatId={setActiveChatId}
+                          />
+                        }
+                      >
+                        {activeMessageBoxInfo && activeChatId ? (
+                          <MessageMain
+                            account={activeMessageBoxInfo.account}
+                            user={activeMessageBoxInfo.orderBy}
+                            orderId={activeChatId}
+                          />
+                        ) : (
+                          <Loading></Loading>
+                        )}
+                      </AppDrawer>
+                    </div>
+                  </>
                 ))}
               </div>
-              <div className="border border-[#EFECEC]"></div>
-              <div className="w-[63%] h-full">
+              <div className="hidden md:block border border-[#EFECEC]"></div>
+              <div className="hidden md:block md:w-[63%] h-full">
                 {activeMessageBoxInfo && activeChatId ? (
                   <MessageMain
                     account={activeMessageBoxInfo.account}
@@ -108,7 +134,7 @@ const Messages = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col">
+            <div className="bg-white rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col">
               <Image
                 width={120}
                 height={120}

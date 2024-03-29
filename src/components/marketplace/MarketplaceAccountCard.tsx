@@ -14,6 +14,7 @@ import {
 } from "@/redux/features/cart/cartApi";
 import { toast } from "react-toastify";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Tooltip } from "antd";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -63,11 +64,12 @@ const MarketplaceAccountCard = ({
     }
   };
 
+  // console.log(account);
+
   return (
     <div
-      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${
-        existOnCart && "bg-[#FBFAFA] opacity-50"
-      }`}
+      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${existOnCart && "bg-[#FBFAFA] opacity-50"
+        }`}
     >
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -88,7 +90,9 @@ const MarketplaceAccountCard = ({
           </p>
           {/* this is profile div  */}
           <div className="flex items-center gap-1 pt-1 md:pt-2">
-            <img
+            <Image
+              width={20}
+              height={20}
               src={account?.ownBy?.profileImg as string}
               className="size-3 rounded-full"
               alt="avatar image"
@@ -110,28 +114,27 @@ const MarketplaceAccountCard = ({
         {/* this is icons div view cart message  */}
         <div className="flex items-center justify-between gap-4">
           {isModal || existOnCart?.accountId ? (
-            <div>
-              <Image
-                src={"/assets/icons/cart.png"}
-                width={40}
-                height={40}
-                className="size-4 md:size-5"
-                alt="eye"
-              />
-            </div>
+            // <Image
+            //   src={"/assets/icons/cart.png"}
+            //   width={40}
+            //   height={40}
+            //   className="size-4 md:size-5"
+            //   alt="cart"
+            // />
+            <></>
           ) : (
             <AppModal
               title="Add to cart"
               button={
-                <button>
+                <Tooltip title="Add to cart">
                   <Image
                     src={"/assets/icons/cart.png"}
                     width={40}
                     height={40}
-                    className="size-4 md:size-5"
-                    alt="eye"
+                    className="size-4 md:size-5 cursor-pointer"
+                    alt="cart"
                   />
-                </button>
+                </Tooltip>
               }
             >
               <div className="md:w-[500px]">
@@ -164,28 +167,27 @@ const MarketplaceAccountCard = ({
           )}
 
           {isModal || existOnCart?.accountId ? (
-            <div>
-              <Image
-                src={"/assets/icons/eye.png"}
-                width={40}
-                height={40}
-                className="size-4 md:size-5"
-                alt="eye"
-              />
-            </div>
+            // <Image
+            //   src={"/assets/icons/eye.png"}
+            //   width={40}
+            //   height={40}
+            //   className="size-4 md:size-5"
+            //   alt="eye"
+            // />
+            <></>
           ) : (
             <AppModal
               title="Account Details"
               button={
-                <button>
+                <Tooltip title="Open account details">
                   <Image
                     src={"/assets/icons/eye.png"}
                     width={40}
                     height={40}
-                    className="size-4 md:size-5"
+                    className="size-4 md:size-5 cursor-pointer"
                     alt="eye"
                   />
-                </button>
+                </Tooltip>
               }
             >
               <div className="md:w-[500px] space-y-1">
@@ -208,17 +210,35 @@ const MarketplaceAccountCard = ({
                   </p>
                 </div>
                 <div className="flex items-center justify-between text-sm">
+                  <p className="text-textGrey">Price</p>
+                  <p>{account?.price}</p>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <p className="text-textGrey">Owner Name</p>
+                  <p>{account?.ownBy?.name}</p>
+                </div>
+                <div className="flex items-center justify-between text-sm">
                   <p className="text-textGrey">Owner Email</p>
                   <p>{account?.ownBy?.email}</p>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-textGrey">2FA Email</p>
-                  <p>{account?.additionalEmail}</p>
-                </div>
-                <div className="space-y-1.5">
-                  <p className="text-textGrey">Additional Information</p>
-                  <p>{account?.additionalDescription}</p>
-                </div>
+                {account?.preview &&
+                  <div className="flex items-center justify-between text-sm">
+                    <p className="text-textGrey">Preview Account Link</p>
+                    <p>{account?.preview}</p>
+                  </div>
+                }
+                {account?.additionalEmail &&
+                  <div className="flex items-center justify-between text-sm">
+                    <p className="text-textGrey">2FA Email</p>
+                    <p>{account?.additionalEmail}</p>
+                  </div>
+                }
+                {account?.additionalDescription &&
+                  <div className="space-y-1.5">
+                    <p className="text-textGrey">Additional Information</p>
+                    <p>{account?.additionalDescription}</p>
+                  </div>
+                }
               </div>
             </AppModal>
           )}

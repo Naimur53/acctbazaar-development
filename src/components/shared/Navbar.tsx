@@ -72,89 +72,6 @@ const Navbar = () => {
     label: string;
   }
 
-  const nav = (
-    <ul className="flex md:flex-row flex-col lg:gap-3 md:items-center justify-between">
-      <li>
-        <Link className="flex items-center gap-1 nav-single-item" href={"/"}>
-          <span className="flex items-center">
-            <IoMdHome className="align-middle md:hidden" />
-          </span>
-          <span className="align-middle">Home</span>
-        </Link>
-      </li>
-
-      {!user?.id ? (
-        <>
-          <li>
-            <Link
-              className="flex items-center gap-1 nav-single-item"
-              href="/#about"
-            >
-              <span className="align-middle">About</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              className="flex items-center gap-1 nav-single-item"
-              href="/#features"
-            >
-              <span className="align-middle">Features</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              className="flex items-center gap-1 nav-single-item"
-              href="/#how-it-works"
-            >
-              <span className="align-middle">How it works</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              className="flex items-center gap-1 nav-single-item"
-              href={"/become-a-seller"}
-            >
-              <span className="align-middle">Become A Merchant</span>
-            </Link>
-          </li>
-          <li>
-            <div className="nav-single-item text-center ">
-              {/* <Dropdown menu={{ items }}> */}
-              <Link
-                href="/auth/sign-in"
-                className="nav-single-item px-4 py-2 rounded-lg inline-block border text-primary border-primary "
-              >
-                <Space>
-                  Login
-                  {/* <DownOutlined /> */}
-                </Space>
-              </Link>
-              {/* </Dropdown> */}
-            </div>
-          </li>
-          <li className="w-full">
-            <div className="nav-single-item text-center w-full">
-              {/* <Dropdown menu={{ items }}> */}
-              <Link
-                href="/auth/sign-up"
-                className="appBtn w-full"
-              >
-                <Space>
-                  Sign Up
-                  {/* <DownOutlined /> */}
-                </Space>
-              </Link>
-              {/* </Dropdown> */}
-            </div>
-          </li>
-        </>
-      ) : null}
-    </ul>
-  )
-
   return (
     <header className="fixed w-full top-0 z-[500] md:shadow md:border-b border-b-[#D0D2D5]">
       <div
@@ -250,10 +167,11 @@ const Navbar = () => {
             >
               <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
             </button>
-          </div>}
+          </div>
+        }
 
         {/* this is for the mobile section  */}
-        <div className="block md:hidden">
+        {!user?.id && <div className="block md:hidden">
           <Drawer
             width={300}
             title={
@@ -266,9 +184,33 @@ const Navbar = () => {
             onClose={() => setMobileMenu(false)}
             open={mobileMenu}
           >
-            <div>{nav}</div>
+            <div>
+              {nonUserNavLinks.map(link => (
+                <Link
+                  key={link.label}
+                  className={`flex items-center gap-1 nav-single-item  ${router?.asPath === link.path ? "!text-primary !hover:text-primary" : "text-textBlack"}`}
+                  href={link.path}
+                >
+                  {link.path === '/' && <IoMdHome />}
+                  <span className={`${router?.asPath === link.path ? "!text-primary !hover:text-primary" : "text-textBlack"}`}>{link.label}</span>
+                </Link>
+              ))}
+              <Link
+                href="/auth/sign-in"
+                className="appOutlineBtn w-full block mt-3"
+              >
+                log in
+              </Link>
+              <div className='appBtn !text-white !hover:text-white w-full mt-3'>
+                <Link
+                  href="/auth/sign-up"
+                >
+                  Sign up
+                </Link>
+              </div>
+            </div>
           </Drawer>
-        </div>
+        </div>}
 
 
       </div>

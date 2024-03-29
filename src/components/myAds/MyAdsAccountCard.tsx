@@ -1,6 +1,7 @@
 import { useDeleteAccountMutation } from "@/redux/features/account/accountApi";
 import { AccountCategory, IAccount } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
+import { Tooltip } from "antd";
 import Image from "next/image";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlinePauseCircle } from "react-icons/md";
@@ -32,7 +33,9 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
                             <MdOutlinePauseCircle /> Pause Ad
                         </button> */}
                         <button onClick={() => deleteAccount(account?.id)} className="bg-white group p-2 rounded-full">
-                            <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
+                            <Tooltip title="Delete this ads">
+                                <AiOutlineDelete className="group-hover:text-red cursor-pointer text-lg" />
+                            </Tooltip>
                         </button>
                     </div>
                 </div>

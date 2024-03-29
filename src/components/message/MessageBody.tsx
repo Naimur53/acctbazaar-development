@@ -72,7 +72,7 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
     <>
       <div
         ref={bodyRef}
-        className="p-4 2xl:p-5 min-h-[50vh] max-h-[50vh] w-full overflow-x-hidden overflow-y-auto"
+        className="p-4 2xl:p-5 min-h-[60dvh] md:min-h-[50dvh] max-h-[80dvh] md:max-h-[50dvh] w-full overflow-x-hidden overflow-y-auto"
       >
         {/* this is chats  */}
         <div className="p-1 mt-4 space-y-4">

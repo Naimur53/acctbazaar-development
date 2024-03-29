@@ -23,12 +23,11 @@ const SingleMessageUser = ({
   return (
     <div
       onClick={() => setActiveChatId(orderId)}
-      className={`flex items-center cursor-pointer justify-between gap-4 rounded-lg px-3 py-6 ${
-        isActive && "bg-[#FBFAFA]"
-      }`}
+      className={`flex items-center cursor-pointer justify-between gap-2 md:gap-4 rounded-lg px-1.5 md:px-3 py-3 md:py-6 ${isActive && "bg-[#FBFAFA]"
+        }`}
     >
       {/* this is left div  */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 md:gap-3">
         <Image
           src={user.profileImg || ""}
           className="size-10 rounded-full"
@@ -49,15 +48,15 @@ const SingleMessageUser = ({
       </div>
       {/* this is right div  */}
       <div className="space-y-2">
-        <p className="text-[#475467] text-sm">
+        <p className="text-[#475467] text-xs md:text-sm">
           {mainData?.data?.length
             ? dateFormat(
-                new Date(
-                  mainData?.data[mainData?.data?.length - 1].createdAt ||
-                    new Date()
-                ),
-                appDateFormate
-              )
+              new Date(
+                mainData?.data[mainData?.data?.length - 1].createdAt ||
+                new Date()
+              ),
+              appDateFormate
+            )
             : null}
         </p>
 
