@@ -56,7 +56,7 @@ export default function ReviewSellAccount({
         }
       })
       .catch((err: IGenericErrorMessage) => {
-        console.log(err);
+
         toast.error(err.message || "something went wrong");
       });
   };

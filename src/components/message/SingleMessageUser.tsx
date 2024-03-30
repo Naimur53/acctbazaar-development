@@ -19,7 +19,7 @@ const SingleMessageUser = ({
 }: TSingleuser) => {
   const { data, isLoading } = useGetMessagesQuery(`orderId=${orderId}`);
   const mainData = isLoading ? null : data || null;
-  console.log(mainData);
+
   return (
     <div
       onClick={() => setActiveChatId(orderId)}

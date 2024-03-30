@@ -52,6 +52,7 @@ export interface IUser {
   isApprovedForSeller?: Boolean;
   isBlocked?: Boolean;
   shouldSendEmail?: Boolean;
+  isVerifiedByAdmin: boolean;
   profileImg: string | null;
   isPaidForSeller?: boolean;
   withdrawalPin: string;

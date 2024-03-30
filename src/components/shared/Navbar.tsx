@@ -55,7 +55,7 @@ const Navbar = () => {
   const onClose = () => {
     setOpen(false);
   };
-  console.log(user);
+
 
   // Extracted Currency Display
   const currencyDisplay = data?.data && (

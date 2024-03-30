@@ -7,6 +7,7 @@ import Image from "next/image";
 import AppModal from "../ui/AppModal";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
+import { GoDotFill } from "react-icons/go";
 
 type ProfileDetailsBody = {
     setOpen: Dispatch<SetStateAction<boolean>>
@@ -40,11 +41,21 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                 <div className='border-b border-b-[#EDF2F7] pb-2 pl-2 pt-2'>
 
                     <div className=' hidden md:flex flex-col md:flex-row items-center justify-between gap-2 md:gap-10 pb-1'>
-                        <h4 className="text-sm md:text-base">{user?.name}</h4>
+                        <h4 className="text-sm md:text-base flex items-center gap-1">{user?.name}
+                            {user?.isVerifiedByAdmin &&
+                                <p
+                                    className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
+                                >
+                                    <GoDotFill />
+                                    verified merchant
+                                </p>
+                            }
+                        </h4>
                         {(!user?.isApprovedForSeller && user?.role === UserRole.User) &&
                             <button onClick={openModal} className="appOutlineBtnSm hidden md:block">Become Verified</button>
                         }
                     </div>
+
                     <p className="textG hidden md:block">{user?.email}</p>
                     <div className='flex items-center gap-2 md:hidden'>
                         <div className='!relative'>
@@ -55,7 +66,16 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                         </div>
                         <div className='w-full'>
                             <div className='w-full flex items-center justify-between'>
-                                <h4 className="text-sm md:text-base">{user?.name}</h4>
+                                <h4 className="text-sm md:text-base flex items-center gap-1">{user?.name}
+                                    {user?.isVerifiedByAdmin &&
+                                        <p
+                                            className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
+                                        >
+                                            <GoDotFill />
+                                            verified merchant
+                                        </p>
+                                    }
+                                </h4>
                                 {(!user?.isApprovedForSeller && user?.role === UserRole.User) &&
                                     <button onClick={openModal} className="appOutlineBtnSm w-fit mt-2 md:hidden">Become Verified</button>
                                 }
@@ -76,10 +96,20 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                                 className='flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg cursor-pointer'>
                                 <nav.icon />  {nav?.label}
                             </div>
-                            : <Link href={nav?.path} key={nav?.label} className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${nav.label === "My Purchase" && "md:hidden"}`}>
-                                <nav.icon />  {nav?.label}
-                            </Link>
+                            :
+                            ((user?.role === UserRole.User) && (nav.label === "My Account Dashboard")) ? null :
+                                <Link href={nav?.path} key={nav?.label} className={`flex items-center gap-3 text-[#4C4646] hover:text-primary text-base 2xl:text-lg ${nav.label === "My Purchase" && "md:hidden"}`}>
+                                    <nav.icon />  {nav?.label}
+                                </Link>
                     ))}
+                </div>
+                <div className='md:hidden p-4'>
+                    <Link
+                        href={"/account/sell-your-account"}
+                        className="appBtn w-full block"
+                    >
+                        Sell Product
+                    </Link>
                 </div>
             </div>
 

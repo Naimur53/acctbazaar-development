@@ -59,14 +59,14 @@ const AccountSettingProfile = () => {
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         const countryObj = Country.getCountryByCode(data.country);
         const stateObj = State.getStateByCodeAndCountry(data.country, data.state);
-        console.log(data);
+        // console.log(data);
         const submittedData = {
             id: user?.id, ...data,
             country: countryObj?.name,
             state: stateObj?.name,
             name: readOnly ? undefined : data.name
         }
-        console.log(submittedData);
+        // console.log(submittedData);
 
         await editUser(submittedData).unwrap().then((res: ResponseErrorType) => {
             if (!res.data?.success) {
@@ -94,7 +94,7 @@ const AccountSettingProfile = () => {
 
         formData.append('image', value);
         await uploadImage(formData).unwrap().then((res: ResponseErrorType) => {
-            console.log(res);
+            // console.log(res);
             if (!res.data.success) {
                 toast.error(res?.data?.message || "Something went wrong");
                 setLoading(false)

@@ -38,7 +38,7 @@ export const notificationsApi = apiSlice.injectEndpoints({
             "getNotificationss",
             "",
             (draft) => {
-              console.log(JSON.stringify(draft));
+              // console.log(JSON.stringify(draft));
               if (draft) {
                 draft.data = draft?.data?.map((single: INotifications) => {
                   return {
