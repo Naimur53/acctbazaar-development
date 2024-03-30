@@ -16,7 +16,7 @@ import { useMemo, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 
 const Orders = () => {
-  const order = true;
+
   const tabs = [
     { label: "All" },
     { label: "Pending" },
@@ -31,7 +31,7 @@ const Orders = () => {
     const info = {
       status: activeTab !== "All" ? activeTab.toLocaleLowerCase() : undefined,
       page,
-      limit: 50,
+      limit: 10,
       sellerId: user?.id,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -86,7 +86,7 @@ const Orders = () => {
                     return (
                       <div className="py-4 md:py-6 space-y-6">
                         {data?.data.length > 0 ? (
-                          <div className='max-h-[70dvh] overflow-auto space-y-3 md:space-y-0'>
+                          <div className='max-h-[70dvh] overflow-auto space-y-3 md:space-y-4'>
                             {data.data.map((single: IOrder) => (
                               <OrderAccountCard
                                 orderInfo={single}

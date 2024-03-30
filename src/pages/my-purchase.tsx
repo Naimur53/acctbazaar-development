@@ -68,7 +68,7 @@ export default function MyPurchase() {
                                         data?.data.length > 0 ?
                                             <MyPurchaseMain accounts={data?.data} />
                                             :
-                                            <div className='bg-white rounded-2xl w-full min-h-[90vh] flex items-center justify-center flex-col'>
+                                            <div className='bg-white rounded-2xl w-full min-h-[80dvh] flex items-center justify-center flex-col'>
                                                 <Image width={120} height={120} src={'/assets/myAds/no-ads.png'} alt="order image" />
                                                 <h3 className="subTitle pt-5">No Ads</h3>
                                                 <p className="text-textGrey pt-1">Add products for customers to buy from you</p>

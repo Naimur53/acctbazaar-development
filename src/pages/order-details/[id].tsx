@@ -44,7 +44,17 @@ const OrderDetails = () => {
     );
   }
   const mainData = data.data as IOrder;
-  console.log(mainData);
+
+  const accountDetailsInfo = {
+    id: mainData.id || "",
+    email: mainData.account?.ownBy?.email || "",
+    password: mainData.account.password || "",
+    preview: mainData.account.preview || "",
+    additionalEmail: mainData.account.additionalEmail || "",
+    additionalPassword: mainData.account.additionalPassword || "",
+    additionalDescription: mainData.account.additionalDescription || "",
+
+  }
   return (
     <HomeLayout>
       <div className="container py-5 md:py-10 2xl:py-12">
@@ -59,8 +69,12 @@ const OrderDetails = () => {
                 #{location.id}
               </span>
             </p>
-            <p className="py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3]">
-              <GoDotFill className="fill-[#3abc5c]" />
+            <p className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${(mainData.status === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              (mainData.status === "cancelled" && "text-[#B42318] bg-[#FEF3F2]") ||
+              (mainData.status === "completed" && "text-[#027A48] bg-[#ECFDF3]")}`}>
+              <GoDotFill className={`${(mainData.status === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+                (mainData.status === "cancelled" && "text-[#B42318] bg-[#FEF3F2]") ||
+                (mainData.status === "completed" && "text-[#027A48] bg-[#ECFDF3]")}`} />
               {mainData.status}
             </p>
           </div>
@@ -89,10 +103,10 @@ const OrderDetails = () => {
                 />
                 {/* this is description div  */}
                 <div className="">
-                  <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
+                  <h3 className="text-textBlack line-clamp-1 font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
                     {mainData?.account.name}
                   </h3>
-                  <p className="text-textGrey pt-0.5 text-xs md:text-sm">
+                  <p className="text-textGrey line-clamp-1 pt-0.5 text-xs md:text-sm">
                     {mainData?.account.description}
                   </p>
                 </div>
@@ -118,10 +132,11 @@ const OrderDetails = () => {
 
               </div>
             </div>
-            <div className="pt-2 space-y-2">
-              {/* <OrderDetailsAccountInfo />
-              <OrderDetailsAccountInfo /> */}
-            </div>
+            {mainData?.status === "completed" &&
+              <div className="pt-2 space-y-2">
+                <OrderDetailsAccountInfo index={0} isNotDeletable account={accountDetailsInfo} />
+              </div>
+            }
             {isCancelled ? (
               <div className="space-y-2 py-10 flex items-center text-textBlack justify-center flex-col">
                 <Image

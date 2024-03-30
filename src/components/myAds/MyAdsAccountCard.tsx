@@ -17,8 +17,8 @@ const MyAdsAccountCard = ({ account }: { account: IAccount }) => {
             <div className='w-full '>
                 <div className='flex items-center gap-4 justify-between'>
                     <div className=''>
-                        <h3 className="text-textBlack font-medium text-sm md:text-base">{account?.name}</h3>
-                        <p className="text-textGrey pt-0.5 text-xs md:text-sm">{account?.description} </p>
+                        <h3 className="text-textBlack line-clamp-1 font-medium text-sm md:text-base">{account?.name}</h3>
+                        <p className="text-textGrey line-clamp-1 pt-0.5 text-xs md:text-sm">{account?.description} </p>
                     </div>
                     <p className={`text-sm   py-1 px-2 rounded-full ${(account?.approvedForSale === "pending" && "text-[#B54708] bg-[#FFFAEB]") || (account?.approvedForSale === "denied" && "text-[#B42318] bg-[#FEF3F2]") ||
                         (account?.approvedForSale === "approved" && "text-[#175CD3] bg-[#EFF8FF]")}`}>{account?.approvedForSale}</p>

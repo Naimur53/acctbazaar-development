@@ -93,7 +93,7 @@ const VerifyAccount = () => {
 
                 {/* this is main div  */}
                 <div className='bg-white rounded min-h-[80dvh] mt-2 md:mt-4 lg:mt-5 2xl:mt-6'>
-                    <div className='md:w-[80%] md:py-6 px-4 md:px-10'>
+                    <div className='md:w-[80%] md:py-6  md:px-10'>
                         <form
                             className="w-full py-4 2xl:py-5 space-y-4 lg:space-y-5 2xl:space-y-6"
                             onSubmit={handleSubmit(onSubmit)}

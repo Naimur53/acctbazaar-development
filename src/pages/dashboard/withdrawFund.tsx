@@ -221,8 +221,8 @@ const WithdrawFund = () => {
       });
   };
   return (
-    <>
-      <SellerLayout>
+    <SellerLayout>
+      <div className="container py-5 md:py-10">
         <h2 className="text-center text-xl font-bold">Withdraw Fund</h2>
         <div className="flex gap-5 justify-between max-w-[900px] mx-auto mt-5">
           <div className="p-3 lg:p-5 shadow-orange-50 shadow-xl border rounded max-w-[300px] w-full flex-col items-center justify-center flex ">
@@ -430,8 +430,8 @@ const WithdrawFund = () => {
             </form>
           </FormProvider>
         </Modal>
-      </SellerLayout>
-    </>
+      </div>
+    </SellerLayout>
   );
 };
 

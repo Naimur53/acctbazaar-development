@@ -8,6 +8,7 @@ import dateFormat from "dateformat";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Link from "next/link";
 import { Tooltip } from "antd";
+import AppModal from "../ui/AppModal";
 
 type props = {
   orderInfo: IOrder;
@@ -15,6 +16,7 @@ type props = {
 
 const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
   const accountInfo = orderInfo.account;
+
   return (
     <div
       className={`space-y-3 rounded-lg p-2 md:px-5 md:py-3 lg:px-6 lg:py-4 bg-[#FBFAFA]`}
@@ -59,10 +61,10 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
           />
           {/* this is description div  */}
           <div className="">
-            <h3 className="text-textBlack font-medium text-sm md:text-base">
+            <h3 className="text-textBlack line-clamp-1 font-medium text-sm md:text-base">
               {accountInfo.name}
             </h3>
-            <p className="text-textGrey pt-0.5 text-xs md:text-sm">
+            <p className="text-textGrey line-clamp-1 pt-0.5 text-xs md:text-sm">
               {accountInfo.description}
             </p>
             {/* this is profile div  */}
@@ -91,13 +93,50 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
           </h2>
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-end gap-4">
+            {(orderInfo.status === "completed") &&
+              <AppModal
+                button={
+                  <Tooltip title="Open account details">
+                    <Image
+                      src={"/assets/icons/eye.png"}
+                      width={40}
+                      height={40}
+                      className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                      alt="eye"
+                    />
+                  </Tooltip>
+                }
+              >
+                <div className='space-y-4 min-w-44'>
+
+                  <div className='flex items-center justify-between text-sm'>
+                    <p className="text-textGrey">Email</p>
+                    <p>{orderInfo?.orderBy.email}</p>
+                  </div>
+                  {
+                    orderInfo?.account.additionalEmail &&
+                    <div className='flex items-center justify-between text-sm'>
+                      <p className="text-textGrey">2FA Email</p>
+                      <p>{orderInfo?.account.additionalEmail}</p>
+                    </div>
+                  }
+                  {orderInfo?.account.additionalDescription &&
+                    <div className='space-y-1.5'>
+                      <p className="text-textGrey">Additional Information</p>
+                      <p className="text-sm">{orderInfo?.account.additionalDescription}</p>
+                    </div>
+                  }
+                </div>
+              </AppModal>
+
+            }
             <Link href={`/order-details/${orderInfo.id}`}>
               <Tooltip title="Message vendor">
                 <Image
                   src={"/assets/icons/message.png"}
                   width={40}
                   height={40}
-                  className="size-4 md:size-5 cursor-pointer"
+                  className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
                   alt="message"
                 />
               </Tooltip>

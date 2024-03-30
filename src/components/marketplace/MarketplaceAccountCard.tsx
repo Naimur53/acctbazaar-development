@@ -82,10 +82,10 @@ const MarketplaceAccountCard = ({
         />
         {/* this is description div  */}
         <div className="">
-          <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
+          <h3 className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${!isModal && "line-clamp-1"}`}>
             {account?.name}
           </h3>
-          <p className="text-textGrey pt-0.5 text-xs md:text-sm">
+          <p className={`text-textGrey pt-0.5 text-xs md:text-sm ${!isModal && "line-clamp-1"}`}>
             {account?.description}
           </p>
           {/* this is profile div  */}

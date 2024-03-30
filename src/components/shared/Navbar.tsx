@@ -32,6 +32,7 @@ import AppDrawer from "../ui/AppDrawer";
 import MarketplaceSidebar from "../marketplace/MarketplaceSidebar";
 import NotificationBody from "./NotificationBody";
 import CartPopUpBody from "./CartPopUpBody";
+import ProfileDetailsBody from "./ProfileDetailsBody";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -88,10 +89,9 @@ const Navbar = () => {
         {user?.id && (
           <div className="md:hidden">
             <AppDrawer
-              title="Filter"
               button={<FiMenu className="md:hidden text-xl" />}
             >
-              <MarketplaceSidebar />
+              <ProfileDetailsBody setOpen={setOpen} />
             </AppDrawer>
           </div>
         )}
@@ -220,16 +220,16 @@ const Navbar = () => {
                   <Link
                     key={link.label}
                     className={`flex items-center gap-1 nav-single-item  ${router?.asPath === link.path
-                        ? "!text-primary !hover:text-primary"
-                        : "text-textBlack"
+                      ? "!text-primary !hover:text-primary"
+                      : "text-textBlack"
                       }`}
                     href={link.path}
                   >
                     {link.path === "/" && <IoMdHome />}
                     <span
                       className={`${router?.asPath === link.path
-                          ? "!text-primary !hover:text-primary"
-                          : "text-textBlack"
+                        ? "!text-primary !hover:text-primary"
+                        : "text-textBlack"
                         }`}
                     >
                       {link.label}
