@@ -4,13 +4,15 @@ import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import { AccountCategory, IAccount, IUser } from "@/types/common";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import React from "react";
+
 type Props = {
   user: Pick<IUser, "name" | "id" | "profileImg">;
   account: Pick<IAccount, "id" | "name" | "description" | "price" | "category">;
   orderId: string;
 };
+
 const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
-  console.log(account);
+
   return (
     <div className="border border-[#EFECEC] rounded-lg">
       {/* this is top message div  */}

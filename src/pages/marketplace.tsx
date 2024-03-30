@@ -2,6 +2,7 @@ import { SelectOptions } from "@/components/Forms/FormSelectField";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
 import PriceRange from "@/components/marketplace/PriceRange";
+import AppDrawer from "@/components/ui/AppDrawer";
 import AppInput from "@/components/ui/AppInput";
 import AppRenderReduxData from "@/components/ui/AppRenderReduxData";
 import useDebounce from "@/hooks/useDebounce";
@@ -11,6 +12,7 @@ import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { useAppSelector } from "@/redux/hook";
 import { IAccount } from "@/types/common";
 import { useMemo, useState } from "react";
+import { IoFilter } from "react-icons/io5";
 
 const Marketplace = () => {
   const [search, setSearch] = useState<string>("");
@@ -68,13 +70,24 @@ const Marketplace = () => {
                 Access all products on the marketplace by our verified sellers
               </p>
             </div>
-            <div className="w-full md:w-1/4">
+            <div className="w-full md:w-1/4 pt-2 md:pt-0 flex items-center gap-3">
               <AppInput
                 onChange={handleSearchChange}
                 type="text"
                 placeholder="Search by name or description"
                 value={""}
               />
+              <AppDrawer
+                title="Filter"
+                button={
+                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1 text-lg">
+                    <IoFilter />
+                  </div>
+                }
+              >
+                <MarketplaceSidebar isHideTitle />
+              </AppDrawer>
+
             </div>
           </div>
 

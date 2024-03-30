@@ -135,8 +135,8 @@ export interface IOrder {
 
 enum EOrderStatus {
   PENDING = "pending",
-  SUCCESS = "success",
-  DENIED = "denied",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled",
 }
 
 export enum EApprovedForSale {

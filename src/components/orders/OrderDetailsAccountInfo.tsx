@@ -7,6 +7,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { SlArrowDown } from "react-icons/sl";
 
 type TOrderDetailsAccountInfo = {
+    isNotDeletable?: boolean;
     index: number;
     account: {
         id: string;
@@ -19,7 +20,7 @@ type TOrderDetailsAccountInfo = {
     }
 };
 
-const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) => {
+const OrderDetailsAccountInfo = ({ index, account, isNotDeletable }: TOrderDetailsAccountInfo) => {
     const [open, setOpen] = useState(false);
     const dispatch = useAppDispatch();
 
@@ -48,14 +49,19 @@ const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) =
                         <p className="text-textGrey">Email</p>
                         <p>{account?.email}</p>
                     </div>
-                    <div className='flex items-center justify-between text-sm'>
-                        <p className="text-textGrey">2FA Email</p>
-                        <p>{account?.additionalEmail}</p>
-                    </div>
-                    <div className='space-y-1.5'>
-                        <p className="text-textGrey">Additional Information</p>
-                        <p className="text-sm">{account?.additionalDescription}</p>
-                    </div>
+                    {
+                        account?.additionalEmail &&
+                        <div className='flex items-center justify-between text-sm'>
+                            <p className="text-textGrey">2FA Email</p>
+                            <p>{account?.additionalEmail}</p>
+                        </div>
+                    }
+                    {account?.additionalDescription &&
+                        <div className='space-y-1.5'>
+                            <p className="text-textGrey">Additional Information</p>
+                            <p className="text-sm">{account?.additionalDescription}</p>
+                        </div>
+                    }
                     {/* <div className='space-y-1.5'>
                         <p className="text-textGrey">Images</p>
                         <div className='rounded-lg py-2 px-3 flex items-center gap-3'>
@@ -69,9 +75,12 @@ const OrderDetailsAccountInfo = ({ index, account }: TOrderDetailsAccountInfo) =
                 </motion.div>
             ) :
                 (
+
                     <div className='pt-2 flex items-center justify-between '>
                         <h4>{account?.email}</h4>
-                        <AiOutlineDelete onClick={() => dispatch(deleteAccountCredentials(account?.id))} className="hover:text-red cursor-pointer text-lg" />
+                        {!isNotDeletable &&
+                            <AiOutlineDelete onClick={() => dispatch(deleteAccountCredentials(account?.id))} className="hover:text-red cursor-pointer text-lg" />
+                        }
                     </div>
                 )
             }

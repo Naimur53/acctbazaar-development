@@ -64,10 +64,10 @@ export default function CartAccountCard({
             <RiVerifiedBadgeFill className="text-success" />
           )}
         </div>
-        <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
+        <h3 className="text-textBlack font-medium text-sm  md:text-base flex items-center justify-between md:justify-normal !line-clamp-1">
           {account?.account?.name}
         </h3>
-        <p className="text-textGrey pt-0.5 text-xs md:text-sm">
+        <p className="text-textGrey pt-0.5 text-xs md:text-sm line-clamp-1">
           {account?.account?.description}
         </p>
         <div className="flex items-center justify-between gap-4">

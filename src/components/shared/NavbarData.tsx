@@ -73,6 +73,11 @@ export const popupNavbarLinks = [
         icon: PiUsersThreeLight,
     },
     {
+        label: "My Purchase",
+        path: "/my-purchase",
+        icon: BsClipboardCheck
+    },
+    {
         label: "Account settings",
         path: "/account/account-setting",
         icon: IoSettingsOutline,
@@ -94,6 +99,11 @@ export const loggedUserPopupNavbarLinks = [
         label: "Referral",
         path: "/referral",
         icon: PiUsersThreeLight,
+    },
+    {
+        label: "My Purchase",
+        path: "/my-purchase",
+        icon: BsClipboardCheck
     },
     {
         label: "Account settings",
