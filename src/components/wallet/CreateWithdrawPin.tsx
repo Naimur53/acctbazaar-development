@@ -5,6 +5,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
 import Loading from "../ui/Loading";
+import AppSmallLoading from "../ui/AppSmallLoading";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import {
+  addWithdrawalPin,
+  userLoggedIn,
+} from "@/redux/features/auth/authSlice";
 
 type TCreateWithdrawPin = {
   setNotCreatePin: Dispatch<SetStateAction<boolean>>;
@@ -15,6 +21,7 @@ const CreateWithdrawPin: React.FC<TCreateWithdrawPin> = ({
   const [otp, setOtp] = useState("");
   const [confirmOTP, setConfirmOTP] = useState("");
   const [createWithdrawPin, { isLoading }] = useAddWithdrawPinMutation();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async () => {
     if (otp === "" || confirmOTP === "") {
@@ -31,7 +38,8 @@ const CreateWithdrawPin: React.FC<TCreateWithdrawPin> = ({
           if (!res.data) {
             toast.error(res?.data?.message || "Something went wrong");
           } else {
-            setNotCreatePin(false);
+            setNotCreatePin(true);
+            dispatch(addWithdrawalPin());
             toast.success("withdrawalPin are Created successfully!", {
               toastId: 1,
             });
@@ -88,7 +96,7 @@ const CreateWithdrawPin: React.FC<TCreateWithdrawPin> = ({
           </div>
         </div>
         {isLoading ? (
-          <Loading></Loading>
+          <AppSmallLoading></AppSmallLoading>
         ) : (
           <button
             type="submit"

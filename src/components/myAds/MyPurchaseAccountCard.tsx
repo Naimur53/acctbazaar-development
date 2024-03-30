@@ -15,7 +15,6 @@ const MyPurchaseAccountCard = ({
   account: IAccount;
   orderId: string;
 }) => {
-  console.log(account);
   const [deleteAccount] = useDeleteAccountMutation();
   return (
     <div
@@ -40,13 +39,14 @@ const MyPurchaseAccountCard = ({
             </p>
           </div>
           <p
-            className={`text-sm   py-1 px-2 rounded-full ${(account?.approvedForSale === "pending" &&
+            className={`text-sm   py-1 px-2 rounded-full ${
+              (account?.approvedForSale === "pending" &&
                 "text-[#B54708] bg-[#FFFAEB]") ||
               (account?.approvedForSale === "denied" &&
                 "text-[#B42318] bg-[#FEF3F2]") ||
               (account?.approvedForSale === "approved" &&
                 "text-[#175CD3] bg-[#EFF8FF]")
-              }`}
+            }`}
           >
             {account?.approvedForSale}
           </p>

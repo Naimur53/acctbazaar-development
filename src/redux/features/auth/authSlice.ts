@@ -2,6 +2,7 @@ import { authKey } from "@/constants/storageKey";
 import { IUser } from "@/types/common";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import state from "sweetalert/typings/modules/state";
 
 type IState = {
   isLoading: boolean;
@@ -168,6 +169,11 @@ const authSlice = createSlice({
       // Clear user information from localStorage
       localStorage.removeItem("accessToken");
     },
+    addWithdrawalPin: (state) => {
+      if (state.user) {
+        state.user.withdrawalPin = "it random pin";
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -240,6 +246,11 @@ const authSlice = createSlice({
   },
 });
 
-export const { userLoggedIn, userLoggedOut, setLoading, setError } =
-  authSlice.actions;
+export const {
+  userLoggedIn,
+  userLoggedOut,
+  setLoading,
+  setError,
+  addWithdrawalPin,
+} = authSlice.actions;
 export default authSlice.reducer;

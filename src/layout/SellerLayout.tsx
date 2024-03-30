@@ -27,7 +27,7 @@ const SellerLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const notSuperAdmin = user?.role !== UserRole.SuperAdmin;
   if (notSeller && notAdmin && notSuperAdmin) {
     router.push({
-      pathname: "/dashboard",
+      pathname: "/",
       //   query: { from: router.pathname },
     });
     return (

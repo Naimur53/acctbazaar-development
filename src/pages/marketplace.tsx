@@ -20,6 +20,9 @@ const Marketplace = () => {
   const { minPrice, maxPrice } = useAppSelector((state) => state.marketplace);
   console.log(minPrice, maxPrice);
   // const debouncedPrice = useDebounce([minPrice, maxPrice], 500);
+  const minPriceDe = useDebounce(minPrice, 500);
+  const maxPriceDe = useDebounce(maxPrice, 500);
+
   const debouncedSearch = useDebounce(search, 500);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +34,8 @@ const Marketplace = () => {
       category: selectedCategories.join("-"),
       // page,
       isSold: false,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
+      minPrice: minPriceDe,
+      maxPrice: maxPriceDe,
       approvedForSale: "approved",
       limit: 50,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
@@ -49,7 +52,7 @@ const Marketplace = () => {
       return pre;
     }, "");
     return queryString;
-  }, [selectedCategories, minPrice, maxPrice, debouncedSearch]);
+  }, [selectedCategories, debouncedSearch, minPriceDe, maxPriceDe]);
 
   const queryData = useGetAccountsQuery(queryString);
 
@@ -89,7 +92,10 @@ const Marketplace = () => {
                   return (
                     <>
                       {data.data.map((single: IAccount) => (
-                        <MarketplaceAccountCard account={single} key={single.id} />
+                        <MarketplaceAccountCard
+                          account={single}
+                          key={single.id}
+                        />
                       ))}
                     </>
                   );

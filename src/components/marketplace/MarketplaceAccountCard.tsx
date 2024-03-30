@@ -15,6 +15,7 @@ import {
 import { toast } from "react-toastify";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Tooltip } from "antd";
+import Link from "next/link";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -68,8 +69,9 @@ const MarketplaceAccountCard = ({
 
   return (
     <div
-      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${existOnCart && "bg-[#FBFAFA] opacity-50"
-        }`}
+      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${
+        existOnCart && "bg-[#FBFAFA] opacity-50"
+      }`}
     >
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -190,55 +192,43 @@ const MarketplaceAccountCard = ({
                 </Tooltip>
               }
             >
-              <div className="md:w-[500px] space-y-1">
+              <div className="md:w-[500px] mt-6 space-y-1">
                 {/* <MarketplaceAccountCard isModal account={account} /> */}
-                <div className="flex items-center justify-center flex-col">
+                <div className="flex  flex-col">
                   <Image
                     src={getImageUrlByCategory(
                       account?.category as AccountCategory
                     )}
-                    className="size-9 md:size-10 lg:size-14 2xl:size-16"
+                    className="size-9 md:size-10 lg:size-14 2xl:size-20"
                     width={70}
                     height={70}
                     alt="social icons"
                   />
-                  <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal">
+                  <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal mt-3">
                     {account?.name}
                   </h3>
-                  <p className="text-textGrey pt-0.5 text-xs md:text-sm">
+                  <p className="text-textGrey pt-2 text-xs md:text-sm">
                     {account?.description}
                   </p>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-textGrey">Price</p>
-                  <p>{account?.price}</p>
+                <div className="flex pt-2 items-center  gap-22 text-sm">
+                  <p className="text-textGrey text-xl">Price</p>
+                  <p className="ml-2 text-xl text-black font-bold">
+                    ${account?.price}
+                  </p>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-textGrey">Owner Name</p>
-                  <p>{account?.ownBy?.name}</p>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-textGrey">Owner Email</p>
-                  <p>{account?.ownBy?.email}</p>
-                </div>
-                {account?.preview &&
-                  <div className="flex items-center justify-between text-sm">
-                    <p className="text-textGrey">Preview Account Link</p>
-                    <p>{account?.preview}</p>
+
+                {account?.preview && (
+                  <div className="flex items-center justify-center pt-5 text-sm">
+                    <Link
+                      href={account.preview}
+                      className="appBtn py-2"
+                      target="blank"
+                    >
+                      Preview
+                    </Link>
                   </div>
-                }
-                {account?.additionalEmail &&
-                  <div className="flex items-center justify-between text-sm">
-                    <p className="text-textGrey">2FA Email</p>
-                    <p>{account?.additionalEmail}</p>
-                  </div>
-                }
-                {account?.additionalDescription &&
-                  <div className="space-y-1.5">
-                    <p className="text-textGrey">Additional Information</p>
-                    <p>{account?.additionalDescription}</p>
-                  </div>
-                }
+                )}
               </div>
             </AppModal>
           )}

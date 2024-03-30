@@ -316,3 +316,14 @@ export interface ISeenMessage {
   updatedAt: Date;
   lastSeen: Date;
 }
+export interface INotifications {
+  id: string;
+  title: string;
+  message: string;
+  link?: string | null;
+  isSeen: boolean;
+  ownById: string;
+  ownBy?: IUser;
+  createdAt: Date;
+  updatedAt: Date;
+}

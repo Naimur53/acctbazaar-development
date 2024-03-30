@@ -1,11 +1,14 @@
 import { useAddWithdrawFundMutation } from "@/redux/features/withdrawFund/withdrawFundApi";
+import { useAppSelector } from "@/redux/hook";
 import { ResponseErrorType, ResponseSuccessType } from "@/types/common";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { toast } from "react-toastify";
+import CreateWithdrawPin from "./CreateWithdrawPin";
 
 type TEnterWithdrawPin = {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
+  refresh: () => void;
   withdrawData?: {
     accountNumber?: string;
     fullName?: string;
@@ -18,10 +21,19 @@ type TEnterWithdrawPin = {
 export default function EnterWithdrawPin({
   setModalOpen,
   withdrawData,
+  refresh,
 }: TEnterWithdrawPin) {
+  const user = useAppSelector((state) => state.user.user);
   const [otp, setOtp] = useState("");
   const [makeWithdrawRequest, { isLoading }] = useAddWithdrawFundMutation();
-
+  const [isPinExits, setIsPinExits] = useState(
+    user?.withdrawalPin ? true : false
+  );
+  useEffect(() => {
+    if (user) {
+      setIsPinExits(user.withdrawalPin ? true : false);
+    }
+  }, [user]);
   const handleWithdraw = async () => {
     if (otp.length !== 4) {
       toast.error("Please Enter 4 digit Pin Number and try again");
@@ -46,6 +58,7 @@ export default function EnterWithdrawPin({
             toast.success("withdraw request are send successfully!", {
               toastId: 1,
             });
+            refresh();
           }
         })
         .catch((res: ResponseErrorType | ResponseSuccessType) => {
@@ -55,7 +68,11 @@ export default function EnterWithdrawPin({
         });
     }
   };
-
+  if (!isPinExits) {
+    return (
+      <CreateWithdrawPin setNotCreatePin={setIsPinExits}></CreateWithdrawPin>
+    );
+  }
   return (
     <div className="p-4">
       <h2 className="subTitle">Enter Withdrawal PIN</h2>

@@ -38,6 +38,7 @@ export default function AddWithdrawModal() {
   const [cryptoW, setCryptoW] = useState(false);
   const [tronSelect, setTronSelect] = useState(false);
   const [bnbSelect, setBnbSelect] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
   const [notCreatePin, setNotCreatePin] = useState(
     user?.withdrawalPin ? true : false
   );
@@ -51,7 +52,7 @@ export default function AddWithdrawModal() {
     reset();
     setBnbSelect(false);
     setTronSelect(false);
-    setAmount(withdrawData.amount);
+    setAmount(amount);
     setAmountError("");
     setWithdrawData({ amount: withdrawData.amount });
   };
@@ -59,7 +60,7 @@ export default function AddWithdrawModal() {
   const handleCryptoWithdraw = () => {
     setCryptoW((prev) => !prev);
     setBankW(false);
-    setAmount(withdrawData.amount);
+    setAmount(amount);
     setAmountError("");
     setWithdrawData({ amount: withdrawData.amount });
   };
@@ -110,7 +111,7 @@ export default function AddWithdrawModal() {
         bankName: data.bankName,
         amount,
       });
-      setNotCreatePin(false);
+      setShowPinModal(true);
     } else if (cryptoW) {
       console.log("hi");
       if (!tronSelect && !bnbSelect) {
@@ -122,7 +123,9 @@ export default function AddWithdrawModal() {
         address: data.address,
         amount,
       });
+      setShowPinModal(true);
     }
+
     // reset();
   };
   const handleWithdraw = () => {
@@ -151,7 +154,20 @@ export default function AddWithdrawModal() {
     setBnbSelect(false);
     setTronSelect(false);
     setMainModalOpen(false);
-    setAmount("");
+    // setAmount();
+    setAmountError("");
+    setWithdrawData({ amount });
+  };
+  const refresh = () => {
+    setModalOpen(false);
+    setBankW(false);
+    setCryptoW(false);
+    reset();
+    setBnbSelect(false);
+    setTronSelect(false);
+    setShowPinModal(false);
+    setMainModalOpen(false);
+    // setAmount();
     setAmountError("");
     setWithdrawData({ amount });
   };
@@ -159,40 +175,37 @@ export default function AddWithdrawModal() {
   return (
     <>
       <AppModal
-        closeable={notCreatePin}
+        // closeable={false}
         modalOpen={mainModalOpen}
         setModalOpen={setMainModalOpen}
         button={
-          withdrawData.address || withdrawData.bankName ? null : (
-            <div className="flex items-center justify-center flex-col space-y-2">
-              <Image
-                width={60}
-                height={60}
-                src="/assets/icons/send.png"
-                alt=""
-                className="size-14 rounded-lg border border-[#E6E0E0] hover:bg-[#FFCAAD]/15 cursor-pointer"
-              />
-              <h4>Withdraw</h4>
-            </div>
-          )
+          <div className="flex items-center justify-center flex-col space-y-2">
+            <Image
+              width={60}
+              height={60}
+              src="/assets/icons/send.png"
+              alt=""
+              className="size-14 rounded-lg border border-[#E6E0E0] hover:bg-[#FFCAAD]/15 cursor-pointer"
+            />
+            <h4>Withdraw</h4>
+          </div>
         }
-        title={notCreatePin ? "Withdraw" : ""}
-        subTitle={notCreatePin ? "Send funds from your wallet" : ""}
+        title={!showPinModal ? "Withdraw" : ""}
+        subTitle={!showPinModal ? "Send funds from your wallet" : ""}
       >
-        {withdrawData.address || withdrawData.bankName ? (
+        {showPinModal ? (
           <div className="space-y-1">
             <GoArrowLeft
-              onClick={() => setNotCreatePin(true)}
+              onClick={() => setShowPinModal(false)}
               className="text-xl text-textBlack cursor-pointer"
             />
-            {!notCreatePin ? (
+            {
               <EnterWithdrawPin
                 withdrawData={{ ...withdrawData, amount }}
                 setModalOpen={setModalOpen}
+                refresh={refresh}
               />
-            ) : (
-              <CreateWithdrawPin setNotCreatePin={setNotCreatePin} />
-            )}
+            }
           </div>
         ) : (
           <div className="space-y-4 pt-4 md:w-[520px]">
@@ -409,12 +422,7 @@ export default function AddWithdrawModal() {
                         </div>
                       </form>
                     </motion.div>
-                  ) : (
-                    <EnterWithdrawPin
-                      withdrawData={{ ...withdrawData, amount }}
-                      setModalOpen={setModalOpen}
-                    />
-                  )}
+                  ) : null}
                 </AnimatePresence>
               )}
             </div>
