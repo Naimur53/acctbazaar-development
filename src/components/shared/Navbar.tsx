@@ -148,14 +148,15 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-2 lg:gap-6">
           {(user?.id ? loggedUserNavLinks : nonUserNavLinks).map(
             (nav: TNav) => (
-              <Link
-                className={`${router?.asPath === nav?.path && "text-primary"
-                  } text-sm lg:text-base 2xl:text-lg font-medium hover:text-primary`}
-                href={nav?.path}
-                key={nav?.label}
-              >
-                {nav.label}
-              </Link>
+              (user?.role === UserRole.User) && (nav.label === "Orders" || nav.label === "My Ads") ? null :
+                <Link
+                  className={`${router?.asPath === nav?.path && "text-primary"
+                    } text-sm lg:text-base 2xl:text-lg font-medium hover:text-primary`}
+                  href={nav?.path}
+                  key={nav?.label}
+                >
+                  {nav.label}
+                </Link>
             )
           )}
 

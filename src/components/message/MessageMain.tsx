@@ -41,7 +41,7 @@ const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
             {/* this is description div  */}
             <div className="">
               <h4 className="line-clamp-1">{account.name}</h4>
-              <p className="text-textGrey line-clamp-2 pt-0.5 pb-1 text-xs">
+              <p className="text-textGrey line-clamp-1 pt-0.5 pb-1 text-xs">
                 {account.description}
               </p>
               <h2 className="text-textBlack font-bold flex items-center">
