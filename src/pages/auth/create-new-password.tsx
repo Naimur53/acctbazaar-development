@@ -20,7 +20,7 @@ const CreateNewPassword = () => {
     } = useForm<FormData>();
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-        console.log(data);
+        // console.log(data);
     }
     return (
         <div className='flex lg:h-[100vh]'>

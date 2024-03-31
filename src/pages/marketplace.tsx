@@ -20,7 +20,7 @@ const Marketplace = () => {
     (state) => state.categories.selectedCategories
   );
   const { minPrice, maxPrice } = useAppSelector((state) => state.marketplace);
-  console.log(minPrice, maxPrice);
+  // console.log(minPrice, maxPrice);
   // const debouncedPrice = useDebounce([minPrice, maxPrice], 500);
   const minPriceDe = useDebounce(minPrice, 500);
   const maxPriceDe = useDebounce(maxPrice, 500);
@@ -80,7 +80,7 @@ const Marketplace = () => {
               <AppDrawer
                 title="Filter"
                 button={
-                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1 text-lg">
+                  <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1.5 text-lg">
                     <IoFilter />
                   </div>
                 }
@@ -101,7 +101,7 @@ const Marketplace = () => {
               <AppRenderReduxData
                 queryData={queryData}
                 showData={(data) => {
-                  console.log(data);
+                  // console.log(data);
                   return (
                     <>
                       {data.data.map((single: IAccount) => (

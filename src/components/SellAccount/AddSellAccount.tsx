@@ -49,7 +49,7 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+
     updateProgress(3);
     dispatch(setAccountCard(data));
   };

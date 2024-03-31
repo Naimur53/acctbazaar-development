@@ -58,7 +58,7 @@ const VerifyAccount = () => {
             id: user?.id, ...data
         }
         await editUser(submittedData).unwrap().then((res: ResponseErrorType | ResponseSuccessType) => {
-            console.log(res);
+            // console.log(res);
             if (!res.data?.success) {
                 toast.error(res?.data?.message || "Something went wrong");
             }
