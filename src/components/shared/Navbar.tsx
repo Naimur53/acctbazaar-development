@@ -55,7 +55,6 @@ const Navbar = () => {
   const onClose = () => {
     setOpen(false);
   };
-  console.log(user);
 
   // Extracted Currency Display
   const currencyDisplay = data?.data && (
@@ -78,19 +77,18 @@ const Navbar = () => {
       <div
         className={`
       px-4 md:px-4 lg:px-10 2xl:px-16 py-2 2xl:py-2.5  flex justify-between items-center text-black transition-all
-      ${!isHome
-            ? "bg-[#FAFAFC] md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
-            : progress >= 0.06
-              ? "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
-              : "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl lg:bg-transparent lg:backdrop-blur-0"
-          }
+      ${
+        !isHome
+          ? "bg-[#FAFAFC] md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
+          : progress >= 0.06
+          ? "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl"
+          : "bg-white/80 md:bg-white/50 backdrop-blur-sm md:backdrop-blur-xl lg:bg-transparent lg:backdrop-blur-0"
+      }
       `}
       >
         {user?.id && (
           <div className="md:hidden">
-            <AppDrawer
-              button={<FiMenu className="md:hidden text-xl" />}
-            >
+            <AppDrawer button={<FiMenu className="md:hidden text-xl" />}>
               <ProfileDetailsBody setOpen={setOpen} />
             </AppDrawer>
           </div>
@@ -146,17 +144,18 @@ const Navbar = () => {
 
         {/* this is for tab to large screen  */}
         <div className="hidden md:flex items-center gap-2 lg:gap-6">
-          {(user?.id ? loggedUserNavLinks : nonUserNavLinks).map(
-            (nav: TNav) => (
-              (user?.role === UserRole.User) && (nav.label === "Orders" || nav.label === "My Ads") ? null :
-                <Link
-                  className={`${router?.asPath === nav?.path && "text-primary"
-                    } text-sm lg:text-base 2xl:text-lg font-medium hover:text-primary`}
-                  href={nav?.path}
-                  key={nav?.label}
-                >
-                  {nav.label}
-                </Link>
+          {(user?.id ? loggedUserNavLinks : nonUserNavLinks).map((nav: TNav) =>
+            user?.role === UserRole.User &&
+            (nav.label === "Orders" || nav.label === "My Ads") ? null : (
+              <Link
+                className={`${
+                  router?.asPath === nav?.path && "text-primary"
+                } text-sm lg:text-base 2xl:text-lg font-medium hover:text-primary`}
+                href={nav?.path}
+                key={nav?.label}
+              >
+                {nav.label}
+              </Link>
             )
           )}
 
@@ -220,18 +219,20 @@ const Navbar = () => {
                 {nonUserNavLinks.map((link) => (
                   <Link
                     key={link.label}
-                    className={`flex items-center gap-1 nav-single-item  ${router?.asPath === link.path
-                      ? "!text-primary !hover:text-primary"
-                      : "text-textBlack"
-                      }`}
+                    className={`flex items-center gap-1 nav-single-item  ${
+                      router?.asPath === link.path
+                        ? "!text-primary !hover:text-primary"
+                        : "text-textBlack"
+                    }`}
                     href={link.path}
                   >
                     {link.path === "/" && <IoMdHome />}
                     <span
-                      className={`${router?.asPath === link.path
-                        ? "!text-primary !hover:text-primary"
-                        : "text-textBlack"
-                        }`}
+                      className={`${
+                        router?.asPath === link.path
+                          ? "!text-primary !hover:text-primary"
+                          : "text-textBlack"
+                      }`}
                     >
                       {link.label}
                     </span>

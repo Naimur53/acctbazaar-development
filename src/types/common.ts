@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 export interface IMeta {
@@ -10,6 +11,8 @@ export type ResponseSuccessType = {
   length: number;
   data: any;
   meta?: IMeta;
+  success: boolean;
+  message: string;
 };
 
 export type ResponseErrorType = {
