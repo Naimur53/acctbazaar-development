@@ -90,11 +90,10 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
-                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
                 (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
                 (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-              }`}
+                }`}
             >
               <GoDotFill />
               {text}
@@ -174,7 +173,7 @@ const Wallet = () => {
                 <AppRenderReduxData
                   queryData={queryData}
                   showData={(data) => {
-                    console.log(data);
+                    // console.log(data);
                     return (
                       <Table
                         columns={columns}

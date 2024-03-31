@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
         }
       })
       .catch((res) => {
-        console.log(res);
+        (res);
         toast.error(res?.response?.data?.message || "something went wrong");
       })
       .finally(() => {

@@ -44,7 +44,7 @@ const Orders = () => {
     return queryString;
   }, [page, user, activeTab]);
   const orderQuery = useGetOrdersQuery(queryString);
-  console.log(queryString);
+  // console.log(queryString);
 
   return (
     <HomeLayout>

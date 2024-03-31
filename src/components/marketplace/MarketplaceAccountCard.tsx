@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Tooltip } from "antd";
 import Link from "next/link";
+import { GoDotFill } from "react-icons/go";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -69,9 +70,8 @@ const MarketplaceAccountCard = ({
 
   return (
     <div
-      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${
-        existOnCart && "bg-[#FBFAFA] opacity-50"
-      }`}
+      className={`flex items-center justify-between rounded-lg gap-2 md:gap-4 2xl:gap-6 border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 ${existOnCart && "bg-[#FBFAFA] opacity-50"
+        }`}
     >
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
@@ -86,6 +86,7 @@ const MarketplaceAccountCard = ({
         <div className="">
           <h3 className={`text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal ${!isModal && "line-clamp-1"}`}>
             {account?.name}
+
           </h3>
           <p className={`text-textGrey pt-0.5 text-xs md:text-sm ${!isModal && "line-clamp-1"}`}>
             {account?.description}
@@ -103,6 +104,12 @@ const MarketplaceAccountCard = ({
             {account?.ownBy?.isVerified && (
               <RiVerifiedBadgeFill className="text-success" />
             )}
+            {user?.isVerifiedByAdmin && <p
+              className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
+            >
+              <GoDotFill />
+              verified merchant
+            </p>}
           </div>
         </div>
       </div>
@@ -115,57 +122,17 @@ const MarketplaceAccountCard = ({
         </h2>
         {/* this is icons div view cart message  */}
         <div className="flex items-center justify-between gap-4">
-          {isModal || existOnCart?.accountId ? (
-            // <Image
-            //   src={"/assets/icons/cart.png"}
-            //   width={40}
-            //   height={40}
-            //   className="size-4 md:size-5"
-            //   alt="cart"
-            // />
-            <></>
-          ) : (
-            <AppModal
-              title="Add to cart"
-              button={
-                <Tooltip title="Add to cart">
-                  <Image
-                    src={"/assets/icons/cart.png"}
-                    width={40}
-                    height={40}
-                    className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                    alt="cart"
-                  />
-                </Tooltip>
-              }
-            >
-              <div className="md:w-[500px]">
-                <MarketplaceAccountCard isModal account={account} />
-                {/* <div className='pt-5 flex items-center justify-between'>
-                                    <h4>Quantity</h4>
-                                    <div className='flex items-center gap-2 text-xl font-semibold'>
-                                        <button onClick={handleMinus}><FiMinus /></button>
-                                        <p>{count}</p>
-                                        <button onClick={handlePlus}><FiPlus /></button>
-                                    </div>
-                                </div> */}
-
-                <div className="flex items-center justify-center">
-                  {isLoading ? (
-                    <button className="appBtn px-10 flex items-center justify-center mt-6">
-                      <AiOutlineLoading3Quarters className="animate-spin text-white text-xl" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleAddCart}
-                      className="appBtn mt-6 mx-auto px-10"
-                    >
-                      Add to Cart
-                    </button>
-                  )}
-                </div>
-              </div>
-            </AppModal>
+          {!existOnCart?.accountId && (
+            <Tooltip title="Add to cart">
+              <Image
+                src={"/assets/icons/cart.png"}
+                width={40}
+                height={40}
+                className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                alt="cart"
+                onClick={handleAddCart}
+              />
+            </Tooltip>
           )}
 
           {isModal || existOnCart?.accountId ? (

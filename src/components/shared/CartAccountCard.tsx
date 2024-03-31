@@ -35,7 +35,7 @@ export default function CartAccountCard({
   const dispatch = useAppDispatch();
 
   const [deleteCart, { isLoading: isDeleteLoading }] = useDeleteCartMutation();
-  console.log(account);
+
   return (
     <div
       className={` flex items-center justify-between w-full rounded-lg gap-1 md:gap-3 2xl:gap-4 border-b border-b-[#EFEFEF] p-2 md:p-3 2xl:p-4`}

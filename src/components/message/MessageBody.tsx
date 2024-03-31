@@ -52,9 +52,9 @@ const MessageBody: React.FC<props> = ({ orderId }) => {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
     //
-    console.log("before", "dfadf");
+    // console.log("before", "dfadf");
     if (data?.meta?.unSeenCount && !isLoading) {
-      console.log("after in");
+      // console.log("after in");
       updateSeenMessage({ orderId: orderId });
     }
   }, [data, bodyRef, updateSeenMessage, orderId, isLoading]);

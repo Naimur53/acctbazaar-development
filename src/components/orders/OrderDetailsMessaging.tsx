@@ -9,7 +9,7 @@ type props = {
   order: IOrder;
 };
 const OrderDetailsMessaging: React.FC<props> = ({ order }) => {
-  console.log(order);
+
   return (
     <div className="border border-[#EFECEC] rounded-lg">
       {/* this is top message div  */}

@@ -30,7 +30,7 @@ export const messageApi = apiSlice.injectEndpoints({
           await cacheDataLoaded;
           socket?.emit("join-room", arg.replace(/orderId=/g, ""));
           socket.on("receive-message", (data) => {
-            console.log("hi i have reacive a message");
+            // console.log("hi i have reacive a message");
             updateCachedData((draft) => {
               draft.data.push(data);
               // console.log(JSON.parse(JSON.stringify(draft)));
@@ -122,13 +122,13 @@ export const messageApi = apiSlice.injectEndpoints({
         };
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        console.log(`orderId=${arg.orderId}`);
+        // console.log(`orderId=${arg.orderId}`);
         dispatch(
           messageApi.util.updateQueryData(
             "getMessages",
             `orderId=${arg.orderId}`,
             (draft) => {
-              console.log("DSSS", JSON.stringify(draft));
+              // console.log("DSSS", JSON.stringify(draft));
               if (draft) {
                 draft.meta.unSeenCount = 0;
               }
