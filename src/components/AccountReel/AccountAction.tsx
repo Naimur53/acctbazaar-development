@@ -11,6 +11,9 @@ import {
 import { useAppSelector } from "@/redux/hook";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 import { toast } from "react-toastify";
+import { Tooltip } from "antd";
+import Image from "next/image";
+import AccountModal from "../AccountCard/AccountModal";
 type Props = {} & IAccount;
 
 const AccountAction = (props: Props) => {
@@ -93,27 +96,18 @@ const AccountAction = (props: Props) => {
       <button
         disabled={isLoading || isAddToCartLoading || isDeleteLoading}
         onClick={handleCartClick}
-        className={`lg:px-5 px-2 disabled:opacity-55 transition-all rounded py-1 border border-orange-500 ${
-          existOnCart?.id ? "opacity-60" : ""
-        }`}
       >
-        <FontAwesomeIcon
-          icon={faCartPlus}
-          className="text-orange-500"
-        ></FontAwesomeIcon>
+        <Tooltip title="Add to cart">
+          <Image
+            src={"/assets/icons/cart.png"}
+            width={40}
+            height={40}
+            className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+            alt="cart"
+          />
+        </Tooltip>
       </button>
-      <button
-        onClick={showModal}
-        className="lg:px-5 px-2 rounded py-1 border bg-green-500"
-      >
-        <FontAwesomeIcon icon={faEye} className="text-white"></FontAwesomeIcon>
-      </button>
-      <AccountDetailsModal
-        handelOk={handleOk}
-        isModalOpen={isModalOpen}
-        handleCancel={handleCancel}
-        {...props}
-      ></AccountDetailsModal>
+      <AccountModal account={props}></AccountModal>
     </div>
   );
 };

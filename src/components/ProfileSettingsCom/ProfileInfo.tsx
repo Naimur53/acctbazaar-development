@@ -92,11 +92,11 @@ const ProfileInfo = (props: Props) => {
                 )}
               </div>
               <div>
-                <FormUploadImage
+                {/* <FormUploadImage
                   loading={imageUploadLoading}
                   handleChange={handleChange}
                   imgUrl={url}
-                ></FormUploadImage>
+                ></FormUploadImage> */}
               </div>
             </div>
             <h4 className="mt-10 font-bold text-xl">

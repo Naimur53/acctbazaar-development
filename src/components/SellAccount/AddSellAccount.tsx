@@ -23,15 +23,15 @@ type TAddSellAccount = {
 };
 
 export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
   const [userGuide, setUserGuide] = useState(1);
   const user = useAppSelector((state) => state.user.user);
-  const { accountCard } = useAppSelector(state => state.account);
+  const { accountCard } = useAppSelector((state) => state.account);
   useEffect(() => {
     if (!user?.isPaidForSeller) {
-      setModalOpen(true)
+      setModalOpen(true);
     }
-  }, [user?.isPaidForSeller])
+  }, [user?.isPaidForSeller]);
 
   const dispatch = useAppDispatch();
   const {
@@ -44,12 +44,11 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
       category: accountCard?.category,
       name: accountCard.name,
       description: accountCard?.description,
-      price: accountCard?.price
-    }
+      price: accountCard?.price,
+    },
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-
     updateProgress(3);
     dispatch(setAccountCard(data));
   };
@@ -251,7 +250,6 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
     );
   }
 
-
   return (
     <>
       <AppModal
@@ -296,7 +294,10 @@ export default function AddSellAccount({ updateProgress }: TAddSellAccount) {
       </AppModal>
 
       <div className="bg-white rounded-2xl w-full min-h-[80vh] pt-4 md:p-6 2xl:p-8">
-        <h2 className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center">
+        <h2
+          onClick={() => setModalOpen(true)}
+          className="subTitle pt-2 2xl:pt-6 pb-6 2xl:pb-8 text-center"
+        >
           Add Account
         </h2>
 

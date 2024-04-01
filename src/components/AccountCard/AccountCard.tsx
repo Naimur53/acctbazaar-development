@@ -15,6 +15,9 @@ import {
 import { toast } from "react-toastify";
 import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 import { useAppSelector } from "@/redux/hook";
+import AccountAction from "../AccountReel/AccountAction";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { GoDotFill } from "react-icons/go";
 type Props = {} & IAccount;
 
 const AccountCard = (props: Props) => {
@@ -69,72 +72,51 @@ const AccountCard = (props: Props) => {
       }
     }
   }, [data, id]);
-  useEffect(() => {}, [addToCartError]);
-  const handleCartClick = () => {
-    if (!user?.id) {
-      toast.error("Your are not logged in");
-      return;
-    }
-    if (isLoading) {
-      return;
-    }
-    if (existOnCart) {
-      deleteCart(existOnCart.id);
-    } else {
-      addToCart({ accountId: id })
-        .unwrap()
-        .then((res: any) => {
-          if (res.error) {
-            // toast.error("something went wrong");
-          } else {
-            // toast.success("success");
-          }
-        })
-        .catch(() => {
-          toast.error("Failed save");
-        });
-    }
-  };
   return (
-    <div>
-      <div className="flex gap-5 items-start">
+    <div
+      className={
+        existOnCart?.id
+          ? " transition-all pointer-events-none opacity-15"
+          : "transition-all opacity-100 p-2 "
+      }
+    >
+      <div className="flex flex-col gap-5  items-start">
         <Image
           src={findImageUrlByCategory(category)}
-          className="rounded-xl w-[30%]"
+          className="rounded w-full"
           width={200}
           height={200}
           alt="account-img"
         />
-        <div className="w-[60%]">
-          <h4 className=" text-2xl font-bold">{name}</h4>
-          <div>
-            <p className="text-xl my-3">{description.slice(0, 50)}</p>
+        <div className="w-full">
+          <div className="flex justify-between gap-5  items-center">
+            <h4 className=" text-[16px] font-bold">{category}</h4>
+            <span className="text-[16px] font-bold">${price}</span>
           </div>
-          <div className="flex gap-5">
-            <div className="font-bold text-lg text-orange-500">
-              <CurrencyLogo amount={price} className="w-[30px]"></CurrencyLogo>
+
+          <div className="flex items-center justify-between gap-1 pt-1 md:pt-4">
+            <div className="flex gap-1">
+              <Image
+                width={20}
+                height={20}
+                src={ownBy?.profileImg as string}
+                className="size-5 rounded-full"
+                alt="avatar image"
+              />
+              <p className="text-textBlack text-xs">{ownBy?.name}</p>
+              {ownBy?.isVerified && (
+                <RiVerifiedBadgeFill className="text-success" />
+              )}
+              {ownBy?.isVerifiedByAdmin && (
+                <p
+                  className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
+                >
+                  <GoDotFill />
+                  verified merchant
+                </p>
+              )}
             </div>
-            <button
-              disabled={isLoading}
-              onClick={handleCartClick}
-              className={`px-5 disabled:opacity-55 transition-all rounded py-1 border border-orange-500 ${
-                existOnCart ? "opacity-60" : ""
-              }`}
-            >
-              <FontAwesomeIcon
-                icon={faCartPlus}
-                className="text-orange-500"
-              ></FontAwesomeIcon>
-            </button>
-            <button
-              onClick={showModal}
-              className="px-5 rounded py-1 border bg-green-500"
-            >
-              <FontAwesomeIcon
-                icon={faEye}
-                className="text-white"
-              ></FontAwesomeIcon>
-            </button>
+            <AccountAction {...props}></AccountAction>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+"use client";
 import AccountSettingNotifications from "@/components/account-setting/AccountSettingNotifications";
 import AccountSettingProfile from "@/components/account-setting/AccountSettingProfile";
 import AccountSettingSecurity from "@/components/account-setting/AccountSettingSecurity";

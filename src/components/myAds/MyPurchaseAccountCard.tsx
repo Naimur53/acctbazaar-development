@@ -8,6 +8,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlinePauseCircle } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppModal from "../ui/AppModal";
+import OrderSecretViewPop from "../orders/OrderSecretViewPop";
 
 const MyPurchaseAccountCard = ({
   account,
@@ -62,6 +63,7 @@ const MyPurchaseAccountCard = ({
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-between gap-4 text-[#4F4F4F]">
             <AppModal
+              title="Account Information"
               button={
                 <Tooltip title="Open account details">
                   <Image
@@ -74,24 +76,7 @@ const MyPurchaseAccountCard = ({
                 </Tooltip>
               }
             >
-              <div className="space-y-4 min-w-44">
-                <div className="flex items-center justify-between text-sm">
-                  <p className="text-textGrey">Email</p>
-                  <p>{account.ownBy?.email}</p>
-                </div>
-                {account.additionalEmail && (
-                  <div className="flex items-center justify-between text-sm">
-                    <p className="text-textGrey">2FA Email</p>
-                    <p>{account.additionalEmail}</p>
-                  </div>
-                )}
-                {account.additionalDescription && (
-                  <div className="space-y-1.5">
-                    <p className="text-textGrey">Additional Information</p>
-                    <p className="text-sm">{account.additionalDescription}</p>
-                  </div>
-                )}
-              </div>
+              <OrderSecretViewPop account={account}></OrderSecretViewPop>
             </AppModal>
 
             <Link href={`/order-details/${orderId}`}>

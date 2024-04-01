@@ -37,6 +37,7 @@
     "react-phone-input-2": "^2.15.1",
     "react-qr-code": "^2.0.12",
     "react-redux": "^8.1.1",
+    "react-sticky-el": "^2.1.0",
     "react-toastify": "^7.0.4",
     "recharts": "^2.12.3",
     "socket.io-client": "^4.7.5",

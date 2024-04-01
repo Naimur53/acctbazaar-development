@@ -1,3 +1,4 @@
+import { findImageUrlByCategory } from "@/shared";
 import { AccountCategory, IAccount } from "@/types/common";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import Image from "next/image";
@@ -21,13 +22,16 @@ export default function AccountCredentialCard({
   account,
   updateProgress,
 }: TAccountCredentialCard) {
-
+  console.log(
+    findImageUrlByCategory(account?.category as AccountCategory)
+    // account.category
+  );
   return (
     <div
       className={` flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg p-2 md:p-3 2xl:p-4 bg-[#FBFAFA]`}
     >
       <Image
-        src={getImageUrlByCategory(account?.category as AccountCategory)}
+        src={findImageUrlByCategory(account?.category as AccountCategory)}
         className="size-9 md:size-10 lg:size-14 2xl:size-16 rounded-full"
         width={70}
         height={70}

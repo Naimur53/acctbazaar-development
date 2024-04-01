@@ -88,6 +88,7 @@ export const messageApi = apiSlice.injectEndpoints({
           const result = await queryFulfilled;
           pathResult1.undo();
           if (result?.data?.success) {
+            socket.emit("send-message", result.data.data);
             // dispatch(
             //   messageApi.util.updateQueryData(
             //     "getMessages",
@@ -97,7 +98,6 @@ export const messageApi = apiSlice.injectEndpoints({
             //     }
             //   )
             // );
-            socket.emit("send-message", result.data.data);
           }
         } catch (err) {
           pathResult1.undo();

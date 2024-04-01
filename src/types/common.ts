@@ -113,6 +113,17 @@ export enum AccountCategory {
   Apple = "Apple",
   TrustWallet = "TrustWallet",
   AmazonPrimeVideos = "AmazonPrimeVideos",
+
+  // new items
+  AmazonGiftCard = "AmazonGiftCard",
+  AmexGiftCard = "AmexGiftCard",
+  EbayGiftCard = "EbayGiftCard",
+  GooglePlayGiftCard = "GooglePlayGiftCard",
+  NikeGiftCard = "NikeGiftCard",
+  NordStromGiftCard = "NordStromGiftCard",
+  PlaystationGiftCard = "PlaystationGiftCard",
+  SephoraGiftCard = "SephoraGiftCard",
+  SteamGiftCard = "SteamGiftCard",
 }
 
 export enum BookingStatus {
@@ -154,6 +165,7 @@ export enum AccountType {
   Game = "Game",
   Email = "Email",
   Vpn = "Vpn",
+  GiftCard = "GiftCard",
   Other = "Other",
 }
 

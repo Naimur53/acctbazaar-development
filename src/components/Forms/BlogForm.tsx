@@ -40,12 +40,12 @@ const BlogForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
             <FormInput name="title" required={true} placeholder="Enter title" />
           </div>
           <div>
-            <FormUploadImage
+            {/* <FormUploadImage
               loading={imageUploadLoading}
               handleChange={handleChange}
               imgUrl={url}
               showImg={true}
-            ></FormUploadImage>
+            ></FormUploadImage> */}
           </div>
           <div className="col-span-2">
             <FormTextArea

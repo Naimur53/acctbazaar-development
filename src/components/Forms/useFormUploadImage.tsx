@@ -38,6 +38,7 @@ const useFormUploadImage = (defaultUrl?: string): output => {
   const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
   ) => {
+    console.log({ info }, "hiiiiiiiiiiiiii");
     if (info.file.status === "uploading") {
       setLoading(true);
       return;
@@ -45,7 +46,8 @@ const useFormUploadImage = (defaultUrl?: string): output => {
     if (info.file.status === "done") {
       // Get this url from response in real world.
       //
-      setImageUrl(info.file.response.data.url), setLoading(false);
+      setImageUrl(info.file.response.data.url);
+      setLoading(false);
     }
   };
 

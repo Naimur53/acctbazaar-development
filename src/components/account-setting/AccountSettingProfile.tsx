@@ -22,6 +22,8 @@ import AppSmallLoading from "../ui/AppSmallLoading";
 import { useEffect, useMemo, useState } from "react";
 import getDaysRemaining from "@/utils/getDaysRemaining";
 import { City, Country, ICountry, State } from "country-state-city";
+import FormUploadImage from "../Forms/FormUploadImage";
+import useFormUploadImage from "../Forms/useFormUploadImage";
 
 interface FormData {
   name: string;
@@ -61,22 +63,39 @@ const AccountSettingProfile = () => {
     },
   });
 
+  const {
+    handleChange,
+    loading: imageUploadLoading,
+    url,
+    setUrl,
+  } = useFormUploadImage();
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const countryObj = Country.getCountryByCode(data.country);
     const stateObj = State.getStateByCodeAndCountry(data.country, data.state);
-    console.log(data);
-    const submittedData = {
+    const submittedData: {
+      country: string | undefined;
+      name: string;
+      email: string;
+      address: string;
+      state: string;
+      city: string;
+      dateOfBirth: string;
+      phoneNumber: string;
+      id: string | undefined;
+      profileImg?: string;
+    } = {
       id: user?.id,
       ...data,
       country: countryObj?.name,
       //   state: stateObj?.name,
     };
-    console.log(submittedData);
+    if (!readOnly && url) {
+      submittedData.profileImg = url;
+    }
 
     await editUser(submittedData)
       .unwrap()
       .then((res: ResponseSuccessType) => {
-        console.log({ res });
         if (!res.success) {
           toast.error(res.message || "Something went wrong");
         } else {
@@ -148,7 +167,6 @@ const AccountSettingProfile = () => {
         )
       : [];
   }, [selectedCountry]);
-  console.log(countryOptions, stateOptions);
 
   const cityOption = useMemo(() => {
     const selectedCountryDetails = Country.getAllCountries().find(
@@ -168,10 +186,6 @@ const AccountSettingProfile = () => {
         }))
       : [];
   }, [selectedCountry, selectedState]);
-  console.log({ cityOption });
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <form
@@ -264,7 +278,7 @@ const AccountSettingProfile = () => {
         <div className="w-full md:w-[40%] flex items-center justify-between gap-4">
           <img
             className="size-20 rounded-full object-cover"
-            src={user?.profileImg as string}
+            src={url ? url : (user?.profileImg as string)}
             alt=""
           />
           <div className="">
@@ -286,25 +300,33 @@ const AccountSettingProfile = () => {
               {loading ? (
                 <AppSmallLoading />
               ) : (
-                <label
-                  htmlFor="file"
-                  className="cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed py-3 px-3 flex items-center justify-center text-center gap-2 flex-col"
-                >
-                  <Image
-                    width={30}
-                    height={30}
-                    className="rounded-full object-cover"
-                    src="/assets/icons/gallry.png"
-                    alt=""
-                  />
-                  <h2 className="text-[#7D7878] text-xs font-light">
-                    <span className="font-medium text-gray-700">
-                      Click to replace
-                    </span>{" "}
-                    or drag and drop <br />
-                    SVG, PNG, JPG or GIF (max 800 x 400px)
-                  </h2>
-                </label>
+                <FormUploadImage
+                  loading={imageUploadLoading}
+                  handleChange={handleChange}
+                  imgUrl={url}
+                  onRemove={() => {
+                    setUrl(null);
+                  }}
+                ></FormUploadImage>
+                // <label
+                //   htmlFor="file"
+                //   className="cursor-pointer border border-borderColor rounded hover:bg-gray-100 border-dashed py-3 px-3 flex items-center justify-center text-center gap-2 flex-col"
+                // >
+                //   <Image
+                //     width={30}
+                //     height={30}
+                //     className="rounded-full object-cover"
+                //     src="/assets/icons/gallry.png"
+                //     alt=""
+                //   />
+                //   <h2 className="text-[#7D7878] text-xs font-light">
+                //     <span className="font-medium text-gray-700">
+                //       Click to replace
+                //     </span>{" "}
+                //     or drag and drop <br />
+                //     SVG, PNG, JPG or GIF (max 800 x 400px)
+                //   </h2>
+                // </label>
               )}
             </div>
             {readOnly && (

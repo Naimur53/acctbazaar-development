@@ -10,10 +10,12 @@ type TAppModalProps = {
   primaryButtonAction?: () => void;
   cancelButtonTitle?: string;
   cancelButtonAction?: () => void;
-  handleClose?: (setOpen: React.Dispatch<React.SetStateAction<boolean>>) => void;
-  modalOpen?: boolean,
-  closeable?: boolean,
-  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  handleClose?: (
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
+  modalOpen?: boolean;
+  closeable?: boolean;
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AppModal = ({
@@ -27,7 +29,7 @@ const AppModal = ({
   cancelButtonAction,
   modalOpen,
   setModalOpen,
-  closeable
+  closeable,
 }: TAppModalProps) => {
   const [open, setOpen] = useState(false);
 
@@ -37,7 +39,7 @@ const AppModal = ({
     } else {
       setOpen(value);
     }
-  }
+  };
 
   return (
     <div className="">
@@ -47,10 +49,12 @@ const AppModal = ({
         maskClosable={closeable}
         title={
           <>
-            <h1 className="title">{title}</h1>
-            {subTitle &&
-              <p className="text-textGrey text-xs md:text-sm font-normal w-fit">{subTitle}</p>
-            }
+            <h1 className="title text-xl">{title}</h1>
+            {subTitle && (
+              <p className="text-textGrey text-xs md:text-sm font-normal w-fit">
+                {subTitle}
+              </p>
+            )}
           </>
         }
         centered
@@ -59,7 +63,7 @@ const AppModal = ({
         onOk={() => handleOpen(false)}
         onCancel={() => handleOpen(false)}
         footer={
-          (primaryButtonTitle || cancelButtonTitle) ?
+          primaryButtonTitle || cancelButtonTitle ? (
             <div className="w-full flex items-center justify-center gap-2 lg:pt-2">
               {cancelButtonTitle && (
                 <button
@@ -88,7 +92,10 @@ const AppModal = ({
                   {primaryButtonTitle}
                 </button>
               )}
-            </div> : []
+            </div>
+          ) : (
+            []
+          )
         }
       >
         {children}

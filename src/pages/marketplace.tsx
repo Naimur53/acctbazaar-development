@@ -1,3 +1,4 @@
+import AccountReel from "@/components/AccountReel/AccountReel";
 import { SelectOptions } from "@/components/Forms/FormSelectField";
 import MarketplaceAccountCard from "@/components/marketplace/MarketplaceAccountCard";
 import MarketplaceSidebar from "@/components/marketplace/MarketplaceSidebar";
@@ -10,12 +11,15 @@ import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
 import { useGetAccountsQuery } from "@/redux/features/account/accountApi";
 import { useAppSelector } from "@/redux/hook";
-import { IAccount } from "@/types/common";
+import { AccountType, IAccount } from "@/types/common";
+import { Pagination } from "antd";
 import { useMemo, useState } from "react";
 import { IoFilter } from "react-icons/io5";
+import Sticky from "react-sticky-el";
 
 const Marketplace = () => {
   const [search, setSearch] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
   const selectedCategories = useAppSelector(
     (state) => state.categories.selectedCategories
   );
@@ -39,7 +43,8 @@ const Marketplace = () => {
       minPrice: minPriceDe,
       maxPrice: maxPriceDe,
       approvedForSale: "approved",
-      limit: 50,
+      limit: 2,
+      page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
     const queryString = Object.keys(info).reduce((pre, key: string) => {
@@ -54,7 +59,7 @@ const Marketplace = () => {
       return pre;
     }, "");
     return queryString;
-  }, [selectedCategories, debouncedSearch, minPriceDe, maxPriceDe]);
+  }, [selectedCategories, debouncedSearch, minPriceDe, maxPriceDe, page]);
 
   const queryData = useGetAccountsQuery(queryString);
 
@@ -87,33 +92,60 @@ const Marketplace = () => {
               >
                 <MarketplaceSidebar isHideTitle />
               </AppDrawer>
-
             </div>
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 min-h-[80dvh] 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
-            <div className="hidden md:block md:w-[25%] h-full bg-white">
-              <MarketplaceSidebar />
+          <div className="flex gap-4 min-h-[80dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
+            <div className="hidden md:block md:w-[30%] min-w-[330px] h-full bg-white">
+              <Sticky
+                topOffset={-40}
+                offsetTransforms={true}
+                stickyClassName="mt-[90px]"
+              >
+                <div className="bg-white">
+                  <MarketplaceSidebar />
+                </div>
+              </Sticky>
             </div>
             <div className="hidden md:block border border-[#E1DBDB]"></div>
-            <div className="w-full md:w-[73%] max-h-[80dvh] overflow-y-auto bg-white p-2 md:p-4 2xl:p-6">
-              <AppRenderReduxData
-                queryData={queryData}
-                showData={(data) => {
-                  // console.log(data);
-                  return (
-                    <>
-                      {data.data.map((single: IAccount) => (
-                        <MarketplaceAccountCard
-                          account={single}
-                          key={single.id}
-                        />
-                      ))}
-                    </>
-                  );
-                }}
-              />
+            <div className="w-full">
+              <div className="w-full     bg-white p-2 md:p-4 2xl:p-6">
+                <h2 className="text-xl font-bold">Social media</h2>
+                <AppRenderReduxData
+                  queryData={queryData}
+                  showData={(data) => {
+                    // console.log(data);
+                    return (
+                      <>
+                        {data.data.map((single: IAccount) => (
+                          <MarketplaceAccountCard
+                            account={single}
+                            key={single.id}
+                          />
+                        ))}
+                        <div className="flex justify-center items-center mt-5">
+                          <Pagination
+                            showSizeChanger={false}
+                            pageSize={data.meta.limit}
+                            total={data.meta.total}
+                            current={data.meta.page}
+                            onChange={(value) => {
+                              setPage(value);
+                            }}
+                          ></Pagination>
+                        </div>
+                      </>
+                    );
+                  }}
+                />
+              </div>
+              <div className=" md:max-w-[660px] xl:max-w-[71vw]  mt-5">
+                <AccountReel
+                  title="Gift Cards"
+                  accountType={AccountType.GiftCard}
+                ></AccountReel>
+              </div>
             </div>
           </div>
         </div>

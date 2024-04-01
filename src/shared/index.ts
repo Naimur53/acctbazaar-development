@@ -5,6 +5,54 @@ interface IProduct_Category {
   value: AccountCategory;
   imageUrl: string;
 }
+
+export const GiftCardCategories: IProduct_Category[] = [
+  {
+    label: "Amazon Gift Card",
+    value: AccountCategory.AmazonGiftCard,
+    imageUrl: "/assets/amazon-giftcard.png",
+  },
+  {
+    label: "Amex Gift Card",
+    value: AccountCategory.AmexGiftCard,
+    imageUrl: "/assets/amex-giftcard.png",
+  },
+  {
+    label: "Ebay Gift Card",
+    value: AccountCategory.EbayGiftCard,
+    imageUrl: "/assets/ebay-giftcard.png",
+  },
+  {
+    label: "Google Play Gift Card",
+    value: AccountCategory.GooglePlayGiftCard,
+    imageUrl: "/assets/googlepay-giftcard.png",
+  },
+  {
+    label: "Nike Gift Card",
+    value: AccountCategory.NikeGiftCard,
+    imageUrl: "/assets/nike-giftcard.png",
+  },
+  {
+    label: "NordStrom  Gift Card",
+    value: AccountCategory.NordStromGiftCard,
+    imageUrl: "/assets/nordstorm-giftcard.png",
+  },
+  {
+    label: "Playstation Gift Card",
+    value: AccountCategory.PlaystationGiftCard,
+    imageUrl: "/assets/playstation-giftcard.png",
+  },
+  {
+    label: "Sephora Gift Card",
+    value: AccountCategory.SephoraGiftCard,
+    imageUrl: "/assets/sephora-giftcard.png",
+  },
+  {
+    label: "Steam Gift Card",
+    value: AccountCategory.SteamGiftCard,
+    imageUrl: "/assets/steam-giftcard.png",
+  },
+];
 export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
   {
     label: "Facebook",
@@ -152,9 +200,12 @@ export const ACCOUNT_CATEGORIES: IProduct_Category[] = [
     value: AccountCategory.Other,
     imageUrl: "/assets/other.png",
   },
+  // new added git card
+  ...GiftCardCategories,
 ];
 
 export function findImageUrlByCategory(categoryName: AccountCategory): string {
+  console.log({ categoryName });
   return (
     ACCOUNT_CATEGORIES.find((single) => single.value === categoryName)
       ?.imageUrl || ""

@@ -2,6 +2,7 @@ import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import MarketPlaceSidebarFilterElement from "./MarketPlaceSidebarFilterElement";
 import PriceRange from "./PriceRange";
 import { AccountCategory } from "@/types/common";
+import { GiftCardCategories } from "@/shared";
 
 const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
   const sidebarMenu: any = [
@@ -106,29 +107,30 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
     {
       imageUrl: "/assets/icons/gift.png",
       label: "Giftcards",
-      children: [
-        {
-          label: "Netflix",
-          value: AccountCategory.Netflix,
-          imageUrl: "/assets/netflix.png",
-        },
-        ,
-        {
-          label: "Apple",
-          value: AccountCategory.Apple,
-          imageUrl: "/assets/apple.png",
-        },
-        {
-          label: "TrustWallet",
-          value: AccountCategory.TrustWallet,
-          imageUrl: "/assets/trust-wallet.png",
-        },
-        {
-          label: "Amazon Prime Videos",
-          value: AccountCategory.AmazonPrimeVideos,
-          imageUrl: "/assets/prime_video.jpg",
-        },
-      ],
+      children: GiftCardCategories,
+      // [
+      //   {
+      //     label: "Netflix",
+      //     value: AccountCategory.Netflix,
+      //     imageUrl: "/assets/netflix.png",
+      //   },
+      //   ,
+      //   {
+      //     label: "Apple",
+      //     value: AccountCategory.Apple,
+      //     imageUrl: "/assets/apple.png",
+      //   },
+      //   {
+      //     label: "TrustWallet",
+      //     value: AccountCategory.TrustWallet,
+      //     imageUrl: "/assets/trust-wallet.png",
+      //   },
+      //   {
+      //     label: "Amazon Prime Videos",
+      //     value: AccountCategory.AmazonPrimeVideos,
+      //     imageUrl: "/assets/prime_video.jpg",
+      //   },
+      // ],
     },
     {
       imageUrl: "/assets/icons/internet.png",
@@ -203,9 +205,9 @@ const MarketplaceSidebar = ({ isHideTitle }: { isHideTitle?: boolean }) => {
 
   return (
     <div>
-      {!isHideTitle &&
+      {!isHideTitle && (
         <h2 className="font-bold text-textBlack py-4 px-6">Filter</h2>
-      }
+      )}
 
       {/* this is account category div  */}
       <div className={`${isHideTitle && "pt-3"}`}>

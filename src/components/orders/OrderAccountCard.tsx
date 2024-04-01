@@ -9,6 +9,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Link from "next/link";
 import { Tooltip } from "antd";
 import AppModal from "../ui/AppModal";
+import OrderSecretViewPop from "./OrderSecretViewPop";
 
 type props = {
   orderInfo: IOrder;
@@ -31,7 +32,9 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
             height={16}
             alt="social icons"
           />
-          <p className="text-xs md:text-sm text-textBlack">{accountInfo.category}</p>
+          <p className="text-xs md:text-sm text-textBlack">
+            {accountInfo.category}
+          </p>
         </div>
         <p className="py-0.5 md:py-1 px-1 md:px-2 rounded-full text-xs flex items-center gap-1 md:gap-2 text-[#027A48] bg-[#ECFDF3]">
           <GoDotFill />
@@ -42,7 +45,8 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
       {/* this is order and date div  */}
       <div className="flex flex-col md:flex-row md:items-center gap-1 justify-between">
         <p className="text-xs md:text-sm line-clamp-1 text-textBlack flex items-center gap-1 md:gap-2">
-          <p className="w-24 md:w-fit text-textBlack">Order number</p> <span className="text-textGrey line-clamp-1"># {orderInfo.id}</span>
+          <p className="w-24 md:w-fit text-textBlack">Order number</p>{" "}
+          <span className="text-textGrey line-clamp-1"># {orderInfo.id}</span>
         </p>
         <p className="text-xs text-textGrey">
           <span className="md:hidden  text-textBlack">Order time: </span>
@@ -93,7 +97,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
           </h2>
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-end gap-4">
-            {(orderInfo.status === "completed") &&
+            {orderInfo.status === "completed" && (
               <AppModal
                 button={
                   <Tooltip title="Open account details">
@@ -107,29 +111,9 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
                   </Tooltip>
                 }
               >
-                <div className='space-y-4 min-w-44'>
-
-                  <div className='flex items-center justify-between text-sm'>
-                    <p className="text-textGrey">Email</p>
-                    <p>{orderInfo?.orderBy.email}</p>
-                  </div>
-                  {
-                    orderInfo?.account.additionalEmail &&
-                    <div className='flex items-center justify-between text-sm'>
-                      <p className="text-textGrey">2FA Email</p>
-                      <p>{orderInfo?.account.additionalEmail}</p>
-                    </div>
-                  }
-                  {orderInfo?.account.additionalDescription &&
-                    <div className='space-y-1.5'>
-                      <p className="text-textGrey">Additional Information</p>
-                      <p className="text-sm">{orderInfo?.account.additionalDescription}</p>
-                    </div>
-                  }
-                </div>
+                <OrderSecretViewPop account={accountInfo}></OrderSecretViewPop>
               </AppModal>
-
-            }
+            )}
             <Link href={`/order-details/${orderInfo.id}`}>
               <Tooltip title="Message vendor">
                 <Image
