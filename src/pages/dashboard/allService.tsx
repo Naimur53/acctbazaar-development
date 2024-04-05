@@ -30,7 +30,7 @@ import { ACCOUNT_CATEGORIES } from "@/shared";
 type Props = {};
 type DataType = {} & IAccount;
 
-function AllService({ }: Props) {
+function AllService({}: Props) {
   const [page, setPage] = useState<number>(1);
   const [deleteService] = useDeleteAccountMutation();
   const [editService, { isLoading: isEditLoading }] = useEditAccountMutation();
@@ -64,6 +64,48 @@ function AllService({ }: Props) {
     useGetAccountsQuery(queryString);
   let content = null;
 
+  const approveButton = (id: string) => {
+    return (
+      <div>
+        <button
+          className="app-status-button bg-green-600"
+          onClick={() => {
+            editService({ id, approvedForSale: EApprovedForSale.approved });
+          }}
+        >
+          Approve
+        </button>
+      </div>
+    );
+  };
+  const pendingButton = (id: string) => {
+    return (
+      <div>
+        <button
+          className="app-status-button bg-blue-600"
+          onClick={() => {
+            editService({ id, approvedForSale: EApprovedForSale.pending });
+          }}
+        >
+          Pending
+        </button>
+      </div>
+    );
+  };
+  const deniedButton = (id: string) => {
+    return (
+      <div>
+        <button
+          className="app-status-button bg-yellow-500"
+          onClick={() => {
+            editService({ id, approvedForSale: EApprovedForSale.denied });
+          }}
+        >
+          Denied
+        </button>
+      </div>
+    );
+  };
   const columns: ColumnsType<DataType> = [
     {
       title: "Category",
@@ -123,29 +165,41 @@ function AllService({ }: Props) {
       },
     },
     {
-      title: "Approved Status",
+      title: "Status",
       dataIndex: "approvedForSale",
       key: "approvedForSale",
       className: "text-[12px] lg:text-md",
 
-      render: (_, record) => {
+      render: (current, record) => {
         return (
           <div className="flex gap-2 items-center">
-            <div className="w-[120px] ">
+            <div className="w-[120px] capitalize ">
               {record.isSold ? (
                 <p className="font-bold">Sold</p>
               ) : (
-                <Form submitHandler={() => { }}>
-                  <FormSelectField
-                    name="approvedForSale"
-                    handleChange={(ele) => {
-                      editService({ id: record.id, approvedForSale: ele });
-                    }}
-                    placeholder="Filter By Approved status"
-                    options={approvedStatusOption}
-                    value={record.approvedForSale}
-                  ></FormSelectField>
-                </Form>
+                <div>
+                  <span className="border rounded-full p-1 px-2">
+                    {current}
+                  </span>
+                  <div className="flex gap-2 mt-2">
+                    {current === EApprovedForSale.pending ? (
+                      <>
+                        {approveButton(record.id)}
+                        {deniedButton(record.id)}
+                      </>
+                    ) : current === EApprovedForSale.approved ? (
+                      <>
+                        {pendingButton(record.id)}
+                        {deniedButton(record.id)}
+                      </>
+                    ) : (
+                      <>
+                        {approveButton(record.id)}
+                        {deniedButton(record.id)}
+                      </>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -247,7 +301,7 @@ function AllService({ }: Props) {
             <div className="flex flex-col md:flex-row items-center gap-4 mb-5 justify-between">
               <div className="flex flex-wrap lg:flex-nowrap gap-4">
                 <div className="w-[200px] ">
-                  <Form submitHandler={() => { }}>
+                  <Form submitHandler={() => {}}>
                     <FormSelectField
                       name="category"
                       handleChange={handleCategoryChange}
@@ -258,7 +312,7 @@ function AllService({ }: Props) {
                   </Form>
                 </div>
                 <div className="w-[230px] ">
-                  <Form submitHandler={() => { }}>
+                  <Form submitHandler={() => {}}>
                     <FormSelectField
                       name="approvedForSale"
                       handleChange={handleApprovedChange}

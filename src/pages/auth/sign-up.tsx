@@ -1,6 +1,7 @@
 import FormInputNumber from "@/components/Forms/FormInputNumber";
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import AppFormInput from "@/components/ui/AppFormInput";
+import AppSmallLoading from "@/components/ui/AppSmallLoading";
 import Loading from "@/components/ui/Loading";
 import { createUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -198,10 +199,13 @@ const SignUp = () => {
                 </span>
               )}
             </div>
-
-            <button type="submit" className="appBtn mt-4 w-full">
-              Get started
-            </button>
+            {isLoading ? (
+              <AppSmallLoading></AppSmallLoading>
+            ) : (
+              <button type="submit" className="appBtn mt-4 w-full">
+                Sign up
+              </button>
+            )}
           </form>
         </div>
       </div>

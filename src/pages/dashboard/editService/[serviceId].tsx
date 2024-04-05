@@ -39,7 +39,7 @@ const EditSingleService = (props: Props) => {
       </div>
     );
   }
-  return <SellerLayout>{content}</SellerLayout>;
+  return <AdminLayout>{content}</AdminLayout>;
 };
 
 export default EditSingleService;

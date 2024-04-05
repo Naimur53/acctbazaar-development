@@ -1,5 +1,6 @@
 import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import AppFormInput from "@/components/ui/AppFormInput";
+import AppSmallLoading from "@/components/ui/AppSmallLoading";
 import { loginUser, setError } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import Link from "next/link";
@@ -30,7 +31,6 @@ const SignIn = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-
     if (data.password.length < 8) {
       toast.error("minimum password value is 8");
     } else {
@@ -88,7 +88,7 @@ const SignIn = () => {
               name="password"
               required={true}
               register={register}
-              type="text"
+              type="password"
               label="Password"
               placeholder="Type your Password"
               error={errors.password}
@@ -99,9 +99,13 @@ const SignIn = () => {
                 <p>Forgot Password?</p>{" "}
               </Link>
             </div>
-            <button type="submit" className="appBtn mt-4 w-full">
-              Get started
-            </button>
+            {isLoading ? (
+              <AppSmallLoading />
+            ) : (
+              <button type="submit" className="appBtn mt-4 w-full">
+                Login
+              </button>
+            )}
           </form>
         </div>
       </div>

@@ -90,7 +90,7 @@ const AccountCard = (props: Props) => {
         />
         <div className="w-full">
           <div className="flex justify-between gap-5  items-center">
-            <h4 className=" text-[16px] font-bold">{category}</h4>
+            <h4 className=" text-[16px] font-bold">{name}</h4>
             <span className="text-[16px] font-bold">${price}</span>
           </div>
 

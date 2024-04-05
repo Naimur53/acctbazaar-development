@@ -2,6 +2,7 @@ import LeftSideAuthComponent from "@/components/auth/LeftSideAuthComponent";
 import Loading from "@/components/ui/Loading";
 import {
   resendEmail,
+  userLoggedOut,
   verifyUserWithToken,
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -115,6 +116,15 @@ const EnterOtp = () => {
           <p className="text-[#645D5D] text-xs lg:text-sm">
             A 6-digit OTP (one time password) has been sent to your e-mail for
             verification.
+            <button
+              onClick={() => {
+                dispatch(userLoggedOut());
+                router.push("/auth/sign-in");
+              }}
+              className="text-xs ml-1 text-primary"
+            >
+              Login with another Account
+            </button>
           </p>
 
           <div className="w-full md:w-[500px] 2xl:w-[560px] py-2 lg:py-4 2xl:py-5 ">

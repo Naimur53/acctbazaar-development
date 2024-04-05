@@ -16,6 +16,12 @@
   .appOutlineBtnSm {
     @apply hover:bg-primary text-primary select-none text-xs 2xl:text-sm hover:text-white rounded 2xl:rounded-md font-medium w-full lg:w-fit text-center px-2 md:px-4 2xl:px-6 py-1 2xl:py-2 border border-primary;
   }
+ .app-small.ant-spin .ant-spin-dot-item {
+  @apply !bg-primary   
+  }
+  .app-status-button{
+    @apply p-1 rounded px-2  text-white
+  }
   .title {
     @apply text-textBlack font-semibold text-xl md:text-2xl lg:text-3xl 2xl:text-4xl;
   }

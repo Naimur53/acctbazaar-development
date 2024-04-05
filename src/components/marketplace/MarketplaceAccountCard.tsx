@@ -17,6 +17,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Tooltip } from "antd";
 import Link from "next/link";
 import { GoDotFill } from "react-icons/go";
+import { findImageUrlByCategory } from "@/shared";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -77,7 +78,7 @@ const MarketplaceAccountCard = ({
       {/* this is image and description div  */}
       <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
         <Image
-          src={getImageUrlByCategory(account?.category as AccountCategory)}
+          src={findImageUrlByCategory(account?.category as AccountCategory)}
           className="size-9 md:size-10 lg:size-14 2xl:size-16"
           width={70}
           height={70}
