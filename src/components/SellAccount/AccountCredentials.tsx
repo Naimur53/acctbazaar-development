@@ -53,11 +53,12 @@ export default function AccountCredentials({
 
   const handleCredentials = () => {
     if (accountCredentials.length < 1) {
-      return toast.error("Please set minimum one account Credentials", { toastId: 1 })
+      return toast.error("Please set minimum one account Credentials", {
+        toastId: 1,
+      });
     }
     updateProgress(4);
   };
-
 
   return (
     <div className="bg-white rounded-2xl w-full min-h-[80vh] p-1 md:p-6 2xl:p-8">
@@ -77,10 +78,10 @@ export default function AccountCredentials({
           {/* this is middle div  */}
           <div className="md:w-[30%] space-y-3">
             <AppFormInput
-              label="Account Email"
+              label="Username"
               name="email"
               type="text"
-              placeholder="Type your Account Email here"
+              placeholder="Type your Account Username here"
               register={register}
               error={errors?.email}
               required
@@ -105,7 +106,7 @@ export default function AccountCredentials({
             />
             <div className="pt-2">
               <h2 className="text-lg font-medium text-textBlack">
-                2FA Credentials{" "}
+                Additional information.
                 <span className="text-sm font-normal">(optional)</span>
               </h2>
               <p className="text-xs text-textGrey">
@@ -149,7 +150,7 @@ export default function AccountCredentials({
             {accountCredentials.length < 1 ? (
               <div className="h-[30dvh]"></div>
             ) : (
-              <div className='max-h-[60dvh] space-y-2 overflow-auto'>
+              <div className="max-h-[60dvh] space-y-2 overflow-auto">
                 {accountCredentials.map((account, index) => (
                   <OrderDetailsAccountInfo
                     key={index}
