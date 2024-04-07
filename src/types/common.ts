@@ -84,6 +84,7 @@ export enum UserRole {
 }
 
 export enum AccountCategory {
+  // Social media accounts
   Facebook = "Facebook",
   Twitter = "Twitter",
   Instagram = "Instagram",
@@ -91,30 +92,69 @@ export enum AccountCategory {
   Pinterest = "Pinterest",
   Snapchat = "Snapchat",
   TikTok = "TikTok",
-  YouTube = "YouTube",
-  GoogleVoice = "GoogleVoice",
   Threads = "Threads",
-  Telegram = "Telegram",
-  Whatsapp = "Whatsapp",
+  Tinder = "Tinder",
+  Bumble = "Bumble",
+  Reddit = "Reddit",
+  Discord = "Discord",
+
+  // Gaming accounts
   Playstation = "Playstation",
   CallOfDuty = "CallOfDuty",
   Pubg = "Pubg",
   Steam = "Steam",
+  Gta = "Gta",
+  Fortnite = "Fortnite",
+  Epic = "Epic",
+
+  // Email and messaging accounts
   Gmail = "Gmail",
   Ymail = "Ymail",
   Hotmail = "Hotmail",
   MailRu = "MailRu",
   Outlook = "Outlook",
+  Whatsapp = "Whatsapp",
+  GoogleVoice = "GoogleVoice",
+  Telegram = "Telegram",
+  WeChat = "WeChat",
+  TextNow = "TextNow",
+  TextPlus = "TextPlus",
+
+  // VPN accounts
   Windscribe = "Windscribe",
   Nord = "Nord",
   Vpn911 = "Vpn911",
-  Other = "Other",
+  Pia = "Pia",
+  Express = "Express",
+  IpVanish = "IpVanish",
+  CyberGhost = "CyberGhost",
+  Private = "Private",
+  Total = "Total",
+
+  // E-commerce
+  Aliexpress = "Aliexpress",
+  Alibaba = "Alibaba",
+  Amazon = "Amazon",
+  Shopify = "Shopify",
+  Ebay = "Ebay",
+
+  // Accounts & Subscriptions
   Netflix = "Netflix",
   Apple = "Apple",
   TrustWallet = "TrustWallet",
+  Prime = "Prime",
   AmazonPrimeVideos = "AmazonPrimeVideos",
+  AppleMusic = "AppleMusic",
+  AppleTv = "AppleTv",
+  Spotify = "Spotify",
+  Audiomack = "Audiomack",
+  YouTube = "YouTube",
+  GitHub = "GitHub",
+  Canva = "Canva",
+  ChatGPT = "ChatGPT",
+  Office365 = "Office365",
 
-  // new items
+  // Gift card accounts
   AmazonGiftCard = "AmazonGiftCard",
   AmexGiftCard = "AmexGiftCard",
   EbayGiftCard = "EbayGiftCard",
@@ -124,6 +164,9 @@ export enum AccountCategory {
   PlaystationGiftCard = "PlaystationGiftCard",
   SephoraGiftCard = "SephoraGiftCard",
   SteamGiftCard = "SteamGiftCard",
+
+  // Other types of accounts
+  Other = "Other",
 }
 
 export enum BookingStatus {

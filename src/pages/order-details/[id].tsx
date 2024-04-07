@@ -16,6 +16,7 @@ import appDateFormate from "@/utils/appDateFormate";
 import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import { Tooltip } from "antd";
 import AppDrawer from "@/components/ui/AppDrawer";
+import { findImageUrlByCategory } from "@/shared";
 
 const OrderDetails = () => {
   const isCancelled = false;
@@ -53,8 +54,7 @@ const OrderDetails = () => {
     additionalEmail: mainData.account.additionalEmail || "",
     additionalPassword: mainData.account.additionalPassword || "",
     additionalDescription: mainData.account.additionalDescription || "",
-
-  }
+  };
   return (
     <HomeLayout>
       <div className="container py-5 md:py-10 2xl:py-12">
@@ -69,12 +69,26 @@ const OrderDetails = () => {
                 #{location.id}
               </span>
             </p>
-            <p className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${(mainData.status === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-              (mainData.status === "cancelled" && "text-[#B42318] bg-[#FEF3F2]") ||
-              (mainData.status === "completed" && "text-[#027A48] bg-[#ECFDF3]")}`}>
-              <GoDotFill className={`${(mainData.status === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-                (mainData.status === "cancelled" && "text-[#B42318] bg-[#FEF3F2]") ||
-                (mainData.status === "completed" && "text-[#027A48] bg-[#ECFDF3]")}`} />
+            <p
+              className={`py-1 px-2 w-fit rounded-full text-xs flex items-center gap-2 text-[#027a48] bg-[#ECFDF3] ${
+                (mainData.status === "pending" &&
+                  "text-[#B54708] bg-[#FFFAEB]") ||
+                (mainData.status === "cancelled" &&
+                  "text-[#B42318] bg-[#FEF3F2]") ||
+                (mainData.status === "completed" &&
+                  "text-[#027A48] bg-[#ECFDF3]")
+              }`}
+            >
+              <GoDotFill
+                className={`${
+                  (mainData.status === "pending" &&
+                    "text-[#B54708] bg-[#FFFAEB]") ||
+                  (mainData.status === "cancelled" &&
+                    "text-[#B42318] bg-[#FEF3F2]") ||
+                  (mainData.status === "completed" &&
+                    "text-[#027A48] bg-[#ECFDF3]")
+                }`}
+              />
               {mainData.status}
             </p>
           </div>
@@ -95,7 +109,7 @@ const OrderDetails = () => {
               {/* this is image and description div  */}
               <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
                 <Image
-                  src={getImageUrlByCategory(mainData?.account.category)}
+                  src={findImageUrlByCategory(mainData?.account.category)}
                   className="size-9 md:size-10 lg:size-14 2xl:size-16"
                   width={70}
                   height={70}
@@ -111,7 +125,7 @@ const OrderDetails = () => {
                   </p>
                 </div>
               </div>
-              <div className='flex w-full items-center justify-between md:justify-end gap-1'>
+              <div className="flex w-full items-center justify-between md:justify-end gap-1">
                 <h2 className="text-textBlack font-bold flex items-center justify-end">
                   <PiCurrencyDollarBold />
                   {mainData?.account.price}
@@ -129,14 +143,18 @@ const OrderDetails = () => {
                 >
                   <OrderDetailsMessaging order={mainData} />
                 </AppDrawer>
-
               </div>
             </div>
-            {mainData?.status === "completed" &&
+            {mainData?.status === "completed" && (
               <div className="pt-2 space-y-2">
-                <OrderDetailsAccountInfo index={0} isNotDeletable account={accountDetailsInfo} />
+                <OrderDetailsAccountInfo
+                  index={0}
+                  title="Account Details"
+                  isNotDeletable
+                  account={accountDetailsInfo}
+                />
               </div>
-            }
+            )}
             {isCancelled ? (
               <div className="space-y-2 py-10 flex items-center text-textBlack justify-center flex-col">
                 <Image
@@ -156,7 +174,7 @@ const OrderDetails = () => {
                     Wallet
                   </button>
                 </div>
-                <div className="">
+                {/* <div className="">
                   <h4>Leave a Review</h4>
                   <div className="flex items-center gap-6 pt-2.5">
                     <button className="bg-[#F4F5F5] text-sm text-textBlack flex items-center gap-0.5 py-1.5 px-3 rounded-full">
@@ -168,7 +186,7 @@ const OrderDetails = () => {
                       Negative
                     </button>
                   </div>
-                </div>
+                </div> */}
               </>
             )}
           </div>

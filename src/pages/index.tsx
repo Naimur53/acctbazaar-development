@@ -42,7 +42,7 @@ export default function Home() {
     details:
       "Explore our marketplace now and unlock a world of genuine treasures. Join Acctbazaar today and experience a new way to buy and connect.",
     buttonText: "Explore marketplace",
-    linkSrc: "/signIn",
+    linkSrc: "/auth/sign-in",
   };
 
   return (

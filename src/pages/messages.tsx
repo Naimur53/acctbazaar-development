@@ -6,7 +6,10 @@ import AppErrorComponent from "@/components/ui/AppErrorComponent";
 import AppInput from "@/components/ui/AppInput";
 import Loading from "@/components/ui/Loading";
 import HomeLayout from "@/layout/HomeLayout";
-import { useGetOrdersQuery } from "@/redux/features/order/orderApi";
+import {
+  useGetMyOrdersQuery,
+  useGetOrdersQuery,
+} from "@/redux/features/order/orderApi";
 import { useAppSelector } from "@/redux/hook";
 import { IOrder } from "@/types/common";
 import Image from "next/image";
@@ -19,39 +22,28 @@ const Messages = () => {
   const { isLoading, isFetching, error, isError, data } = useGetOrdersQuery(
     `sellerId=${user?.id}`
   );
-
-  const messageList = [
-    {
-      name: "Sheldon Cooper",
-      imageUrl: "/assets/windscribe.png",
-      message: "Will I be able to get the things??",
-      time: "01:30pm",
-      notificationNumber: "5+",
-      isActive: true,
-    },
-    {
-      name: "Sheldon Cooper",
-      imageUrl: "/assets/windscribe.png",
-      message: "Will I be able to get the things??",
-      time: "01:30pm",
-      notificationNumber: "5+",
-      isActive: false,
-    },
-  ];
+  const {
+    isLoading: isMyOrderLoading,
+    isFetching: isMyOrderFetching,
+    isError: isMyOrderError,
+    data: myOrderData,
+  } = useGetMyOrdersQuery("");
 
   useEffect(() => {
-    if (data?.data) {
+    if (data?.data.length) {
       setActiveChatId(data.data[0]?.id);
+    } else if (myOrderData?.data) {
+      setActiveChatId(myOrderData.data[0]?.id);
     }
-  }, [data]);
+  }, [data, myOrderData]);
 
-  if (isFetching || isLoading) {
+  if (isFetching || isLoading || isMyOrderLoading || isMyOrderFetching) {
     return (
       <HomeLayout>
         <Loading></Loading>
       </HomeLayout>
     );
-  } else if (isError) {
+  } else if (isError || isMyOrderError) {
     return (
       <HomeLayout>
         <div className="flex justify-center items-center h-screen">
@@ -60,10 +52,13 @@ const Messages = () => {
       </HomeLayout>
     );
   }
-  const mainData = data.data as IOrder[];
+  const mainData = (
+    data.data.length ? data.data : myOrderData.data
+  ) as IOrder[];
   const activeMessageBoxInfo = mainData.find(
     (single) => single.id === activeChatId
   );
+  console.log({ myOrderData });
   return (
     <HomeLayout>
       <div className="container py-5 md:py-10 2xl:py-12">
@@ -87,20 +82,20 @@ const Messages = () => {
               <div className="w-full md:w-[35%] max-h-[70dvh] overflow-auto space-y-3 2xl:space-y-4">
                 {mainData.map((single) => (
                   <>
-                    <div key={single.id} className='hidden md:block'>
+                    <div key={single.id} className="hidden md:block">
                       <SingleMessageUser
                         isActive={single.id === activeChatId}
-                        user={single.orderBy}
+                        user={single.orderBy || single.account.ownBy}
                         orderId={single.id}
                         setActiveChatId={setActiveChatId}
                       />
                     </div>
-                    <div key={single.id} className='md:hidden'>
+                    <div key={single.id} className="md:hidden">
                       <AppDrawer
                         button={
                           <SingleMessageUser
                             isActive={single.id === activeChatId}
-                            user={single.orderBy}
+                            user={single.orderBy || single.account.ownBy}
                             orderId={single.id}
                             setActiveChatId={setActiveChatId}
                           />
@@ -109,7 +104,10 @@ const Messages = () => {
                         {activeMessageBoxInfo && activeChatId ? (
                           <MessageMain
                             account={activeMessageBoxInfo.account}
-                            user={activeMessageBoxInfo.orderBy}
+                            user={
+                              activeMessageBoxInfo?.orderBy ||
+                              activeMessageBoxInfo?.account?.ownBy
+                            }
                             orderId={activeChatId}
                           />
                         ) : (
@@ -125,7 +123,10 @@ const Messages = () => {
                 {activeMessageBoxInfo && activeChatId ? (
                   <MessageMain
                     account={activeMessageBoxInfo.account}
-                    user={activeMessageBoxInfo.orderBy}
+                    user={
+                      activeMessageBoxInfo?.orderBy ||
+                      activeMessageBoxInfo?.account?.ownBy
+                    }
                     orderId={activeChatId}
                   />
                 ) : (

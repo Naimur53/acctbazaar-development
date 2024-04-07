@@ -22,6 +22,7 @@ import {
 } from "@/redux/features/cart/cartSlice";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDeleteCartMutation } from "@/redux/features/cart/cartApi";
+import { findImageUrlByCategory } from "@/shared";
 
 type TCartAccountCard = {
   account: ICart;
@@ -41,7 +42,7 @@ export default function CartAccountCard({
       className={` flex items-center justify-between w-full rounded-lg gap-1 md:gap-3 2xl:gap-4 border-b border-b-[#EFEFEF] p-2 md:p-3 2xl:p-4`}
     >
       <Image
-        src={getImageUrlByCategory(
+        src={findImageUrlByCategory(
           account?.account?.category as AccountCategory
         )}
         className="size-7 md:size-8 lg:size-12 2xl:size-14"
@@ -106,7 +107,7 @@ export default function CartAccountCard({
                   {/* <MarketplaceAccountCard isModal account={account} /> */}
                   <div className="flex items-center justify-center flex-col">
                     <Image
-                      src={getImageUrlByCategory(
+                      src={findImageUrlByCategory(
                         account?.account?.category as AccountCategory
                       )}
                       className="size-9 md:size-10 lg:size-14 2xl:size-16"

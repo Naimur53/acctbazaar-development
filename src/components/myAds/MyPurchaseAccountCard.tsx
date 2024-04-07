@@ -9,6 +9,7 @@ import { MdOutlinePauseCircle } from "react-icons/md";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import AppModal from "../ui/AppModal";
 import OrderSecretViewPop from "../orders/OrderSecretViewPop";
+import { findImageUrlByCategory } from "@/shared";
 
 const MyPurchaseAccountCard = ({
   account,
@@ -23,7 +24,7 @@ const MyPurchaseAccountCard = ({
       className={`w-full flex items-center gap-1 md:gap-2 2xl:gap-3 rounded-lg border-b border-b-[#EFEFEF] p-2 md:p-4 2xl:p-5 hover:bg-[#FBFAFA]`}
     >
       <Image
-        src={getImageUrlByCategory(account?.category)}
+        src={findImageUrlByCategory(account?.category)}
         className="size-9 md:size-10 lg:size-14 2xl:size-16"
         width={70}
         height={70}

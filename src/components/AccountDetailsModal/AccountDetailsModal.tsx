@@ -4,13 +4,11 @@ import { Avatar, Modal, Popconfirm } from "antd";
 import Image from "next/image";
 import React from "react";
 import CurrencyLogo from "../CurrencyLogo/CurrencyLogo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { useAddOrderMutation } from "@/redux/features/order/orderApi";
 import { toast } from "react-toastify";
 import { useAppSelector } from "@/redux/hook";
 import Link from "next/link";
-import swal from "sweetalert";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 type Props = {
@@ -67,7 +65,7 @@ const AccountDetailsModal = ({
       onCancel={handleCancel}
       footer={null}
     >
-      <div className="flex gap-5 items-start mt-5">
+      <div className="flex flex-col gap-5 items-start mt-5">
         <Image
           src={findImageUrlByCategory(category)}
           className="rounded-xl w-[30%]"
@@ -75,7 +73,7 @@ const AccountDetailsModal = ({
           height={200}
           alt="account-img"
         />
-        <div className="w-[60%]">
+        <div className=" ">
           <h4 className="text-2xl font-bold">{name}</h4>
           <div>
             <p className="text-xl my-3">{description}</p>
@@ -86,13 +84,7 @@ const AccountDetailsModal = ({
         <div className="flex items-center font-bold gap-2">
           <Avatar src={ownBy?.profileImg}></Avatar>
           <span>{ownBy?.name}</span>
-          <Image
-            src={"/assets/verified.png"}
-            width={20}
-            className="w-[25px]"
-            height={20}
-            alt="verified"
-          ></Image>
+          {/* <RiVerifiedBadgeFill className="text-success" /> */}
         </div>
         <div className="flex gap-5 items-center">
           <div className="font-bold text-lg text-orange-500">

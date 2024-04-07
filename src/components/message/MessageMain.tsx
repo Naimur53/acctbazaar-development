@@ -4,6 +4,7 @@ import { getImageUrlByCategory } from "@/utils/getImageUrl";
 import { AccountCategory, IAccount, IUser } from "@/types/common";
 import { PiCurrencyDollarBold } from "react-icons/pi";
 import React from "react";
+import { findImageUrlByCategory } from "@/shared";
 
 type Props = {
   user: Pick<IUser, "name" | "id" | "profileImg">;
@@ -12,7 +13,6 @@ type Props = {
 };
 
 const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
-
   return (
     <div className="border border-[#EFECEC] rounded-lg">
       {/* this is top message div  */}
@@ -32,7 +32,7 @@ const MessageMain: React.FC<Props> = ({ user, account, orderId }) => {
         <div className="w-full md:w-2/3 px-3 py-1.5">
           <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
             <Image
-              src={getImageUrlByCategory(account.category)}
+              src={findImageUrlByCategory(account.category)}
               className="size-9 md:size-10 lg:size-12"
               width={70}
               height={70}

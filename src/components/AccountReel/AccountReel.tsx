@@ -63,7 +63,7 @@ const AccountReel = ({ title, accountType, category }: Props) => {
   if (isLoading || isFetching) {
     content = <Loading></Loading>;
   } else if (isError) {
-    content = <ErrorCompo></ErrorCompo>;
+    content = null;
   } else if (isSuccess && data.data.length) {
     const info = data.data as IAccount[];
     content = (

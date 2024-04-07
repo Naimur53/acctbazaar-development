@@ -81,13 +81,15 @@ const AccountCard = (props: Props) => {
       }
     >
       <div className="flex flex-col gap-5  items-start">
-        <Image
-          src={findImageUrlByCategory(category)}
-          className="rounded w-full"
-          width={200}
-          height={200}
-          alt="account-img"
-        />
+        <div className="w-full h-[145px] flex justify-center items-center rounded bg-[#FFF4F1]">
+          <Image
+            src={findImageUrlByCategory(category)}
+            className="rounded "
+            width={80}
+            height={200}
+            alt="account-img"
+          />
+        </div>
         <div className="w-full">
           <div className="flex justify-between gap-5  items-center">
             <h4 className=" text-[16px] font-bold">{name}</h4>
@@ -104,9 +106,9 @@ const AccountCard = (props: Props) => {
                 alt="avatar image"
               />
               <p className="text-textBlack text-xs">{ownBy?.name}</p>
-              {ownBy?.isVerified && (
+              {/* {ownBy?.isVerified && (
                 <RiVerifiedBadgeFill className="text-success" />
-              )}
+              )} */}
               {ownBy?.isVerifiedByAdmin && (
                 <p
                   className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}

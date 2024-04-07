@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Tooltip } from "antd";
 import AppModal from "../ui/AppModal";
 import OrderSecretViewPop from "./OrderSecretViewPop";
+import { findImageUrlByCategory } from "@/shared";
 
 type props = {
   orderInfo: IOrder;
@@ -27,7 +28,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
         <div className="flex items-center gap-2">
           <p className="text-red font-medium text-xs md:text-sm">Sell</p>
           <Image
-            src={getImageUrlByCategory(accountInfo.category)}
+            src={findImageUrlByCategory(accountInfo.category)}
             width={16}
             height={16}
             alt="social icons"
@@ -57,7 +58,7 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
         {/* this is image and description div  */}
         <div className="flex items-center gap-1 md:gap-2 2xl:gap-3">
           <Image
-            src={getImageUrlByCategory(accountInfo.category)}
+            src={findImageUrlByCategory(accountInfo.category)}
             className="size-9 md:size-10 lg:size-14 2xl:size-16"
             width={70}
             height={70}

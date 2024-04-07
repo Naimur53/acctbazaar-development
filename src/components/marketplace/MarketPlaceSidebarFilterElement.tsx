@@ -54,8 +54,9 @@ const MarketPlaceSidebarFilterElement = ({
         <h2 className="flex items-center gap-1 2xl:gap-1.5 text-sm md:text-base font-medium text-textBlack">
           <Image
             className="size-5"
-            width={20}
-            height={20}
+            width={120}
+            height={120}
+            quality={100}
             src={sidebar?.imageUrl}
             alt="icon image"
           />{" "}

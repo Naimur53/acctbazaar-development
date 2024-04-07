@@ -107,7 +107,24 @@ const AccountAction = (props: Props) => {
           />
         </Tooltip>
       </button>
-      <AccountModal account={props}></AccountModal>
+      <div>
+        <button disabled={isLoading} onClick={() => setIsModalOpen(true)}>
+          <Image
+            src={"/assets/icons/eye.png"}
+            width={40}
+            height={40}
+            className="size-4 md:size-5"
+            alt="eye"
+          />
+        </button>
+
+        <AccountDetailsModal
+          {...props}
+          isModalOpen={isModalOpen}
+          handleCancel={() => setIsModalOpen(false)}
+          handelOk={() => setIsModalOpen(false)}
+        ></AccountDetailsModal>
+      </div>
     </div>
   );
 };

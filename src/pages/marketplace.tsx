@@ -111,7 +111,7 @@ const Marketplace = () => {
             <div className="hidden md:block border border-[#E1DBDB]"></div>
             <div className="w-full">
               <div className="w-full     bg-white p-2 md:p-4 2xl:p-6">
-                <h2 className="text-xl font-bold">Social media</h2>
+                <h2 className="text-xl font-bold">Latest account</h2>
                 <AppRenderReduxData
                   queryData={queryData}
                   showData={(data) => {

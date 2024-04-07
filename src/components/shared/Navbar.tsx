@@ -20,7 +20,11 @@ import {
   MdOutlinePlaylistAddCheckCircle,
 } from "react-icons/md";
 import { FaBuysellads } from "react-icons/fa6";
-import { loggedUserNavLinks, nonUserNavLinks } from "./NavbarData";
+import {
+  loggedSellerNavLinks,
+  loggedUserNavLinks,
+  nonUserNavLinks,
+} from "./NavbarData";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SlArrowDown } from "react-icons/sl";
@@ -144,7 +148,12 @@ const Navbar = () => {
 
         {/* this is for tab to large screen  */}
         <div className="hidden md:flex items-center gap-2 lg:gap-6">
-          {(user?.id ? loggedUserNavLinks : nonUserNavLinks).map((nav: TNav) =>
+          {(user?.id
+            ? user?.role === UserRole.User
+              ? loggedUserNavLinks
+              : loggedSellerNavLinks
+            : nonUserNavLinks
+          ).map((nav: TNav) =>
             user?.role === UserRole.User &&
             (nav.label === "Orders" || nav.label === "My Ads") ? null : (
               <Link

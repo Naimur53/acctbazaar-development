@@ -51,14 +51,14 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                 </p>
               )}
             </h4>
-            {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
+            {/* {user?.role === UserRole.Seller && !user?.isVerifiedByAdmin && (
               <button
                 onClick={openModal}
                 className="appOutlineBtnSm hidden md:block"
               >
                 Become Verified
               </button>
-            )}
+            )} */}
           </div>
 
           <p className="textG hidden md:block">{user?.email}</p>
@@ -94,14 +94,14 @@ export default function ProfileDetailsBody({ setOpen }: ProfileDetailsBody) {
                     </p>
                   )}
                 </h4>
-                {!user?.isApprovedForSeller && user?.role === UserRole.User && (
+                {/* {!user?.isApprovedForSeller && user?.role === UserRole.User && (
                   <button
                     onClick={openModal}
                     className="appOutlineBtnSm w-fit mt-2 md:hidden"
                   >
                     Become Verified
                   </button>
-                )}
+                )} */}
               </div>
 
               <p className="textG">{user?.email}</p>

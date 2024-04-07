@@ -18,6 +18,7 @@ import { Tooltip } from "antd";
 import Link from "next/link";
 import { GoDotFill } from "react-icons/go";
 import { findImageUrlByCategory } from "@/shared";
+import AccountDetailsModal from "../AccountDetailsModal/AccountDetailsModal";
 
 type TMarketplaceAccountCard = {
   account: IAccount;
@@ -31,6 +32,7 @@ const MarketplaceAccountCard = ({
   const [existOnCart, setExistOnCart] = useState<ICart | null>();
   const user = useAppSelector((state) => state.user.user);
   const { data } = useGetMyCartsQuery("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [addToCart, { isLoading }] = useAddCartMutation();
 
@@ -110,9 +112,9 @@ const MarketplaceAccountCard = ({
               alt="avatar image"
             />
             <p className="text-textBlack text-xs">{account?.ownBy?.name}</p>
-            {account?.ownBy?.isVerified && (
+            {/* {account?.ownBy?.isVerified && (
               <RiVerifiedBadgeFill className="text-success" />
-            )}
+            )} */}
             {account?.ownBy?.isVerifiedByAdmin && (
               <p
                 className={`py-0.5 px-1 rounded-full w-fit text-xs flex items-center gap-0.5 text-primary bg-[#FFFAEB]`}
@@ -156,59 +158,77 @@ const MarketplaceAccountCard = ({
             // />
             <></>
           ) : (
-            <AppModal
-              title="Account Details"
-              button={
-                <Tooltip title="Open account details">
-                  <Image
-                    src={"/assets/icons/eye.png"}
-                    width={40}
-                    height={40}
-                    className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                    alt="eye"
-                  />
-                </Tooltip>
-              }
-            >
-              <div className="md:w-[500px] mt-6 space-y-1">
-                {/* <MarketplaceAccountCard isModal account={account} /> */}
-                <div className="flex  flex-col">
-                  <Image
-                    src={getImageUrlByCategory(
-                      account?.category as AccountCategory
-                    )}
-                    className="size-9 md:size-10 lg:size-14 2xl:size-20"
-                    width={70}
-                    height={70}
-                    alt="social icons"
-                  />
-                  <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal mt-3">
-                    {account?.name}
-                  </h3>
-                  <p className="text-textGrey pt-2 text-xs md:text-sm">
-                    {account?.description}
-                  </p>
-                </div>
-                <div className="flex pt-2 items-center  gap-22 text-sm">
-                  <p className="text-textGrey text-xl">Price</p>
-                  <p className="ml-2 text-xl text-black font-bold">
-                    ${account?.price}
-                  </p>
-                </div>
+            <div>
+              <button disabled={isLoading} onClick={() => setIsModalOpen(true)}>
+                <Image
+                  src={"/assets/icons/eye.png"}
+                  width={40}
+                  height={40}
+                  className="size-4 md:size-5"
+                  alt="eye"
+                />
+              </button>
 
-                {account?.preview && (
-                  <div className="flex items-center justify-center pt-5 text-sm">
-                    <Link
-                      href={account.preview}
-                      className="appBtn py-2"
-                      target="blank"
-                    >
-                      Preview
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </AppModal>
+              <AccountDetailsModal
+                {...account}
+                isModalOpen={isModalOpen}
+                handleCancel={() => setIsModalOpen(false)}
+                handelOk={() => setIsModalOpen(false)}
+              ></AccountDetailsModal>
+            </div>
+            // <AppModal
+            //   title="Account Details"
+            //   button={
+            //     <Tooltip title="Open account details">
+            //       <Image
+            //         src={"/assets/icons/eye.png"}
+            //         width={40}
+            //         height={40}
+            //         className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+            //         alt="eye"
+            //       />
+            //     </Tooltip>
+            //   }
+            // >
+            //   <div className="md:w-[500px] mt-6 space-y-1">
+            //     {/* <MarketplaceAccountCard isModal account={account} /> */}
+            //     <div className="flex  flex-col">
+            //       <Image
+            //         src={getImageUrlByCategory(
+            //           account?.category as AccountCategory
+            //         )}
+            //         className="size-9 md:size-10 lg:size-14 2xl:size-20"
+            //         width={70}
+            //         height={70}
+            //         alt="social icons"
+            //       />
+            //       <h3 className="text-textBlack font-medium text-sm md:text-base flex items-center justify-between md:justify-normal mt-3">
+            //         {account?.name}
+            //       </h3>
+            //       <p className="text-textGrey pt-2 text-xs md:text-sm">
+            //         {account?.description}
+            //       </p>
+            //     </div>
+            //     <div className="flex pt-2 items-center  gap-22 text-sm">
+            //       <p className="text-textGrey text-xl">Price</p>
+            //       <p className="ml-2 text-xl text-black font-bold">
+            //         ${account?.price}
+            //       </p>
+            //     </div>
+
+            //     {account?.preview && (
+            //       <div className="flex items-center justify-center pt-5 text-sm">
+            //         <Link
+            //           href={account.preview}
+            //           className="appBtn py-2"
+            //           target="blank"
+            //         >
+            //           Preview
+            //         </Link>
+            //       </div>
+            //     )}
+            //   </div>
+            // </AppModal>
           )}
 
           {/* <button>
