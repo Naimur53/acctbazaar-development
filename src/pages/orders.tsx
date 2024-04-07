@@ -16,7 +16,6 @@ import { useMemo, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 
 const Orders = () => {
-
   const tabs = [
     { label: "All" },
     { label: "Pending" },
@@ -86,11 +85,12 @@ const Orders = () => {
                     return (
                       <div className="py-4 md:py-6 space-y-6">
                         {data?.data.length > 0 ? (
-                          <div className='max-h-[70dvh] overflow-auto space-y-3 md:space-y-4'>
+                          <div className="max-h-[70dvh] overflow-auto space-y-3 md:space-y-4">
                             {data.data.map((single: IOrder) => (
                               <OrderAccountCard
                                 orderInfo={single}
                                 key={single.id}
+                                notShowDetails={true}
                               />
                             ))}
                           </div>
@@ -114,9 +114,7 @@ const Orders = () => {
                                 </button>
                               </Link>
                               <Link href="/account/sell-your-account">
-                                <button className="appBtn">
-                                  Sell product
-                                </button>
+                                <button className="appBtn">Sell product</button>
                               </Link>
                             </div>
                           </div>

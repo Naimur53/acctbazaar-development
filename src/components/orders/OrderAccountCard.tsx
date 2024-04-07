@@ -14,9 +14,10 @@ import { findImageUrlByCategory } from "@/shared";
 
 type props = {
   orderInfo: IOrder;
+  notShowDetails?: Boolean;
 };
 
-const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
+const OrderAccountCard: React.FC<props> = ({ orderInfo, notShowDetails }) => {
   const accountInfo = orderInfo.account;
 
   return (
@@ -98,23 +99,27 @@ const OrderAccountCard: React.FC<props> = ({ orderInfo }) => {
           </h2>
           {/* this is icons div view cart message  */}
           <div className="flex items-center justify-end gap-4">
-            {orderInfo.status === "completed" && (
-              <AppModal
-                button={
-                  <Tooltip title="Open account details">
-                    <Image
-                      src={"/assets/icons/eye.png"}
-                      width={40}
-                      height={40}
-                      className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
-                      alt="eye"
-                    />
-                  </Tooltip>
-                }
-              >
-                <OrderSecretViewPop account={accountInfo}></OrderSecretViewPop>
-              </AppModal>
-            )}
+            {notShowDetails
+              ? null
+              : orderInfo.status === "completed" && (
+                  <AppModal
+                    button={
+                      <Tooltip title="Open account details">
+                        <Image
+                          src={"/assets/icons/eye.png"}
+                          width={40}
+                          height={40}
+                          className="size-4 md:size-5 cursor-pointer min-w-4 md:min-w-5 min-h-4 md:min-h-5"
+                          alt="eye"
+                        />
+                      </Tooltip>
+                    }
+                  >
+                    <OrderSecretViewPop
+                      account={accountInfo}
+                    ></OrderSecretViewPop>
+                  </AppModal>
+                )}
             <Link href={`/order-details/${orderInfo.id}`}>
               <Tooltip title="Message vendor">
                 <Image
