@@ -140,7 +140,7 @@ const EnterOtp = () => {
                     {...props}
                     placeholder="-"
                     type="number"
-                    className="size-11 lg:size-14 mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
+                    className="size-11 lg:size-14 mr-2 md:mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
                   />
                 )}
               />
