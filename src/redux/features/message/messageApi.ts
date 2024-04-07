@@ -86,9 +86,10 @@ export const messageApi = apiSlice.injectEndpoints({
         // optimistic cache update end
         try {
           const result = await queryFulfilled;
-          pathResult1.undo();
+
           if (result?.data?.success) {
             socket.emit("send-message", result.data.data);
+            pathResult1.undo();
             // dispatch(
             //   messageApi.util.updateQueryData(
             //     "getMessages",

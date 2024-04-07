@@ -5,9 +5,15 @@ type TAppDrawer = {
   button: ReactNode;
   children: ReactNode;
   title?: string;
+  showExtraBottomButton?: boolean;
 };
 
-const AppDrawer = ({ button, children, title }: TAppDrawer) => {
+const AppDrawer = ({
+  button,
+  children,
+  title,
+  showExtraBottomButton,
+}: TAppDrawer) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -32,12 +38,14 @@ const AppDrawer = ({ button, children, title }: TAppDrawer) => {
           <div className="mt-2 rounded bg-white h-full overflow-y-auto">
             {children}
             <div className="flex justify-center">
-              <button
-                onClick={() => setOpen(false)}
-                className="bg-primary text-sm px-4 py-2 rounded text-white"
-              >
-                Show Accounts
-              </button>
+              {showExtraBottomButton ? (
+                <button
+                  onClick={() => setOpen(false)}
+                  className="bg-primary text-sm px-4 py-2 rounded text-white"
+                >
+                  Show Accounts
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

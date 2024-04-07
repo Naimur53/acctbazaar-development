@@ -91,12 +91,14 @@ const AccountCard = (props: Props) => {
           />
         </div>
         <div className="w-full">
-          <div className="flex justify-between gap-5  items-center">
-            <h4 className=" text-[16px] font-bold">{name}</h4>
-            <span className="text-[16px] font-bold">${price}</span>
+          <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-5  md:items-center">
+            <h4 className=" text-[12px] md:text-[16px] font-[600]">{name}</h4>
+            <span className="text-[12px] md:text-[16px] font-medium">
+              ${price}
+            </span>
           </div>
 
-          <div className="flex items-center justify-between gap-1 pt-1 md:pt-4">
+          <div className="flex items-center justify-between gap-1 pt-2 md:pt-4">
             <div className="flex gap-1">
               <Image
                 width={20}

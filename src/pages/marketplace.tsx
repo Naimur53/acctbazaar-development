@@ -84,6 +84,7 @@ const Marketplace = () => {
               />
               <AppDrawer
                 title="Filter"
+                showExtraBottomButton={true}
                 button={
                   <div className="md:hidden text-primary w-fit cursor-pointer border border-borderColor rounded md:rounded-md lg:rounded-lg 2xl:rounded-xl px-3 py-1.5 text-lg">
                     <IoFilter />

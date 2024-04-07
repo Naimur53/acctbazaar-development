@@ -10,7 +10,29 @@ export const authSellerApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    changePassword: builder.mutation({
+      query: (info) => {
+        return {
+          url: `/auth/change-password`,
+          method: "POST",
+          body: info,
+        };
+      },
+    }),
+    enterForgotOtp: builder.mutation({
+      query: (arg) => {
+        return {
+          url: "/auth/verify-forgot-token",
+          method: "POST",
+          body: arg,
+        };
+      },
+    }),
   }),
 });
 
-export const { useBecomeSellerMutation } = authSellerApi;
+export const {
+  useBecomeSellerMutation,
+  useEnterForgotOtpMutation,
+  useChangePasswordMutation,
+} = authSellerApi;
