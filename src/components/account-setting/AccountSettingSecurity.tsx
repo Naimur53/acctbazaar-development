@@ -162,14 +162,14 @@ const AccountSettingSecurity = () => {
 
       <div className="border border-[#F2F4F7]"></div>
       {!user?.withdrawalPin && (
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-col md:flex-row">
           {/* this is left side text  */}
           <div className="text-textBlueBlack space-y-1">
             <h3 className="font-semibold">Withdrawal PIN</h3>
             <p className="text-textGrey text-sm">Set your withdrawal pin</p>
           </div>
           {/* this is right side text  */}
-          <div className="w-[37%] space-y-3">
+          <div className="md:w-[37%] space-y-3 mt-2">
             <p className="text-sm"> Create Withdrawal pin</p>
             <div className="pt-2">
               <OTPInput
@@ -181,12 +181,12 @@ const AccountSettingSecurity = () => {
                     {...props}
                     placeholder="-"
                     type="number"
-                    className="size-11 lg:size-14 mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
+                    className="size-11 lg:size-14 mr-2 md:mr-10 bg-[#F2F4F7] rounded text-center focus:border-2 !w-[56px] focus-visible:outline-none px-2 focus:!border-primary"
                   />
                 )}
               />
             </div>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end w-full">
               <button
                 type="button"
                 onClick={handleWithdrawPinSubmit}

@@ -12,7 +12,7 @@ export default function index() {
     details:
       "Join Acctbazaar today and experience the benefits of a vibrant P2P selling community. Sign up now to start your journey towards increased visibility, sales, and success.",
     buttonText: "Sign up now",
-    linkSrc: "/signUp",
+    linkSrc: "/auth/sign-up",
   };
 
   return (

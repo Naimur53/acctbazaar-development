@@ -5,18 +5,30 @@ import AddWithdrawModal from "@/components/wallet/AddWithdrawModal";
 import useDebounce from "@/hooks/useDebounce";
 import HomeLayout from "@/layout/HomeLayout";
 import PrivateLayout from "@/layout/PrivateLayout";
-import { useGetCurrencyOfLoggedInUserQuery } from "@/redux/features/currency/currencyApi";
+import {
+  useGetCurrencyOfLoggedInUserQuery,
+  useGetCurrencyQuery,
+} from "@/redux/features/currency/currencyApi";
 import { useGetWithdrawFundsQuery } from "@/redux/features/withdrawFund/withdrawFundApi";
+import { useAppSelector } from "@/redux/hook";
+import { UserRole } from "@/types/common";
+import appDateFormate from "@/utils/appDateFormate";
 import { convertDateToString } from "@/utils/convertDateToString";
 import { Table } from "antd";
 import { useMemo, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { IoEyeOutline } from "react-icons/io5";
-
+import dateFormat from "dateformat";
+import { useGetCurrencyRequestsQuery } from "@/redux/features/currencyRequest/currencyRequestApi";
 const Wallet = () => {
   const [page, setPage] = useState<number>(1);
   // const debouncedSearch = useDebounce(search, 500);
+  const user = useAppSelector((state) => state.user.user);
+  const [showWithdraw, setShowWithdraw] = useState(
+    user?.role !== UserRole.User ? false : true
+  );
   const { data, isLoading } = useGetCurrencyOfLoggedInUserQuery("");
+  const currencyQuery = useGetCurrencyRequestsQuery(`ownById=${user?.id}`);
   const queryString = useMemo(() => {
     const info = {
       // category: selectedCategories.join('-'),
@@ -40,7 +52,69 @@ const Wallet = () => {
 
   const queryData = useGetWithdrawFundsQuery(queryString);
 
-  const columns = [
+  const columnsMobile = [
+    {
+      title: "Date",
+      className: "min-w-[80px]",
+      dataIndex: "createdAt",
+      render: (createdAt: string, record: any) => {
+        return (
+          <div className="flex items-center gap-1">
+            {dateFormat(createdAt, "mm-dd")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "P.t",
+      dataIndex: "walletAddress",
+      className: "capitalize",
+      render: (current: any, fullData: any) => {
+        return (
+          <div>
+            {current?.length
+              ? fullData.isTrc
+                ? "Crypto TRC 20"
+                : "Crypto BEP 20"
+              : "Bank"}
+          </div>
+        );
+      },
+    },
+    // {
+    //   title: "Address",
+    //   dataIndex: "walletAddress",
+    //   className: "capitalize",
+    //   render: (current: any, fullData: any) => {
+    //     return <div>{current || fullData.bankName}</div>;
+    //   },
+    // },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (text: string, record: any) => {
+        return (
+          <div className="flex items-center justify-start">
+            <p
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+                (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
+                (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
+              }`}
+            >
+              <GoDotFill />
+              {text}
+            </p>
+          </div>
+        );
+      },
+    },
+  ];
+  const columnsPc = [
     {
       title: "Date",
       dataIndex: "createdAt",
@@ -48,7 +122,7 @@ const Wallet = () => {
       render: (createdAt: string, record: any) => {
         return (
           <div className="flex items-center gap-1">
-            {convertDateToString(createdAt)}
+            {dateFormat(createdAt, appDateFormate)}
           </div>
         );
       },
@@ -90,10 +164,56 @@ const Wallet = () => {
         return (
           <div className="flex items-center justify-start">
             <p
-              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${(text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
                 (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
                 (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
-                }`}
+              }`}
+            >
+              <GoDotFill />
+              {text}
+            </p>
+          </div>
+        );
+      },
+    },
+  ];
+  const currencyRequestColumnPc = [
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      className: "md:min-w-[150px]",
+      render: (createdAt: string, record: any) => {
+        return (
+          <div className="flex items-center gap-1">
+            <span className="md:block hidden">
+              {dateFormat(createdAt, appDateFormate)}
+            </span>
+            <span className="block md:hidden">
+              {dateFormat(createdAt, "mm-dd")}
+            </span>
+          </div>
+        );
+      },
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      className: "md:min-w-[150px]",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      className: "md:min-w-[150px]",
+      render: (text: string, record: any) => {
+        return (
+          <div className="flex items-center justify-start">
+            <p
+              className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
+                (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
+                (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
+                (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
+              }`}
             >
               <GoDotFill />
               {text}
@@ -160,35 +280,126 @@ const Wallet = () => {
               </div>
               <div className="flex items-center justify-center gap-8">
                 <AddMoneyModal />
-                <AddWithdrawModal />
+                {user?.role !== UserRole.User ? <AddWithdrawModal /> : null}
               </div>
             </div>
 
             {/* this is table div  */}
             <div className="md:w-3/4">
-              <h2 className="text-xl 2xl:text-[22px] text-[#4F4F4F] pb-2 md:pb-4">
-                Transaction Details
+              <h2 className="text-md 2xl:text-[22px] text-[#4F4F4F] pb-2 md:pb-4 ">
+                <span>Showing Details of </span>
+                {user?.role === UserRole.User ? (
+                  "Add money"
+                ) : showWithdraw ? (
+                  <button
+                    onClick={() => setShowWithdraw(false)}
+                    className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
+                  >
+                    Withdraw money
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowWithdraw(true)}
+                    className="border p-2 border-orange-500 rounded ml-2 py-1 text-orange-600"
+                  >
+                    Added money
+                  </button>
+                )}
               </h2>
-              <div className="border border-[#F3F3F3] rounded-lg max-h-[60dvh] md:overflow-y-auto overflow-x-auto w-full">
-                <AppRenderReduxData
-                  queryData={queryData}
-                  showData={(data) => {
-                    // console.log(data);
-                    return (
-                      <Table
-                        columns={columns}
-                        dataSource={data?.data}
-                        pagination={{
-                          onChange: (value) => setPage(value),
-                          pageSize: data?.meta?.limit,
-                          total: data?.meta?.total,
-                          current: data?.meta?.page,
-                          showSizeChanger: false,
+              <div className="border border-[#F3F3F3] rounded-lg max-h-[60dvh] md:overflow-y-auto  w-full">
+                {showWithdraw ? (
+                  <>
+                    <div className="hidden md:block">
+                      <AppRenderReduxData
+                        queryData={queryData}
+                        showData={(data) => {
+                          // console.log(data);
+                          return (
+                            <Table
+                              columns={columnsPc}
+                              dataSource={data?.data}
+                              pagination={{
+                                onChange: (value) => setPage(value),
+                                pageSize: data?.meta?.limit,
+                                total: data?.meta?.total,
+                                current: data?.meta?.page,
+                                showSizeChanger: false,
+                              }}
+                            />
+                          );
                         }}
                       />
-                    );
-                  }}
-                />
+                    </div>
+                    <div className="block md:hidden">
+                      <AppRenderReduxData
+                        queryData={queryData}
+                        showData={(data) => {
+                          // console.log(data);
+                          return (
+                            <Table
+                              columns={columnsMobile}
+                              dataSource={data?.data}
+                              size="small"
+                              pagination={{
+                                onChange: (value) => setPage(value),
+                                pageSize: data?.meta?.limit,
+                                total: data?.meta?.total,
+                                current: data?.meta?.page,
+                                showSizeChanger: false,
+                              }}
+                            />
+                          );
+                        }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="hidden md:block">
+                      <AppRenderReduxData
+                        queryData={currencyQuery}
+                        showData={(data) => {
+                          // console.log(data);
+                          return (
+                            <Table
+                              columns={currencyRequestColumnPc}
+                              dataSource={data?.data}
+                              pagination={{
+                                onChange: (value) => setPage(value),
+                                pageSize: data?.meta?.limit,
+                                total: data?.meta?.total,
+                                current: data?.meta?.page,
+                                showSizeChanger: false,
+                              }}
+                            />
+                          );
+                        }}
+                      />
+                    </div>
+                    <div className="block md:hidden">
+                      <AppRenderReduxData
+                        queryData={currencyQuery}
+                        showData={(data) => {
+                          // console.log(data);
+                          return (
+                            <Table
+                              columns={currencyRequestColumnPc}
+                              dataSource={data?.data}
+                              size="small"
+                              pagination={{
+                                onChange: (value) => setPage(value),
+                                pageSize: data?.meta?.limit,
+                                total: data?.meta?.total,
+                                current: data?.meta?.page,
+                                showSizeChanger: false,
+                              }}
+                            />
+                          );
+                        }}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

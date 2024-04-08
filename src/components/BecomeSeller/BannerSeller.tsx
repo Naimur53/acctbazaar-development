@@ -26,7 +26,7 @@ export default function BannerSeller() {
             <p className="text-lg lg:text-xl leading-7 pb-6 lg:pb-10">
               Turn your accounts into opportunities
             </p>
-            <Link href={"/account/sell-your-account"}>
+            <Link href={"/auth/sign-up"}>
               <button className="appBtn">Become a Merchant</button>
             </Link>
           </div>

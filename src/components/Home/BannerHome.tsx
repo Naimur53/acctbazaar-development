@@ -31,7 +31,7 @@ export default function BannerHome() {
               Enhance your online presence: Preview, verify and acquire geniune
               accounts on AcctBazaar
             </p>
-            <Link href={"/auth/sign-in"}>
+            <Link href={"/auth/sign-up"}>
               <button className="appBtn">Get Started</button>
             </Link>
           </div>

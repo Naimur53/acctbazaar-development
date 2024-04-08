@@ -5,6 +5,7 @@ import { Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { getImageUrlByCategory } from "@/utils/getImageUrl";
+import { findImageUrlByCategory } from "@/shared";
 
 type Props = {
   account: IAccount;
@@ -31,7 +32,7 @@ function AccountModal({ account }: Props) {
           {/* <MarketplaceAccountCard isModal account={account} /> */}
           <div className="flex  flex-col">
             <Image
-              src={getImageUrlByCategory(account?.category as AccountCategory)}
+              src={findImageUrlByCategory(account?.category as AccountCategory)}
               className="size-9 md:size-10 lg:size-14 2xl:size-20"
               width={70}
               height={70}
