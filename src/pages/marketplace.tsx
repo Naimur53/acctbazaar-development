@@ -43,7 +43,7 @@ const Marketplace = () => {
       minPrice: minPriceDe,
       maxPrice: maxPriceDe,
       approvedForSale: "approved",
-      limit: 15,
+      limit: 75,
       page,
       searchTerm: debouncedSearch.length ? debouncedSearch : undefined,
     };
@@ -66,9 +66,9 @@ const Marketplace = () => {
   return (
     <HomeLayout>
       <PrivateLayout>
-        <div className="container py-5 md:py-10 2xl:py-12">
+        <div className="container pb-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
-          <div className="flex flex-col md:flex-row justify-between gap-1">
+          <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  h-[115px] md:h-auto fixed bg-white md:static">
             <div className="">
               <h2 className="title">Marketplace</h2>
               <p className="text-textGrey text-xs md:text-sm">
@@ -97,7 +97,7 @@ const Marketplace = () => {
           </div>
 
           {/* this is main div  */}
-          <div className="flex gap-4 min-h-[80dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
+          <div className=" flex gap-4 min-h-[80dvh] w-full 2xl:gap-6 pt-2 md:pt-4 lg:pt-5 2xl:pt-6">
             <div className="hidden md:block md:w-[30%] min-w-[330px] h-full bg-white">
               <Sticky
                 topOffset={-40}
@@ -110,7 +110,7 @@ const Marketplace = () => {
               </Sticky>
             </div>
             <div className="hidden md:block border border-[#E1DBDB]"></div>
-            <div className="w-full">
+            <div className="w-full mt-[120px] md:mt-0">
               <div className="w-full     bg-white p-2 md:p-4 2xl:p-6">
                 <h2 className="text-xl font-bold">Latest account</h2>
                 <AppRenderReduxData

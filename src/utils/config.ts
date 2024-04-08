@@ -23,6 +23,7 @@ const config = {
     process.env.NEXT_PUBLIC_ACCOUNT_SELL_PERCENTAGE as string
   ),
   topupMax: parseFloat(process.env.NEXT_PUBLIC_TOPUP_MAX as string),
+  dollarRate: parseFloat(process.env.NEXT_PUBLIC_DOLLAR_RATE as string),
 };
 
 export default config;

@@ -59,8 +59,8 @@ const Wallet = () => {
       dataIndex: "createdAt",
       render: (createdAt: string, record: any) => {
         return (
-          <div className="flex items-center gap-1">
-            {dateFormat(createdAt, "mm-dd")}
+          <div className=" text-xs">
+            {dateFormat(createdAt, appDateFormate)}
           </div>
         );
       },
@@ -71,7 +71,7 @@ const Wallet = () => {
       className: "capitalize",
       render: (current: any, fullData: any) => {
         return (
-          <div>
+          <div className="text-xs md:text-sm ">
             {current?.length
               ? fullData.isTrc
                 ? "Crypto TRC 20"
@@ -189,9 +189,13 @@ const Wallet = () => {
             <span className="md:block hidden">
               {dateFormat(createdAt, appDateFormate)}
             </span>
-            <span className="block md:hidden">
-              {dateFormat(createdAt, "mm-dd")}
-            </span>
+            <div className="block md:hidden">
+              <div className=" ">
+                <span className="text-xs ">
+                  {dateFormat(createdAt, appDateFormate)}
+                </span>
+              </div>
+            </div>
           </div>
         );
       },
@@ -199,7 +203,7 @@ const Wallet = () => {
     {
       title: "Amount",
       dataIndex: "amount",
-      className: "md:min-w-[150px]",
+      className: "md:min-w-[150px]  ",
     },
     {
       title: "Status",
@@ -211,8 +215,8 @@ const Wallet = () => {
             <p
               className={`py-1 px-2 rounded-full w-fit text-sm flex items-center gap-2 ${
                 (text === "pending" && "text-[#B54708] bg-[#FFFAEB]") ||
-                (text === "failed" && "text-[#B42318] bg-[#FEF3F2]") ||
-                (text === "success" && "text-[#027A48] bg-[#ECFDF3]")
+                (text === "denied" && "text-[#B42318] bg-[#FEF3F2]") ||
+                (text === "approved" && "text-[#027A48] bg-[#ECFDF3]")
               }`}
             >
               <GoDotFill />
@@ -287,7 +291,7 @@ const Wallet = () => {
             {/* this is table div  */}
             <div className="md:w-3/4">
               <h2 className="text-md 2xl:text-[22px] text-[#4F4F4F] pb-2 md:pb-4 ">
-                <span>Showing Details of </span>
+                <span>Showing Details of {user?.role} </span>
                 {user?.role === UserRole.User ? (
                   "Add money"
                 ) : showWithdraw ? (

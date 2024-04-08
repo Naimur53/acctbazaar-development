@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 interface FormData {
   bankName?: string;
   accountNumber?: string;
+  accountName?: string;
   saveAccount?: any;
   address?: string;
   fullName?: string;
@@ -101,19 +102,17 @@ export default function AddWithdrawModal() {
       toast.error("Min withdrawal amount is $20");
     } else if (parseAmount > maxWithdraw) {
       toast.error("Max amount reached!");
-
     } else if (parseAmount > config.withdrawalMaxMoney) {
       toast.error(`Amount can not be more than ${config.withdrawalMaxMoney}`);
     } else if (bankW && data.bankName && data.accountNumber) {
       setWithdrawData({
         accountNumber: data?.accountNumber,
-        fullName: "no-name",
+        fullName: data?.accountName,
         bankName: data.bankName,
         amount,
       });
       setShowPinModal(true);
     } else if (cryptoW) {
-
       if (!tronSelect && !bnbSelect) {
         toast.error("Choose a network ");
         return;
@@ -138,9 +137,9 @@ export default function AddWithdrawModal() {
 
   const banksOption = data?.data
     ? data?.data?.data?.map((single: any) => ({
-      value: single?.name,
-      label: single?.name,
-    }))
+        value: single?.name,
+        label: single?.name,
+      }))
     : [];
 
   // manage done modal withdraw
@@ -235,8 +234,9 @@ export default function AddWithdrawModal() {
             <div className=" p-4 border border-[#C5C5C5] rounded-lg ">
               <div
                 onClick={handleBankWithdraw}
-                className={`flex items-center justify-between gap-5 ${bankW && "border-b pb-1"
-                  } cursor-pointer`}
+                className={`flex items-center justify-between gap-5 ${
+                  bankW && "border-b pb-1"
+                } cursor-pointer`}
               >
                 <div className="flex items-center gap-4">
                   <Image
@@ -250,7 +250,9 @@ export default function AddWithdrawModal() {
                     <h3 className="text-textBlack font-medium">
                       Withdraw to Bank Account
                     </h3>
-                    {bankW && <p className="textG">$1 ~ ₦1509</p>}
+                    {bankW && (
+                      <p className="textG">$1 ~ ₦{config.dollarRate}</p>
+                    )}
                   </div>
                 </div>
                 <Radio checked={bankW} />
@@ -273,6 +275,15 @@ export default function AddWithdrawModal() {
                         name="bankName"
                         required={true}
                         options={banksOption}
+                      />
+                      <AppFormInput
+                        label="Account Name"
+                        name="accountName"
+                        type="text"
+                        placeholder="Type your Account Name here"
+                        register={register}
+                        required
+                        error={errors?.accountName}
                       />
                       <AppFormInput
                         label="Account Number"
@@ -302,8 +313,9 @@ export default function AddWithdrawModal() {
             <div className="p-4 border border-[#C5C5C5] rounded-lg">
               <div
                 onClick={handleCryptoWithdraw}
-                className={`flex items-center justify-between cursor-pointer gap-5 ${cryptoW && "border-b pb-1"
-                  }`}
+                className={`flex items-center justify-between cursor-pointer gap-5 ${
+                  cryptoW && "border-b pb-1"
+                }`}
               >
                 <div className="flex items-center gap-4">
                   <Image
@@ -335,10 +347,11 @@ export default function AddWithdrawModal() {
                           <div className="grid grid-cols-2 gap-3">
                             <div
                               onClick={() => handleNetworkSelect("TRON")}
-                              className={`border cursor-pointer rounded-md py-3 px-4 ${tronSelect
-                                ? "border-primary"
-                                : "border-[#D0D2D5]"
-                                }`}
+                              className={`border cursor-pointer rounded-md py-3 px-4 ${
+                                tronSelect
+                                  ? "border-primary"
+                                  : "border-[#D0D2D5]"
+                              }`}
                             >
                               <h4 className="font-normal">Tron (TRC20)</h4>
                               <p className="textG text-xs">
@@ -347,10 +360,11 @@ export default function AddWithdrawModal() {
                             </div>
                             <div
                               onClick={() => handleNetworkSelect("BNB")}
-                              className={`border cursor-pointer rounded-md py-3 px-4 ${bnbSelect
-                                ? "border-primary"
-                                : "border-[#D0D2D5]"
-                                }`}
+                              className={`border cursor-pointer rounded-md py-3 px-4 ${
+                                bnbSelect
+                                  ? "border-primary"
+                                  : "border-[#D0D2D5]"
+                              }`}
                             >
                               <h4 className="font-normal">
                                 BNB Smart Chain (BEP20)

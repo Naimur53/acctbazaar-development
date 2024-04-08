@@ -18,13 +18,13 @@ const OrderSecretViewPop = ({ account }: Props) => {
         </div>
         {account.additionalEmail && (
           <div className="flex items-center gap-4 border-b pb-1 justify-between text-sm">
-            <p className="text-textGrey">2FA Email:</p>
+            <p className="text-textGrey">Email attached to the account:</p>
             <p>{account.additionalEmail}</p>
           </div>
         )}
         {account.additionalPassword && (
           <div className="flex items-center gap-4 border-b pb-1 justify-between text-sm">
-            <p className="text-textGrey">2FA Password:</p>
+            <p className="text-textGrey">Email password:</p>
             <p>{account.additionalPassword}</p>
           </div>
         )}
