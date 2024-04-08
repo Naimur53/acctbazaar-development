@@ -306,7 +306,7 @@ const Wallet = () => {
                   </button>
                 )}
               </h2>
-              <div className="border border-[#F3F3F3] rounded-lg max-h-[60dvh] md:overflow-y-auto  w-full">
+              <div className="border border-[#F3F3F3] rounded-lg md:max-h-[60dvh] md:overflow-y-auto  w-full">
                 {showWithdraw ? (
                   <>
                     <div className="hidden md:block">
