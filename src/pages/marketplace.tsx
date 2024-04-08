@@ -68,7 +68,7 @@ const Marketplace = () => {
       <PrivateLayout>
         <div className="container pb-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
-          <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  h-[115px] md:h-auto fixed bg-white md:static">
+          <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static">
             <div className="">
               <h2 className="title">Marketplace</h2>
               <p className="text-textGrey text-xs md:text-sm">
