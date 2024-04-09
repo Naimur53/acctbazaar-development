@@ -148,7 +148,7 @@ export default function AccountCredentials({
           {/* this is last div  */}
           <div className="md:w-[35%] space-y-2 min-h-full">
             {accountCredentials.length < 1 ? (
-              <div className="h-[30dvh]"></div>
+              <div className="md:h-[30dvh]"></div>
             ) : (
               <div className="max-h-[60dvh] space-y-2 overflow-auto">
                 {accountCredentials.map((account, index) => (

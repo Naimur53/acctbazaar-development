@@ -68,7 +68,7 @@ const Marketplace = () => {
       <PrivateLayout>
         <div className="container pb-5 md:py-10 2xl:py-12">
           {/* this is top section div  */}
-          <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static">
+          <div className="flex flex-col md:flex-row justify-between gap-1 pt-5 pb-5  w-[calc(100%-40px)] md:w-auto h-[125px] md:h-auto fixed bg-white md:static z-40">
             <div className="">
               <h2 className="title">Marketplace</h2>
               <p className="text-textGrey text-xs md:text-sm">
@@ -141,7 +141,7 @@ const Marketplace = () => {
                   }}
                 />
               </div>
-              <div className=" md:max-w-[660px] xl:max-w-[71vw]  mt-5">
+              <div className=" md:max-w-[440px] lg:max-w-[660px] xl:max-w-[916px]  2xl:max-w-[1076px] w-full mt-5">
                 <AccountReel
                   title="Gift Cards"
                   accountType={AccountType.GiftCard}

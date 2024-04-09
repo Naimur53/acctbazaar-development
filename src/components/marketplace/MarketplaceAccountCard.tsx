@@ -159,7 +159,11 @@ const MarketplaceAccountCard = ({
             <></>
           ) : (
             <div>
-              <button disabled={isLoading} onClick={() => setIsModalOpen(true)}>
+              <button
+                className="w-[16px]"
+                disabled={isLoading}
+                onClick={() => setIsModalOpen(true)}
+              >
                 <Image
                   src={"/assets/icons/eye.png"}
                   width={40}
